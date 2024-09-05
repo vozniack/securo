@@ -5,4 +5,4 @@ import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest
 @ActiveProfiles(profiles = ["unit-test"])
-abstract class SecuroCoreAbstractUnitTest
+abstract class AbstractUnitTest

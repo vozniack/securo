@@ -17,3 +17,9 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
+
+securo:
+  security:
+    jwt:
+      secret: 656uzf9s3JhPGu1HSj6nkhV8-Jc-TH43C5Wd5p_BH9Zfbq03n4hWMFlskVP6_tZScNWBOmUAmNxgPVTuOmv6lw
+      expiration: 180000
