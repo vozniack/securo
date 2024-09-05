@@ -1,7 +1,7 @@
 package dev.vozniack.securo.core.domain.entity.extension
 
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
-import dev.vozniack.securo.core.api.dto.UserDto
+import dev.vozniack.securo.core.api.dto.entity.UserDto
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.mock.mockCreateUserRequestDto
 import dev.vozniack.securo.core.mock.mockUser
@@ -29,7 +29,7 @@ class UserExtensionTest {
         val user: User = request.toUser()
 
         assertEquals(request.email, user.email)
-        assertEquals(request.password, user.password) // #todo encode
+        assertEquals(request.password, user.password)
         assertEquals(request.firstName, user.firstName)
         assertEquals(request.lastName, user.lastName)
         assertEquals(request.language, user.language)

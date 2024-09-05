@@ -1,4 +1,4 @@
-package dev.vozniack.securo.core.api.dto
+package dev.vozniack.securo.core.api.dto.entity
 
 import java.util.UUID
 
