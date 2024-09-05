@@ -1,4 +1,4 @@
-name: Securo application builder
+name: Maven builder
 
 on:
   push:

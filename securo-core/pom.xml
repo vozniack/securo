@@ -20,10 +20,16 @@
 
 		<spring-boot.version>${project.parent.version}</spring-boot.version>
 
+		<kotlin-logging-jvm.version>5.1.0</kotlin-logging-jvm.version>
+		<slf4j.version>2.0.12</slf4j.version>
+		<log4j.version>2.19.0</log4j.version>
+
 		<flyway.version>10.17.3</flyway.version>
 		<postgres.version>42.7.4</postgres.version>
 
 		<jackson.version>2.17.2</jackson.version>
+
+		<jjwt.version>0.11.5</jjwt.version>
 
 		<mockito-kotlin.version>5.4.0</mockito-kotlin.version>
 	</properties>
@@ -56,12 +62,50 @@
 			<version>${spring-boot.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+
 		<!-- Kotlin Stdlib -->
 
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
 			<version>${kotlin.version}</version>
+		</dependency>
+
+		<!-- Kotlin logging -->
+
+		<dependency>
+			<groupId>io.github.oshai</groupId>
+			<artifactId>kotlin-logging-jvm</artifactId>
+			<version>${kotlin-logging-jvm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 
 		<!-- PostgresSQL -->
@@ -93,6 +137,26 @@
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-kotlin</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- Jjwt -->
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jjwt.version}</version>
 		</dependency>
 
 		<!-- Spring Boot Starter Test -->
