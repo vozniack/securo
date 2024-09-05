@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: securo-core
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/securo_db
+    username: securo_admin
+    password: admin
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/securo_db
+    user: securo_admin
+    password: admin
+    table: schema_version
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate

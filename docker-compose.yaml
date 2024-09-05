@@ -1,0 +1,17 @@
+name: securo
+
+services:
+  postgres:
+    container_name: securo-postgres
+    image: postgres:16.4
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: securo_db
+      POSTGRES_USER: securo_admin
+      POSTGRES_PASSWORD: admin
+
+networks:
+  securo-network:
+    driver: bridge
