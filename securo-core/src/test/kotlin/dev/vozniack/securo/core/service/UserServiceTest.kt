@@ -23,10 +23,12 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserServiceTest @Autowired constructor(
     private val userService: UserService,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder
 ) : AbstractUnitTest() {
 
     @AfterEach
@@ -94,7 +96,7 @@ class UserServiceTest @Autowired constructor(
         val fetchedUser: User = userRepository.findById(user.id).get()
 
         assertEquals(request.email, fetchedUser.email)
-        assertEquals(request.password, fetchedUser.password) // #todo encode
+        assertTrue(passwordEncoder.matches(request.password, fetchedUser.password))
         assertEquals(request.firstName, fetchedUser.firstName)
         assertEquals(request.lastName, fetchedUser.lastName)
         assertEquals(request.language, fetchedUser.language)
@@ -129,7 +131,7 @@ class UserServiceTest @Autowired constructor(
         val updatedUser: User = userService.updatePassword(user.id, request)
 
         assertNotEquals(user.password, updatedUser.password)
-        assertEquals(request.password, updatedUser.password) // #todo encode
+        assertTrue(passwordEncoder.matches(request.password, updatedUser.password))
     }
 
     @Test

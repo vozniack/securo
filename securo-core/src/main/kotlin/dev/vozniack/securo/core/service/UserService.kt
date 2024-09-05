@@ -13,10 +13,11 @@ import dev.vozniack.securo.core.internal.logging.KLogging
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val userRepository: UserRepository) {
+class UserService(private val userRepository: UserRepository, private val passwordEncoder: PasswordEncoder) {
 
     fun findAll(query: Specificable<User>, pageable: Pageable): Page<User> =
         userRepository.findAll(query.toSpecification(), pageable)
@@ -32,7 +33,7 @@ class UserService(private val userRepository: UserRepository) {
     fun create(request: CreateUserRequestDto): User {
         findByEmail(request.email)?.let { throw ConflictException("User with email ${request.email} already exists") }
 
-        return userRepository.save(request.toUser()) // #todo encode
+        return userRepository.save(request.toUser().apply { password = passwordEncoder.encode(request.password) })
     }
 
     fun update(id: UUID, request: UpdateUserRequestDto): User = userRepository.save(
@@ -44,7 +45,7 @@ class UserService(private val userRepository: UserRepository) {
     )
 
     fun updatePassword(id: UUID, request: UpdateUserPasswordRequestDto): User = userRepository.save(
-        getById(id).apply { password = request.password } // #todo encode
+        getById(id).apply { password = passwordEncoder.encode(request.password) }
     )
 
     fun delete(id: UUID) = userRepository.delete(getById(id))
