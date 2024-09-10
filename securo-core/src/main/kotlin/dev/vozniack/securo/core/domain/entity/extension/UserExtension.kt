@@ -6,6 +6,7 @@ import dev.vozniack.securo.core.domain.entity.User
 
 fun User.toDto(): UserDto = UserDto(
     id = id,
+    scope = scope,
     email = email,
     firstName = firstName,
     lastName = lastName,

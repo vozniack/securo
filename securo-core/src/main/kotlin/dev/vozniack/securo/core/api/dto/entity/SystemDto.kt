@@ -3,18 +3,16 @@ package dev.vozniack.securo.core.api.dto.entity
 import dev.vozniack.securo.core.domain.ScopeType
 import java.util.UUID
 
-data class UserDto(
+data class SystemDto(
 
     val id: UUID,
 
     val scope: ScopeType,
 
-    val email: String,
+    var name: String,
+    var code: String,
 
-    val firstName: String,
-    val lastName: String,
+    var description: String? = null,
 
-    val language: String,
-
-    val active: Boolean,
+    var active: Boolean,
 )

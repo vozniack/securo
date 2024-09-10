@@ -1,13 +1,23 @@
 package dev.vozniack.securo.core.domain.repository.specification
 
+import dev.vozniack.securo.core.domain.ScopeType
+import dev.vozniack.securo.core.domain.entity.System
 import dev.vozniack.securo.core.domain.entity.User
+import java.util.UUID
 import org.springframework.data.jpa.domain.Specification
 
 class UserQuery(
-    val firstName: String? = null,
-    val lastName: String? = null,
-    val email: String? = null,
+    private val scope: ScopeType? = null,
+    private val firstName: String? = null,
+    private val lastName: String? = null,
+    private val email: String? = null,
+    private val systemId: String? = null,
 ) : Specificable<User> {
+
+    private fun scopeEquals(scope: ScopeType?): Specification<User> =
+        Specification<User> { root, _, criteriaBuilder ->
+            scope?.let { criteriaBuilder.equal(criteriaBuilder.upper(root.get("scope")), it.name) }
+        }
 
     private fun firstNameLike(firstName: String?): Specification<User> =
         Specification<User> { root, _, criteriaBuilder ->
@@ -24,8 +34,19 @@ class UserQuery(
             email?.let { criteriaBuilder.like(criteriaBuilder.lower(root.get("email")), "%${it.lowercase()}%") }
         }
 
+    private fun belongsToSystemById(systemId: String?): Specification<User> =
+        Specification<User> { root, _, criteriaBuilder ->
+            systemId?.let {
+                criteriaBuilder.equal(
+                    root.join<System, User>("systems").get<UUID?>("id"), UUID.fromString(it)
+                )
+            }
+        }
+
     override fun toSpecification(): Specification<User> =
         Specification<User> { _, _, _ -> null }
+            .and(scopeEquals(scope))
+            .and(belongsToSystemById(systemId))
             .and(
                 firstNameLike(firstName)
                     .or(lastNameLike(lastName))

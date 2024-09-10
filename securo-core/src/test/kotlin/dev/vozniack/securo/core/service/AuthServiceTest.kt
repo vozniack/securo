@@ -7,9 +7,9 @@ import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.internal.exception.UnauthorizedException
 import dev.vozniack.securo.core.mock.mockLoginRequest
 import dev.vozniack.securo.core.mock.mockUser
-import kotlin.test.Test
-import kotlin.test.assertNotNull
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,7 +21,7 @@ class AuthServiceTest @Autowired constructor(
 ) : AbstractUnitTest() {
 
     @AfterEach
-    fun cleanUp() {
+    fun `clean up`() {
         userRepository.deleteAll()
     }
 

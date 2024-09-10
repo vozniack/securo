@@ -39,7 +39,7 @@ class WebSecurityConfig(@Value("\${securo.security.jwt.secret}") private val jwt
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/api/**")
             .allowedOrigins("*")
-            .allowedMethods("GET", "POST", "PUT")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Access-Control-Allow-Origin", "Authorization")
             .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "Authorization")
             .allowCredentials(false)

@@ -16,6 +16,7 @@ class UserExtensionTest {
         val userDto: UserDto = user.toDto()
 
         assertEquals(user.id, userDto.id)
+        assertEquals(user.scope, userDto.scope)
         assertEquals(user.email, userDto.email)
         assertEquals(user.firstName, userDto.firstName)
         assertEquals(user.lastName, userDto.lastName)
@@ -24,7 +25,7 @@ class UserExtensionTest {
     }
 
     @Test
-    fun `create user request to user`() {
+    fun `map create user request to user`() {
         val request: CreateUserRequestDto = mockCreateUserRequestDto()
         val user: User = request.toUser()
 
