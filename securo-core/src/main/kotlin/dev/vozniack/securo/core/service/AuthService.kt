@@ -21,9 +21,10 @@ class AuthService(
     @Value("\${securo.security.jwt.expiration}") private val jwtExpiration: String
 ) {
 
-    fun login(loginRequest: LoginRequest): LoginResponse = userRepository.findByEmail(loginRequest.email)
-        ?.takeIf { passwordEncoder.matches(loginRequest.password, it.password) }
-        ?.let { LoginResponse(token = buildToken(it)) } ?: throw UnauthorizedException("User has not been authorized")
+    fun login(request: LoginRequest): LoginResponse = userRepository.findByEmail(request.email)
+        ?.takeIf { passwordEncoder.matches(request.password, it.password) }
+        ?.let { LoginResponse(token = buildToken(it)) }
+        ?: throw UnauthorizedException("User ${request.email} has not been authorized")
 
     private fun buildToken(user: User): String = Jwts.builder()
         .setSubject(user.email)

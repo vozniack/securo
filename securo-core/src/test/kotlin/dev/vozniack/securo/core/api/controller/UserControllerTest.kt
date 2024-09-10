@@ -3,6 +3,7 @@ package dev.vozniack.securo.core.api.controller
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import dev.vozniack.securo.core.AbstractWebMvcTest
+import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.api.dto.entity.UserDto
@@ -31,7 +32,7 @@ class UserControllerTest @Autowired constructor(
 ) : AbstractWebMvcTest(context) {
 
     @AfterEach
-    fun cleanUp() {
+    fun `clean up`() {
         userRepository.deleteAll()
     }
 
@@ -80,18 +81,18 @@ class UserControllerTest @Autowired constructor(
 
     @Test
     fun `create user`() {
-        val request = mockCreateUserRequestDto()
+        val request: CreateUserRequestDto = mockCreateUserRequestDto()
 
-        val user: UserDto = jacksonObjectMapper().readValue(
+        val userDto: UserDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
                 post("/api/v1/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
-            ).andExpect(status().isOk).andReturn().response.contentAsString
+            ).andExpect(status().isCreated).andReturn().response.contentAsString
         )
 
         assertEquals(1, userRepository.count())
-        assertNotNull(user)
+        assertNotNull(userDto)
     }
 
     @Test

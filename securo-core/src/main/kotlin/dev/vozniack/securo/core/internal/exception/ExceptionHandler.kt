@@ -37,7 +37,7 @@ class ResponseExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [ConflictException::class])
     fun handleConflictException(exception: ConflictException): ResponseEntity<ExceptionResponse> =
         HttpStatus.CONFLICT.toResponseEntity(exception.message).also {
-            ResponseExceptionHandler.logger.warn { exception.toLogMessage() }
+            ResponseExceptionHandler.logger.error { exception.toLogMessage() }
         }
 
     @ExceptionHandler(value = [Exception::class])

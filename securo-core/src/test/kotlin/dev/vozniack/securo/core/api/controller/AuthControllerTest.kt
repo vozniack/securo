@@ -25,7 +25,7 @@ class AuthControllerTest @Autowired constructor(
 ) : AbstractWebMvcTest(context) {
 
     @AfterEach
-    fun cleanUp() {
+    fun `clean up`() {
         userRepository.deleteAll()
     }
 

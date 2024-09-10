@@ -9,7 +9,6 @@ import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
-import dev.vozniack.securo.core.internal.logging.KLogging
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -25,13 +24,13 @@ class UserService(private val userRepository: UserRepository, private val passwo
     fun findAll(query: Specificable<User>): List<User> =
         userRepository.findAll(query.toSpecification())
 
-    fun findByEmail(email: String): User? = userRepository.findByEmail(email)
-
     fun getById(id: UUID): User = userRepository.findById(id)
         .orElseThrow { NotFoundException("Not found user with id $id") }
 
     fun create(request: CreateUserRequestDto): User {
-        findByEmail(request.email)?.let { throw ConflictException("User with email ${request.email} already exists") }
+        userRepository.findByEmail(request.email)?.let {
+            throw ConflictException("User with email ${request.email} already exists")
+        }
 
         return userRepository.save(request.toUser().apply { password = passwordEncoder.encode(request.password) })
     }
@@ -49,6 +48,4 @@ class UserService(private val userRepository: UserRepository, private val passwo
     )
 
     fun delete(id: UUID) = userRepository.delete(getById(id))
-
-    companion object : KLogging()
 }

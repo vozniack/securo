@@ -20,19 +20,17 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 class AuthenticationFilter(private val jwtSecret: String) : OncePerRequestFilter() {
 
-    override fun shouldNotFilter(request: HttpServletRequest): Boolean =
-        NegatedRequestMatcher(AntPathRequestMatcher("/api/v1/auth", HttpMethod.POST.toString())).matches(request)
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         filterChain: FilterChain,
     ) {
-        val token = parseJwtToken(request) ?: throw UnauthorizedException("Token is not present")
-        val loggedUser = buildLoggedUser(token) ?: throw UnauthorizedException("Token is not valid")
+        takeIf { !(request.requestURL.contains("api/v1/auth") || request.requestURL.contains("actuator/health")) }?.let {
+            val token = parseJwtToken(request) ?: throw UnauthorizedException("Token is not present")
+            val loggedUser = buildLoggedUser(token) ?: throw UnauthorizedException("Token is not valid")
 
-        SecurityContextHolder.getContext().authentication = loggedUser
-        filterChain.doFilter(request, response)
+            SecurityContextHolder.getContext().authentication = loggedUser
+        }.also { filterChain.doFilter(request, response) }
     }
 
     private fun parseJwtToken(request: HttpServletRequest): String? = request.getHeader("Authorization")
@@ -51,8 +49,13 @@ class AuthenticationFilter(private val jwtSecret: String) : OncePerRequestFilter
     }
 
     private fun mapRoles(parsedToken: Jws<Claims>): List<SimpleGrantedAuthority> =
-        (parsedToken.body["roles"] as List<*>).map { role -> SimpleGrantedAuthority("ROLE_$role") }
+        parsedToken.body["roles"]?.let {
+            (it as List<*>).map { role -> SimpleGrantedAuthority("ROLE_$role") }
+        } ?: emptyList()
+
 
     private fun mapPrivileges(parsedToken: Jws<Claims>): List<SimpleGrantedAuthority> =
-        (parsedToken.body["privileges"] as List<*>).map { privilege -> SimpleGrantedAuthority(privilege.toString()) }
+        parsedToken.body["privileges"]?.let {
+            (it as List<*>).map { privilege -> SimpleGrantedAuthority(privilege.toString()) }
+        } ?: emptyList()
 }

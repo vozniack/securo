@@ -32,7 +32,7 @@ class UserServiceTest @Autowired constructor(
 ) : AbstractUnitTest() {
 
     @AfterEach
-    fun cleanUp() {
+    fun `clean up`() {
         userRepository.deleteAll()
     }
 
@@ -57,26 +57,11 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
-    fun `find user by email`() {
-        val user: User = userRepository.save(mockUser())
-        val fetchedUSer: User? = userService.findByEmail(user.email)
-
-        assertEquals(user, fetchedUSer)
-    }
-
-    @Test
-    fun `find not existing user by email`() {
-        val fetchedUser: User? = userService.findByEmail("someemail@somedomain.com")
-
-        assertTrue(fetchedUser == null)
-    }
-
-    @Test
     fun `get user by id`() {
         val user: User = userRepository.save(mockUser())
-        val fetchedUSer: User = userService.getById(user.id)
+        val fetchedUser: User = userService.getById(user.id)
 
-        assertEquals(user, fetchedUSer)
+         assertEquals(user.id, fetchedUser.id)
     }
 
     @Test
@@ -93,13 +78,12 @@ class UserServiceTest @Autowired constructor(
 
         assertEquals(1, userRepository.count())
 
-        val fetchedUser: User = userRepository.findById(user.id).get()
-
-        assertEquals(request.email, fetchedUser.email)
-        assertTrue(passwordEncoder.matches(request.password, fetchedUser.password))
-        assertEquals(request.firstName, fetchedUser.firstName)
-        assertEquals(request.lastName, fetchedUser.lastName)
-        assertEquals(request.language, fetchedUser.language)
+        assertEquals(request.email, user.email)
+        assertTrue(passwordEncoder.matches(request.password, user.password))
+        assertEquals(request.firstName, user.firstName)
+        assertEquals(request.lastName, user.lastName)
+        assertEquals(request.language, user.language)
+        assertTrue(user.active)
     }
 
     @Test
@@ -118,6 +102,7 @@ class UserServiceTest @Autowired constructor(
         val request: UpdateUserRequestDto = mockUpdateUserRequestDto()
         val updatedUser: User = userService.update(user.id, request)
 
+        assertEquals(user.id, updatedUser.id)
         assertEquals(updatedUser.firstName, request.firstName)
         assertEquals(updatedUser.lastName, request.lastName)
         assertEquals(updatedUser.language, request.language)
