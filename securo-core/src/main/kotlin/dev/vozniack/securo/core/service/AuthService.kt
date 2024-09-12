@@ -1,7 +1,7 @@
 package dev.vozniack.securo.core.service
 
-import dev.vozniack.securo.core.api.dto.LoginRequest
-import dev.vozniack.securo.core.api.dto.LoginResponse
+import dev.vozniack.securo.core.api.dto.LoginRequestDto
+import dev.vozniack.securo.core.api.dto.LoginResponseDto
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.internal.exception.UnauthorizedException
@@ -21,9 +21,9 @@ class AuthService(
     @Value("\${securo.security.jwt.expiration}") private val jwtExpiration: String
 ) {
 
-    fun login(request: LoginRequest): LoginResponse = userRepository.findByEmail(request.email)
+    fun login(request: LoginRequestDto): LoginResponseDto = userRepository.findByEmail(request.email)
         ?.takeIf { passwordEncoder.matches(request.password, it.password) }
-        ?.let { LoginResponse(token = buildToken(it)) }
+        ?.let { LoginResponseDto(token = buildToken(it)) }
         ?: throw UnauthorizedException("User ${request.email} has not been authorized")
 
     private fun buildToken(user: User): String = Jwts.builder()

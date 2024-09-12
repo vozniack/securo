@@ -5,7 +5,7 @@ import dev.vozniack.securo.core.mock.mockLoginRequest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class AuthRequestExtensionTest {
+class AuthExtensionTest {
 
     @Test
     fun `validate login request`() {

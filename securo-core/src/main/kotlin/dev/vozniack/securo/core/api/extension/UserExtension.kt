@@ -3,6 +3,8 @@ package dev.vozniack.securo.core.api.extension
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
+import dev.vozniack.securo.core.api.dto.UserDto
+import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.internal.exception.BadRequestException
 import dev.vozniack.securo.core.utils.matchesEmailRegex
 import dev.vozniack.securo.core.utils.matchesLanguageRegex
@@ -46,3 +48,21 @@ fun UpdateUserPasswordRequestDto.validate() {
         !password.matchesPasswordRegex()
     }
 }
+
+fun CreateUserRequestDto.toUser(): User = User(
+    email = email,
+    password = password,
+    firstName = firstName,
+    lastName = lastName,
+    language = language
+)
+
+fun User.toDto(): UserDto = UserDto(
+    id = id,
+    scope = scope,
+    email = email,
+    firstName = firstName,
+    lastName = lastName,
+    language = language,
+    active = active,
+)

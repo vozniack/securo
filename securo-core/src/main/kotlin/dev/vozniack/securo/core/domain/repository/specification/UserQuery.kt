@@ -11,7 +11,7 @@ class UserQuery(
     private val firstName: String? = null,
     private val lastName: String? = null,
     private val email: String? = null,
-    private val systemId: String? = null,
+    private val systemId: String? = null
 ) : Specificable<User> {
 
     private fun scopeEquals(scope: ScopeType?): Specification<User> =

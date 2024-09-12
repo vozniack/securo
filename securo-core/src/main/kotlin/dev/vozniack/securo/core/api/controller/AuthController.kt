@@ -1,7 +1,7 @@
 package dev.vozniack.securo.core.api.controller
 
-import dev.vozniack.securo.core.api.dto.LoginRequest
-import dev.vozniack.securo.core.api.dto.LoginResponse
+import dev.vozniack.securo.core.api.dto.LoginRequestDto
+import dev.vozniack.securo.core.api.dto.LoginResponseDto
 import dev.vozniack.securo.core.internal.logging.KLogging
 import dev.vozniack.securo.core.service.AuthService
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 class AuthController(private val authService: AuthService) {
 
     @PostMapping
-    fun login(@RequestBody request: LoginRequest): LoginResponse {
+    fun login(@RequestBody request: LoginRequestDto): LoginResponseDto {
         logger.debug { "Logging in user ${request.email}" }
 
         return authService.login(request)

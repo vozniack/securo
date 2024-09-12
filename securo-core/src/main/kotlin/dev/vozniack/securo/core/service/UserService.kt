@@ -3,8 +3,8 @@ package dev.vozniack.securo.core.service
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
+import dev.vozniack.securo.core.api.extension.toUser
 import dev.vozniack.securo.core.domain.entity.User
-import dev.vozniack.securo.core.domain.entity.extension.toUser
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException

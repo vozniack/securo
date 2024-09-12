@@ -126,7 +126,7 @@ class SystemServiceTest @Autowired constructor(
 
         val request: UpdateSystemRequestDto = mockUpdateSystemRequestDto(code = "SYS")
 
-        // allowed because of code change within system
+        // allowed because of changing the same system
         systemService.update(system.id, request)
 
         // not allowed because of already used system code
