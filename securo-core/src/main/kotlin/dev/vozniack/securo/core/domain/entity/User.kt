@@ -39,5 +39,13 @@ data class User(
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "system_id")]
     )
-    var systems: MutableList<System> = mutableListOf()
+    var systems: MutableList<System> = mutableListOf(),
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "user_Roles",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id")]
+    )
+    var roles: MutableList<Role> = mutableListOf()
 )

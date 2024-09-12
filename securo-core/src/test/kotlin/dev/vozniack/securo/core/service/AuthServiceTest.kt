@@ -32,6 +32,8 @@ class AuthServiceTest @Autowired constructor(
 
         val response: LoginResponseDto = authService.login(request)
         assertNotNull(response.token)
+
+        // #todo validate token
     }
 
     @Test

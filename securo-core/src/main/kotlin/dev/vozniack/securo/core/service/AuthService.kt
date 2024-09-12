@@ -28,6 +28,7 @@ class AuthService(
 
     private fun buildToken(user: User): String = Jwts.builder()
         .setSubject(user.email)
+        .addClaims(mapOf(Pair("roles", user.roles.map { "${it.system.code}_${it.code}" })) as Map<String, Any>?)
         .signWith(Keys.hmacShaKeyFor(jwtSecret.toByteArray(StandardCharsets.UTF_8)))
         .setExpiration(Date(Date().time + jwtExpiration.toInt())) // 12 hours
         .compact()
