@@ -6,7 +6,7 @@ import dev.vozniack.securo.core.AbstractWebMvcTest
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
-import dev.vozniack.securo.core.api.dto.entity.UserDto
+import dev.vozniack.securo.core.api.dto.UserDto
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.mock.mockCreateUserRequestDto

@@ -1,8 +1,8 @@
 package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.AbstractUnitTest
-import dev.vozniack.securo.core.api.dto.LoginRequest
-import dev.vozniack.securo.core.api.dto.LoginResponse
+import dev.vozniack.securo.core.api.dto.LoginRequestDto
+import dev.vozniack.securo.core.api.dto.LoginResponseDto
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.internal.exception.UnauthorizedException
 import dev.vozniack.securo.core.mock.mockLoginRequest
@@ -28,16 +28,18 @@ class AuthServiceTest @Autowired constructor(
     @Test
     fun `login user`() {
         userRepository.save(mockUser().apply { password = passwordEncoder.encode("Admin123!") })
-        val request: LoginRequest = mockLoginRequest(password = "Admin123!")
+        val request: LoginRequestDto = mockLoginRequest(password = "Admin123!")
 
-        val response: LoginResponse = authService.login(request)
+        val response: LoginResponseDto = authService.login(request)
         assertNotNull(response.token)
+
+        // #todo validate token
     }
 
     @Test
     fun `login with incorrect password`() {
         userRepository.save(mockUser().apply { password = passwordEncoder.encode("Admin123!") })
-        val request: LoginRequest = mockLoginRequest(password = "Blabla123!")
+        val request: LoginRequestDto = mockLoginRequest(password = "Blabla123!")
 
         assertThrows<UnauthorizedException> {
             authService.login(request)

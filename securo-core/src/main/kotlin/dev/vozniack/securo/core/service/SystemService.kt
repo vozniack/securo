@@ -2,9 +2,9 @@ package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateSystemRequestDto
+import dev.vozniack.securo.core.api.extension.toSystem
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.entity.System
-import dev.vozniack.securo.core.domain.entity.extension.toSystem
 import dev.vozniack.securo.core.domain.repository.SystemRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException

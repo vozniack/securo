@@ -1,8 +1,8 @@
 package dev.vozniack.securo.core.mock
 
-import dev.vozniack.securo.core.api.dto.LoginRequest
+import dev.vozniack.securo.core.api.dto.LoginRequestDto
 
 fun mockLoginRequest(
     email: String = "john.doe@securo.com",
     password: String = "Admin123!",
-): LoginRequest = LoginRequest(email = email, password = password)
+): LoginRequestDto = LoginRequestDto(email = email, password = password)

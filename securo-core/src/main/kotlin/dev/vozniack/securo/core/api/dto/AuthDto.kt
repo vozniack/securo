@@ -1,10 +1,10 @@
 package dev.vozniack.securo.core.api.dto
 
-data class LoginRequest(
+data class LoginRequestDto(
     val email: String,
     val password: String
 )
 
-data class LoginResponse(
+data class LoginResponseDto(
     val token: String
 )
