@@ -28,7 +28,7 @@ class RoleService(
         roleRepository.findAll(query.toSpecification())
 
     fun getById(id: UUID): Role = roleRepository.findById(id)
-        .orElseThrow { NotFoundException("Not found role id $id") }
+        .orElseThrow { NotFoundException("Not found role with id $id") }
 
     fun create(request: CreateRoleRequestDto): Role {
         roleRepository.findByCodeAndSystem(request.code, systemService.findById(request.systemId))?.let {
@@ -39,16 +39,18 @@ class RoleService(
     }
 
     fun update(id: UUID, request: UpdateRoleRequestDto): Role {
-        roleRepository.findByCodeAndSystem(request.code, systemService.findById(request.systemId))
+        val role: Role = getById(id)
+
+        roleRepository.findByCodeAndSystem(request.code, systemService.findById(role.system.id))
             ?.takeIf { it.id != id }
-            ?.let { throw ConflictException("Role with code ${request.code} within system ${request.systemId} already exists") }
+            ?.let { throw ConflictException("Role with code ${request.code} within system ${role.system.id} already exists") }
 
         return roleRepository.save(
-            getById(id).takeIf { it.system.id == request.systemId }?.apply {
+            role.apply {
                 name = request.name
                 code = request.code
                 description = request.description
-            } ?: throw ConflictException("Role $id can't be moved to system ${request.systemId}")
+            }
         )
     }
 

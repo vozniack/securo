@@ -108,7 +108,7 @@ class RoleControllerTest @Autowired constructor(
     fun `update role`() {
         val system: System = systemRepository.save(mockSystem())
         val role: Role = roleRepository.save(mockRole(system = system))
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(systemId = system.id)
+        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
 
         val roleDto: RoleDto = jacksonObjectMapper().readValue(
             mockMvc.perform(

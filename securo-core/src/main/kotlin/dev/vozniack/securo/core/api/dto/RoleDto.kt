@@ -9,28 +9,26 @@ data class RoleDto(
 
     val scope: ScopeType,
 
-    var name: String,
-    var code: String,
+    val name: String,
+    val code: String,
 
-    var description: String? = null,
+    val description: String? = null,
 
-    var active: Boolean,
+    val active: Boolean,
 )
 
 data class CreateRoleRequestDto(
-    var name: String,
-    var code: String,
+    val name: String,
+    val code: String,
 
-    var description: String? = null,
+    val description: String? = null,
 
-    var systemId: UUID
+    val systemId: UUID
 )
 
 data class UpdateRoleRequestDto(
-    var name: String,
-    var code: String,
+    val name: String,
+    val code: String,
 
-    var description: String? = null,
-
-    var systemId: UUID
+    val description: String? = null,
 )

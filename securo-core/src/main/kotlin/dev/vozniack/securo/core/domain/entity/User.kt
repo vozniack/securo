@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.domain.entity
 
 import dev.vozniack.securo.core.domain.ScopeType
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -11,6 +12,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
 
@@ -18,7 +20,8 @@ import java.util.UUID
 @Table(name = "users")
 data class User(
 
-    @Id @GeneratedValue @Column(nullable = false) val id: UUID = UUID.randomUUID(),
+    @Id @GeneratedValue
+    @Column(nullable = false) val id: UUID = UUID.randomUUID(),
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false) val scope: ScopeType = ScopeType.EXTERNAL,
@@ -43,9 +46,12 @@ data class User(
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "user_Roles",
+        name = "user_roles",
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "role_id")]
     )
-    var roles: MutableList<Role> = mutableListOf()
+    var roles: MutableList<Role> = mutableListOf(),
+
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
+    var privileges: MutableList<UserPrivilege> = mutableListOf(),
 )

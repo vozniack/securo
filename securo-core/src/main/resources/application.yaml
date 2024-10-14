@@ -23,3 +23,8 @@ securo:
     jwt:
       secret: 656uzf9s3JhPGu1HSj6nkhV8-Jc-TH43C5Wd5p_BH9Zfbq03n4hWMFlskVP6_tZScNWBOmUAmNxgPVTuOmv6lw
       expiration: 1800000
+
+logging:
+  level:
+    dev.vozniack.securo.core: DEBUG
+    dev.vozniack.securo.core.api.controller.AuthController: INFO

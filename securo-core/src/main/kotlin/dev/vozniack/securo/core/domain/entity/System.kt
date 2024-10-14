@@ -6,7 +6,6 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
@@ -21,7 +20,8 @@ import java.util.UUID
 @Table(name = "systems")
 data class System(
 
-    @Id @GeneratedValue @Column(nullable = false) val id: UUID = UUID.randomUUID(),
+    @Id @GeneratedValue
+    @Column(nullable = false) val id: UUID = UUID.randomUUID(),
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false) val scope: ScopeType = ScopeType.EXTERNAL,
@@ -34,13 +34,18 @@ data class System(
     @Column(nullable = false) var active: Boolean = true,
 
     @ManyToOne
-    @JoinColumn(name = "parent_id", nullable = true)
-    var parent: System? = null,
+    @JoinColumn(name = "parent_id", nullable = true) var parent: System? = null,
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.REMOVE])
     var systems: MutableList<System> = mutableListOf(),
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "system")
+    var roles: MutableList<Role> = mutableListOf(),
+
+    @OneToMany(mappedBy = "system")
+    var privileges: MutableList<Privilege> = mutableListOf(),
+
+    @ManyToMany
     @JoinTable(
         name = "user_systems",
         joinColumns = [JoinColumn(name = "system_id")],

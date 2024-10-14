@@ -8,7 +8,7 @@ class SystemQuery(
     private val scope: ScopeType? = null,
     private val name: String? = null,
     private val code: String? = null,
-    private val parents: Boolean? = null,
+    private val parent: Boolean? = null,
 ) : Specificable<System> {
 
     private fun scopeEquals(scope: ScopeType?): Specification<System> =
@@ -26,7 +26,6 @@ class SystemQuery(
             code?.let { criteriaBuilder.like(criteriaBuilder.lower(root.get("code")), "%${it.lowercase()}%") }
         }
 
-
     private fun isParent(isParent: Boolean?): Specification<System> =
         Specification<System> { root, _, criteriaBuilder ->
             isParent?.let {
@@ -37,7 +36,7 @@ class SystemQuery(
     override fun toSpecification(): Specification<System> =
         Specification<System> { _, _, _ -> null }
             .and(scopeEquals(scope))
-            .and(isParent(parents))
+            .and(isParent(parent))
             .and(
                 nameLike(name)
                     .or(codeLike(code))

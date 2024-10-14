@@ -3,7 +3,7 @@ package dev.vozniack.securo.core.api.dto
 import dev.vozniack.securo.core.domain.ScopeType
 import java.util.UUID
 
-data class SystemDto(
+data class PrivilegeDto(
 
     val id: UUID,
 
@@ -14,19 +14,27 @@ data class SystemDto(
 
     val description: String? = null,
 
-    val active: Boolean,
+    val index: Int,
+
+    val systemId: UUID,
+
+    val parent: UUID? = null
 )
 
-data class CreateSystemRequestDto(
+data class CreatePrivilegeRequestDto(
     val name: String,
     val code: String,
 
     val description: String? = null,
 
+    val index: Int,
+
+    val systemId: UUID,
+
     val parentId: UUID? = null
 )
 
-data class UpdateSystemRequestDto(
+data class UpdatePrivilegeRequestDto(
     val name: String,
     val code: String,
 

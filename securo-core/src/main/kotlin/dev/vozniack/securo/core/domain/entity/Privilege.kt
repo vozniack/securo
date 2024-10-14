@@ -14,10 +14,9 @@ import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
 
-
 @Entity
-@Table(name = "roles")
-data class Role(
+@Table(name = "privileges")
+data class Privilege(
 
     @Id @GeneratedValue
     @Column(nullable = false) val id: UUID = UUID.randomUUID(),
@@ -30,11 +29,17 @@ data class Role(
 
     @Column(nullable = true) var description: String? = null,
 
-    @Column(nullable = false) var active: Boolean = true,
+    @Column(nullable = false) var index: Int,
 
     @ManyToOne
     @JoinColumn(name = "system_id", nullable = false) val system: System,
 
-    @OneToMany(mappedBy = "role", cascade = [CascadeType.REMOVE])
-    var privileges: MutableList<RolePrivilege> = mutableListOf()
-)
+    @ManyToOne
+    @JoinColumn(name = "parent_id", nullable = true) var parent: Privilege? = null,
+
+    @OneToMany(mappedBy = "parent", cascade = [CascadeType.REMOVE])
+    var privileges: MutableList<Privilege> = mutableListOf()
+) {
+
+    fun hasChildren(): Boolean = privileges.isNotEmpty()
+}

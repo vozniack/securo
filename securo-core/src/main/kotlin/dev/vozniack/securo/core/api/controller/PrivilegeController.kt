@@ -1,14 +1,14 @@
 package dev.vozniack.securo.core.api.controller
 
-import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
-import dev.vozniack.securo.core.api.dto.SystemDto
-import dev.vozniack.securo.core.api.dto.UpdateSystemRequestDto
+import dev.vozniack.securo.core.api.dto.CreatePrivilegeRequestDto
+import dev.vozniack.securo.core.api.dto.PrivilegeDto
+import dev.vozniack.securo.core.api.dto.UpdatePrivilegeRequestDto
 import dev.vozniack.securo.core.api.extension.toDto
 import dev.vozniack.securo.core.api.extension.validate
 import dev.vozniack.securo.core.domain.ScopeType
-import dev.vozniack.securo.core.domain.repository.specification.SystemQuery
+import dev.vozniack.securo.core.domain.repository.specification.PrivilegeQuery
 import dev.vozniack.securo.core.internal.logging.KLogging
-import dev.vozniack.securo.core.service.SystemService
+import dev.vozniack.securo.core.service.PrivilegeService
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -25,53 +25,53 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/systems")
-class SystemController(private val systemService: SystemService) {
+@RequestMapping("/api/v1/privileges")
+class PrivilegeController(private val privilegeService: PrivilegeService) {
 
     @GetMapping("/page")
     fun findAll(
         @RequestParam(required = false) search: String?,
         @RequestParam(required = false) parents: Boolean?,
+        @RequestParam(required = false) systemId: String?,
         pageable: Pageable
-    ): Page<SystemDto> = systemService.findAll(
-        SystemQuery(ScopeType.EXTERNAL, search, search, parents), pageable
+    ): Page<PrivilegeDto> = privilegeService.findAll(
+        PrivilegeQuery(ScopeType.EXTERNAL, search, search, parents, systemId), pageable
     ).map { it.toDto() }
 
     @GetMapping("/list")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) parents: Boolean?
-    ): List<SystemDto> = systemService.findAll(
-        SystemQuery(ScopeType.EXTERNAL, search, search, parents)
+        @RequestParam(required = false) parents: Boolean?,
+        @RequestParam(required = false) systemId: String?,
+    ): List<PrivilegeDto> = privilegeService.findAll(
+        PrivilegeQuery(ScopeType.EXTERNAL, search, search, parents, systemId)
     ).map { it.toDto() }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): SystemDto = systemService.getById(id).toDto()
+    fun getById(@PathVariable id: UUID): PrivilegeDto = privilegeService.getById(id).toDto()
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: CreateSystemRequestDto): SystemDto {
+    fun create(@RequestBody request: CreatePrivilegeRequestDto): PrivilegeDto {
         request.validate().also {
-            logger.debug { "Creating system with request $request" }
+            logger.debug { "Creating privilege with request $request" }
         }
 
-        return systemService.create(request).toDto()
+        return privilegeService.create(request).toDto()
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: UUID, @RequestBody request: UpdateSystemRequestDto): SystemDto {
-        request.validate().also {
-            logger.debug { "Updating system $id with request $request" }
-        }
+    fun update(@PathVariable id: UUID, @RequestBody request: UpdatePrivilegeRequestDto): PrivilegeDto {
+        logger.debug { "Updating privilege $id with request $request" }
 
-        return systemService.update(id, request).toDto()
+        return privilegeService.update(id, request).toDto()
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID) {
-        logger.debug { "Deleting system $id" }
+        logger.debug { "Deleting privilege $id" }
 
-        systemService.delete(id)
+        privilegeService.delete(id)
     }
 
     companion object : KLogging()

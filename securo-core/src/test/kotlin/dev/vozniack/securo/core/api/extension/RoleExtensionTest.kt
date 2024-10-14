@@ -38,16 +38,14 @@ class RoleExtensionTest @Autowired constructor(
 
     @Test
     fun `validate update role request`() {
-        val system: System = systemRepository.save(mockSystem())
-
-        mockUpdateRoleRequestDto(systemId = system.id).validate()
+        mockUpdateRoleRequestDto().validate()
 
         assertThrows<BadRequestException> {
-            mockUpdateRoleRequestDto(name = "", systemId = system.id).validate()
+            mockUpdateRoleRequestDto(name = "").validate()
         }
 
         assertThrows<BadRequestException> {
-            mockUpdateRoleRequestDto(code = "", systemId = system.id).validate()
+            mockUpdateRoleRequestDto(code = "").validate()
         }
     }
 }
