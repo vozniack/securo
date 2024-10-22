@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [20]
 
     steps:
       - uses: actions/checkout@v4
@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - run: cd securo-app
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
