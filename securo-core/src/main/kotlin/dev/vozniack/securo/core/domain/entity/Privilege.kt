@@ -10,16 +10,14 @@ import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
-import jakarta.persistence.JoinTable
-import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
 
 @Entity
-@Table(name = "systems")
-data class System(
+@Table(name = "privileges")
+data class Privilege(
 
     @Id @GeneratedValue
     @Column(nullable = false) val id: UUID = UUID.randomUUID(),
@@ -32,25 +30,14 @@ data class System(
 
     @Column(nullable = true) var description: String? = null,
 
-    @Column(nullable = false) var active: Boolean = true,
+    @Column(nullable = false) var index: Int,
 
     @ManyToOne
-    @JoinColumn(name = "parent_id", nullable = true) var parent: System? = null,
+    @JoinColumn(name = "system_id", nullable = false) val system: System,
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id", nullable = true) var parent: Privilege? = null,
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.REMOVE], fetch = FetchType.EAGER) // #todo lazy fetch
-    var systems: MutableList<System> = mutableListOf(),
-
-    @OneToMany(mappedBy = "system", fetch = FetchType.EAGER) // #todo lazy fetch
-    var roles: MutableList<Role> = mutableListOf(),
-
-    @OneToMany(mappedBy = "system", fetch = FetchType.EAGER) // #todo lazy fetch
-    var privileges: MutableList<Privilege> = mutableListOf(),
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_systems",
-        joinColumns = [JoinColumn(name = "system_id")],
-        inverseJoinColumns = [JoinColumn(name = "user_id")]
-    )
-    var users: MutableList<User> = mutableListOf()
+    var privileges: MutableList<Privilege> = mutableListOf()
 )

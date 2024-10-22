@@ -109,7 +109,7 @@ class RoleServiceTest @Autowired constructor(
         val system: System = systemRepository.save(mockSystem())
         val role: Role = roleRepository.save(mockRole(system = system))
 
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(systemId = system.id)
+        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
         val updatedRole: Role = roleService.update(role.id, request)
 
         assertEquals(role.id, updatedRole.id)
@@ -125,7 +125,7 @@ class RoleServiceTest @Autowired constructor(
         val role: Role = roleRepository.save(mockRole(system = system))
         val otherRole: Role = roleRepository.save(mockRole(name = "User", code = "USER", system = system))
 
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(code = "ADMIN", systemId = system.id)
+        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(code = "ADMIN")
 
         // allowed because of changing the same role
         roleService.update(role.id, request)
@@ -133,19 +133,6 @@ class RoleServiceTest @Autowired constructor(
         // not allowed because of already used role code
         assertThrows<ConflictException> {
             roleService.update(otherRole.id, request)
-        }
-    }
-
-    @Test
-    fun `update role with different system`() {
-        val system: System = systemRepository.save(mockSystem())
-        val systemZero: System = systemRepository.save(mockSystem(code = "SYS0"))
-
-        val role: Role = roleRepository.save(mockRole(system = system))
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(systemId = systemZero.id)
-
-        assertThrows<ConflictException> {
-            roleService.update(role.id, request)
         }
     }
 

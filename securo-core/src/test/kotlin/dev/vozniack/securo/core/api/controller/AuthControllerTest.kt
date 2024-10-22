@@ -8,8 +8,8 @@ import dev.vozniack.securo.core.api.dto.LoginResponseDto
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.mock.mockLoginRequest
 import dev.vozniack.securo.core.mock.mockUser
-import kotlin.test.assertNotNull
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -32,6 +32,7 @@ class AuthControllerTest @Autowired constructor(
     @Test
     fun `login user`() {
         userRepository.save(mockUser().apply { password = passwordEncoder.encode("Admin123!") })
+
         val request: LoginRequestDto = mockLoginRequest(password = "Admin123!")
 
         val response: LoginResponseDto = jacksonObjectMapper().readValue(

@@ -4,7 +4,7 @@ import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.domain.entity.System
 import dev.vozniack.securo.core.domain.repository.SystemRepository
 import dev.vozniack.securo.core.mock.mockSystem
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -34,7 +34,7 @@ class SystemQueryTest @Autowired constructor(
         systems = systemRepository.findAll(SystemQuery(code = "APR").toSpecification())
         assertEquals(1, systems.size)
 
-        systems = systemRepository.findAll(SystemQuery(parents = true).toSpecification())
+        systems = systemRepository.findAll(SystemQuery(parent = true).toSpecification())
         assertEquals(2, systems.size)
     }
 }

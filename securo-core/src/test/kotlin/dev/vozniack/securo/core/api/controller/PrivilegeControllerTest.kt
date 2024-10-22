@@ -3,17 +3,17 @@ package dev.vozniack.securo.core.api.controller
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import dev.vozniack.securo.core.AbstractWebMvcTest
-import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
-import dev.vozniack.securo.core.api.dto.RoleDto
-import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
-import dev.vozniack.securo.core.domain.entity.Role
+import dev.vozniack.securo.core.api.dto.CreatePrivilegeRequestDto
+import dev.vozniack.securo.core.api.dto.PrivilegeDto
+import dev.vozniack.securo.core.api.dto.UpdatePrivilegeRequestDto
+import dev.vozniack.securo.core.domain.entity.Privilege
 import dev.vozniack.securo.core.domain.entity.System
-import dev.vozniack.securo.core.domain.repository.RoleRepository
+import dev.vozniack.securo.core.domain.repository.PrivilegeRepository
 import dev.vozniack.securo.core.domain.repository.SystemRepository
-import dev.vozniack.securo.core.mock.mockCreateRoleRequestDto
-import dev.vozniack.securo.core.mock.mockRole
+import dev.vozniack.securo.core.mock.mockCreatePrivilegeRequestDto
+import dev.vozniack.securo.core.mock.mockPrivilege
 import dev.vozniack.securo.core.mock.mockSystem
-import dev.vozniack.securo.core.mock.mockUpdateRoleRequestDto
+import dev.vozniack.securo.core.mock.mockUpdatePrivilegeRequestDto
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -27,15 +27,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.web.context.WebApplicationContext
 
-class RoleControllerTest @Autowired constructor(
-    private val roleRepository: RoleRepository,
+class PrivilegeControllerTest @Autowired constructor(
+    private val privilegeRepository: PrivilegeRepository,
     private val systemRepository: SystemRepository,
     context: WebApplicationContext
 ) : AbstractWebMvcTest(context) {
 
     @AfterEach
     fun `clean up`() {
-        roleRepository.deleteAll()
+        privilegeRepository.deleteAll()
         systemRepository.deleteAll()
     }
 
@@ -43,14 +43,14 @@ class RoleControllerTest @Autowired constructor(
     fun `find all in page`() {
         val system: System = systemRepository.save(mockSystem())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        privilegeRepository.save(mockPrivilege(name = "Login", code = "LOGIN", system = system))
+        privilegeRepository.save(mockPrivilege(name = "Signup", code = "SIGNUP", system = system))
 
         // we just want to check if endpoint is fine
         // catching result is hard due to Page serialization problem in kotlin-jackson
 
         mockMvc.perform(
-            get("/api/v1/roles/page?systemId=${system.id}")
+            get("/api/v1/privileges/page?systemId=${system.id}")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
     }
@@ -59,80 +59,80 @@ class RoleControllerTest @Autowired constructor(
     fun `find all in list`() {
         val system: System = systemRepository.save(mockSystem())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        privilegeRepository.save(mockPrivilege(name = "Login", code = "LOGIN", system = system))
+        privilegeRepository.save(mockPrivilege(name = "Signup", code = "SIGNUP", system = system))
 
-        val roles: List<RoleDto> = jacksonObjectMapper().readValue(
+        val privileges: List<PrivilegeDto> = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                get("/api/v1/roles/list?systemId=${system.id}")
+                get("/api/v1/privileges/list?systemId=${system.id}")
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(2, roles.size)
+        assertEquals(2, privileges.size)
     }
 
     @Test
     fun `get by id`() {
         val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val privilege: Privilege = privilegeRepository.save(mockPrivilege(system = system))
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val privilegeDto: PrivilegeDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                get("/api/v1/roles/${role.id}")
+                get("/api/v1/privileges/${privilege.id}")
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(role.id, roleDto.id)
+        assertEquals(privilege.id, privilegeDto.id)
     }
 
     @Test
-    fun `create role`() {
+    fun `create privilege`() {
         val system: System = systemRepository.save(mockSystem())
-        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(systemId = system.id)
+        val request: CreatePrivilegeRequestDto = mockCreatePrivilegeRequestDto(systemId = system.id)
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val privilegeDto: PrivilegeDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                post("/api/v1/roles")
+                post("/api/v1/privileges")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
             ).andExpect(status().isCreated).andReturn().response.contentAsString
         )
 
-        assertEquals(1, roleRepository.count())
-        assertNotNull(roleDto)
+        assertEquals(1, privilegeRepository.count())
+        assertNotNull(privilegeDto)
     }
 
     @Test
-    fun `update role`() {
+    fun `update privilege`() {
         val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
+        val privilege: Privilege = privilegeRepository.save(mockPrivilege(system = system))
+        val request: UpdatePrivilegeRequestDto = mockUpdatePrivilegeRequestDto()
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val privilegeDto: PrivilegeDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                put("/api/v1/roles/${role.id}")
+                put("/api/v1/privileges/${privilege.id}")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(role.id, roleDto.id)
+        assertEquals(privilege.id, privilegeDto.id)
     }
 
     @Test
-    fun `delete role`() {
+    fun `delete privilege`() {
         val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val privilege: Privilege = privilegeRepository.save(mockPrivilege(system = system))
 
-        assertEquals(1, roleRepository.count())
+        assertEquals(1, privilegeRepository.count())
 
         mockMvc.perform(
-            delete("/api/v1/roles/${role.id}")
+            delete("/api/v1/privileges/${privilege.id}")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
 
-        assertEquals(0, roleRepository.count())
+        assertEquals(0, privilegeRepository.count())
     }
 }

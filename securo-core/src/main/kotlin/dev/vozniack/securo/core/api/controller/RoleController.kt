@@ -31,7 +31,7 @@ class RoleController(private val roleService: RoleService) {
     @GetMapping("/page")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) systemId: String,
+        @RequestParam(required = false) systemId: String?,
         pageable: Pageable
     ): Page<RoleDto> = roleService.findAll(
         RoleQuery(ScopeType.EXTERNAL, search, search, systemId), pageable
@@ -40,7 +40,7 @@ class RoleController(private val roleService: RoleService) {
     @GetMapping("/list")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) systemId: String,
+        @RequestParam(required = false) systemId: String?,
     ): List<RoleDto> = roleService.findAll(
         RoleQuery(ScopeType.EXTERNAL, search, search, systemId)
     ).map { it.toDto() }
@@ -52,7 +52,7 @@ class RoleController(private val roleService: RoleService) {
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody request: CreateRoleRequestDto): RoleDto {
         request.validate().also {
-            logger.debug { "Creating system with request $request" }
+            logger.debug { "Creating role with request $request" }
         }
 
         return roleService.create(request).toDto()
@@ -61,7 +61,7 @@ class RoleController(private val roleService: RoleService) {
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody request: UpdateRoleRequestDto): RoleDto {
         request.validate().also {
-            logger.debug { "Updating system with request $request" }
+            logger.debug { "Updating role $id with request $request" }
         }
 
         return roleService.update(id, request).toDto()
@@ -69,7 +69,7 @@ class RoleController(private val roleService: RoleService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID) {
-        logger.debug { "Deleting system $id" }
+        logger.debug { "Deleting role $id" }
 
         roleService.delete(id)
     }

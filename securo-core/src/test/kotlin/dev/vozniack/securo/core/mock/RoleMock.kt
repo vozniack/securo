@@ -36,11 +36,9 @@ fun mockCreateRoleRequestDto(
 fun mockUpdateRoleRequestDto(
     name: String = "User",
     code: String = "USER",
-    description: String = "User role description",
-    systemId: UUID
+    description: String = "User role description"
 ): UpdateRoleRequestDto = UpdateRoleRequestDto(
     name = name,
     code = code,
-    description = description,
-    systemId = systemId
+    description = description
 )
