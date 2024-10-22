@@ -18,7 +18,7 @@ data class PrivilegeDto(
 
     val systemId: UUID,
 
-    val parent: UUID? = null
+    val parentId: UUID? = null
 )
 
 data class CreatePrivilegeRequestDto(

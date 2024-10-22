@@ -32,7 +32,10 @@ class PrivilegeQuery(
     private fun isParent(isParent: Boolean?): Specification<Privilege> =
         Specification<Privilege> { root, _, criteriaBuilder ->
             isParent?.let {
-                criteriaBuilder.isNull(root.get<Privilege?>("parent"))
+                when (it) {
+                    true -> criteriaBuilder.isNotEmpty(root.get<MutableList<Privilege>>("privileges"))
+                    false -> criteriaBuilder.isEmpty(root.get<MutableList<Privilege>>("privileges"))
+                }
             }
         }
 
@@ -46,8 +49,8 @@ class PrivilegeQuery(
     override fun toSpecification(): Specification<Privilege> =
         Specification<Privilege> { _, _, _ -> null }
             .and(scopeEquals(scope))
-            .and(belongsToSystemById(systemId))
             .and(isParent(parent))
+            .and(belongsToSystemById(systemId))
             .and(
                 nameLike(name)
                     .or(codeLike(code))

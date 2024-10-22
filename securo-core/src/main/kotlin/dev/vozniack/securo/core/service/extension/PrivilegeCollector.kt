@@ -5,7 +5,7 @@ import dev.vozniack.securo.core.domain.entity.RelatedPrivilege
 import dev.vozniack.securo.core.domain.entity.User
 import java.util.UUID
 
-fun collectPrivileges(user: User): List<Privilege> {
+fun collectPrivileges(user: User): MutableList<Privilege> {
     val privileges: MutableList<Privilege> = mutableListOf()
 
     user.roles.forEach { collectPrivileges(it.privileges, privileges) }
@@ -44,7 +44,7 @@ private infix fun MutableList<Privilege>.flattenList(flattenedPrivileges: Mutabl
     return flattenedPrivileges
 }
 
-fun List<Privilege>.collectCodes(): List<String> = toMutableList().collectCodes(mutableListOf()).distinct()
+fun MutableList<Privilege>.collectCodes(): List<String> = toMutableList().collectCodes(mutableListOf()).distinct()
 
 private infix fun MutableList<Privilege>.collectCodes(privilegeCodes: MutableList<String>): MutableList<String> {
     privilegeCodes.addAll(this.filter { !it.hasChildren() }.map { "${it.system.code}_${it.code}" })
@@ -53,3 +53,5 @@ private infix fun MutableList<Privilege>.collectCodes(privilegeCodes: MutableLis
 
     return privilegeCodes
 }
+
+private fun Privilege.hasChildren(): Boolean = privileges.isNotEmpty()

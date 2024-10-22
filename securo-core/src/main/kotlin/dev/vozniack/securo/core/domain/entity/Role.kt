@@ -6,6 +6,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
+import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
@@ -13,7 +14,6 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
-
 
 @Entity
 @Table(name = "roles")
@@ -35,6 +35,6 @@ data class Role(
     @ManyToOne
     @JoinColumn(name = "system_id", nullable = false) val system: System,
 
-    @OneToMany(mappedBy = "role", cascade = [CascadeType.REMOVE])
+    @OneToMany(mappedBy = "role", cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     var privileges: MutableList<RolePrivilege> = mutableListOf()
 )

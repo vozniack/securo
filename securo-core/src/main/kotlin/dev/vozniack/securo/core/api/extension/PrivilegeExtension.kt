@@ -35,5 +35,5 @@ fun Privilege.toDto(): PrivilegeDto = PrivilegeDto(
     description = description,
     index = index,
     systemId = system.id,
-    parent = parent?.id
+    parentId = parent?.id
 )

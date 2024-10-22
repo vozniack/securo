@@ -62,7 +62,9 @@ class PrivilegeController(private val privilegeService: PrivilegeService) {
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody request: UpdatePrivilegeRequestDto): PrivilegeDto {
-        logger.debug { "Updating privilege $id with request $request" }
+        request.validate().also {
+            logger.debug { "Updating privilege $id with request $request" }
+        }
 
         return privilegeService.update(id, request).toDto()
     }

@@ -14,7 +14,7 @@ import java.util.UUID
 data class RolePrivilege(
 
     @Id @GeneratedValue
-    @Column(nullable = false) var id: UUID,
+    @Column(nullable = false) var id: UUID = UUID.randomUUID(),
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false) var role: Role,
@@ -22,5 +22,5 @@ data class RolePrivilege(
     @ManyToOne
     @JoinColumn(name = "privilege_id", nullable = false) override var privilege: Privilege,
 
-    @Column(name = "excluded", nullable = false) override var excluded: Boolean
+    @Column(name = "excluded", nullable = false) override var excluded: Boolean = false
 ) : RelatedPrivilege

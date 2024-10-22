@@ -14,7 +14,6 @@ import java.util.Date
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AuthService(
@@ -24,7 +23,6 @@ class AuthService(
     @Value("\${securo.security.jwt.expiration}") private val jwtExpiration: String
 ) {
 
-    @Transactional
     fun login(request: LoginRequestDto): LoginResponseDto = userRepository.findByEmail(request.email)
         ?.takeIf { passwordEncoder.matches(request.password, it.password) }
         ?.let { LoginResponseDto(token = buildToken(it)) }

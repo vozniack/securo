@@ -36,7 +36,7 @@ data class User(
 
     @Column(nullable = false) var active: Boolean = true,
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     @JoinTable(
         name = "user_systems",
         joinColumns = [JoinColumn(name = "user_id")],
@@ -44,7 +44,7 @@ data class User(
     )
     var systems: MutableList<System> = mutableListOf(),
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     @JoinTable(
         name = "user_roles",
         joinColumns = [JoinColumn(name = "user_id")],
@@ -52,6 +52,6 @@ data class User(
     )
     var roles: MutableList<Role> = mutableListOf(),
 
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     var privileges: MutableList<UserPrivilege> = mutableListOf(),
 )
