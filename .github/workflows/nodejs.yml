@@ -17,12 +17,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: cd securo-app
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+
+      - name: Run npm ci
+        run: npm ci
+        working-directory: securo-app
+      - name: Run npm build
+        run: npm run build --if-present
+        working-directory: securo-app
+      - name: Run npm test
+        run: npm test
+        working-directory: securo-app
