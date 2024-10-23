@@ -1,1 +1,8 @@
-<router-outlet />
+<div class="securo-main-wrapper">
+  <sec-sidebar *ngIf="sidebar && logged"></sec-sidebar>
+
+  <div class="securo-content-wrapper">
+    <sec-toolbar *ngIf="toolbar && logged"></sec-toolbar>
+    <sec-content [logged]="logged"></sec-content>
+  </div>
+</div>

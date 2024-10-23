@@ -1,0 +1,15 @@
+@import 'theme.scss';
+
+.content-wrapper {
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding: 16px 0;
+
+  &.centered {
+    flex-direction: row;
+    justify-content: center;
+
+    height: 100vh;
+  }
+}

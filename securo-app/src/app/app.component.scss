@@ -1,0 +1,15 @@
+@import 'theme.scss';
+
+.securo-main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+  .securo-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    flex: 1 0 100%;
+  }
+}

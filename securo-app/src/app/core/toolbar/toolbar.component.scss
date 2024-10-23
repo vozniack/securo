@@ -1,0 +1,16 @@
+@import 'theme.scss';
+
+.toolbar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 92px;
+
+  .toolbar {
+    display: flex;
+    gap: 32px;
+
+    padding: 16px;
+  }
+}
