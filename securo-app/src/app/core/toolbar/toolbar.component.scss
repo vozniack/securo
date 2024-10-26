@@ -12,13 +12,9 @@
 
   h1 {
     color: $primary;
-    font-weight: 500;
-    width: 128px;
   }
 
   .action-bar {
-    width: 128px;
-
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

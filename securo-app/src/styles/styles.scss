@@ -1,8 +1,23 @@
 @import 'theme.scss';
 
+// Imports
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/font_montserrat.ttf');
+}
+
+@font-face {
+  font-family: 'material-outlined';
+  src: url('../assets/icons_material_outlined.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // General
 
 body {
+  padding: 0;
   margin: 0;
   height: 100%;
 
@@ -10,29 +25,29 @@ body {
 
   font-family: 'Montserrat', serif;
 
-  &.body {
-    padding: 0;
-    margin: 0;
-  }
-
   ::selection {
     color: $white;
     background: $primary;
   }
+
+  button {
+    outline: none;
+  }
 }
 
-// Fonts
+// Typography
 
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../assets/font_montserrat.ttf');
+h1 {
+  font-weight: 500;
+  font-size: 32px;
 }
 
-// Icons
+h2 {
+  font-weight: 400;
+  font-size: 24px;
+}
 
-@font-face {
-  font-family: 'material-outlined';
-  src: url('../assets/icons_material_outlined.ttf');
-  font-weight: normal;
-  font-style: normal;
+h3 {
+  font-weight: 400;
+  font-size: 20px;
 }

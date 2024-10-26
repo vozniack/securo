@@ -16,9 +16,6 @@
   &:hover {
     cursor: pointer;
     background: $container;
-
-    font-variation-settings: 'FILL' 1;
-    animation: fillIconIn 0.2s linear;
   }
 
   &.active {
