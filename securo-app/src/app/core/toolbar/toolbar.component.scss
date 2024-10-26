@@ -1,16 +1,28 @@
 @import 'theme.scss';
 
 .toolbar-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   height: 92px;
 
-  .toolbar {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 
-    padding: 16px;
+  padding: 0 32px;
+
+  h1 {
+    color: $primary;
+    font-weight: 500;
+    width: 128px;
+  }
+
+  .action-bar {
+    width: 128px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    gap: 8px;
   }
 }

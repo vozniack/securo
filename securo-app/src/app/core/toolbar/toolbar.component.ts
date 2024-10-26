@@ -1,7 +1,10 @@
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NavigationLink } from '../navigation/navigation.interface';
+import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
+import { NavBarComponent } from '../../shared/components/collection/nav-bar/nav-bar.component';
+import { IconComponent } from '../../shared/components/common/icon/icon.component';
+import { NavLink } from '../navigation/navigation.interface';
 import { navigationLinks } from '../navigation/navigation.const';
 
 @Component({
@@ -10,12 +13,27 @@ import { navigationLinks } from '../navigation/navigation.const';
   imports: [
     NgForOf,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    IconComponent,
+    NavBarComponent,
+    IconButtonComponent,
+    NgIf
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
 
-  navigationLinks: NavigationLink[] = navigationLinks;
+  navigationLinks: NavLink[] = navigationLinks;
+
+  search: Boolean = false;
+  darkMode: Boolean = false;
+
+  switchSearch(): void {
+    this.search = !this.search;
+  }
+
+  switchTheme(): void {
+    this.darkMode = !this.darkMode;
+  }
 }

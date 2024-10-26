@@ -2,14 +2,17 @@
 
 .securo-main-wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: start;
+  flex-direction: column;
+  justify-content: center;
 
-  .securo-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  gap: 8px;
 
-    flex: 1 0 100%;
+  margin: auto;
+
+  flex: 0 0 100%;
+  max-width: 1600px;
+
+  sec-content {
+    margin: 32px;
   }
 }

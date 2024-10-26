@@ -1,6 +1,45 @@
 // Basic colors
 
-$_white: rgb(255, 255, 255);
-$_black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
 
-// Theme colors
+// Theme source: #F4B700
+// Light theme
+
+$background: #fff8f2;
+
+$primary: #583e00;
+$primary-container: #926f23;
+
+$secondary: #4f4126;
+$secondary-container: #847254;
+
+$success: #31492b;
+$success-container: #617c5a;
+
+$error: #8c0009;
+$error-container: #da342e;
+
+$container: #f7ecdf;
+
+$neutral: #665e50;
+
+// Dark theme
+
+$background-dark: #17130b;
+
+$primary-dark: #eec570;
+$primary-container-dark: #af8c3d;
+
+$secondary-dark: #dcc8a4;
+$secondary-container-dark: #a08f6e;
+
+$success-dark: #b5d3ad;
+$success-container-dark: #7c9876;
+
+$error-dark: #ffbab1;
+$error-container-dark: #ff5449;
+
+$container-dark: #241f17;
+
+$neutral: #aca291;

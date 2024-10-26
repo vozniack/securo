@@ -1,19 +1,24 @@
-import {NavigationLink} from './navigation.interface';
+import {NavLink} from './navigation.interface';
 
-export const navigationLinks: NavigationLink[] = [
+export const navigationLinks: NavLink[] = [
   {
     'title': 'Home',
-    'icon': '',
+    'icon': 'home',
     'link': 'home'
   },
   {
+    'title': 'Users',
+    'icon': 'person',
+    'link': 'users'
+  },
+  {
     'title': 'Systems',
-    'icon': '',
+    'icon': 'host',
     'link': 'systems'
   },
   {
     'title': 'Environments',
-    'icon': '',
-    'link': 'environment'
+    'icon': 'cloud',
+    'link': 'environments'
   },
 ];

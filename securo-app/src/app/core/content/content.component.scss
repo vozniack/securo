@@ -4,7 +4,12 @@
   flex-direction: column;
   justify-content: flex-start;
 
-  padding: 16px 0;
+  background: $container;
+
+  padding: 16px;
+
+  flex: 0 0 100%;
+  max-width: 1280px;
 
   &.centered {
     flex-direction: row;

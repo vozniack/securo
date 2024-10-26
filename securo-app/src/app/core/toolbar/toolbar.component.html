@@ -1,5 +1,11 @@
 <div class="toolbar-wrapper">
+  <h1>securo</h1>
 
-  <div class="toolbar">
+  <sec-nav-bar [navLinks]="navigationLinks"></sec-nav-bar>
+
+  <div class="action-bar">
+    <sec-icon-button [icon]="'search'" [active]="search" (click)="switchSearch()"></sec-icon-button>
+    <sec-icon-button [icon]="darkMode ? 'light_mode' : 'dark_mode'" (click)="switchTheme()"></sec-icon-button>
+    <sec-icon-button [icon]="'settings'"></sec-icon-button>
   </div>
 </div>

@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'sec-environments',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './environments.component.html',
   styleUrl: './environments.component.scss'
 })
