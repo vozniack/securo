@@ -15,10 +15,5 @@ export const navigationLinks: NavLink[] = [
     'title': 'Systems',
     'icon': 'host',
     'link': 'systems'
-  },
-  {
-    'title': 'Environments',
-    'icon': 'cloud',
-    'link': 'environments'
-  },
+  }
 ];
