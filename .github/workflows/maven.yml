@@ -1,4 +1,4 @@
-name: Securo Builder
+name: Maven builder
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-backend:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -20,28 +21,3 @@ jobs:
           cache: maven
       - name: Build securo-core with Maven
         run: mvn -B package --file securo-core/pom.xml
-
-  build-frontend:
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: securo-app
-
-    strategy:
-      matrix:
-        node-version: [ 20 ]
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: securo-app/package-lock.json
-
-      - name: Run npm ci
-        run: npm ci
-      - name: Run npm build
-        run: npm run build --if-present
