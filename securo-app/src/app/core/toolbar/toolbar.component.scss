@@ -1,0 +1,24 @@
+@import 'theme.scss';
+
+.toolbar-wrapper {
+  height: 92px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+
+  padding: 0 32px;
+
+  h1 {
+    color: $primary;
+  }
+
+  .action-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    gap: 8px;
+  }
+}

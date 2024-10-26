@@ -1,0 +1,18 @@
+@import 'theme.scss';
+
+.securo-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: auto;
+
+  flex: 0 0 100%;
+  max-width: 1600px;
+
+  sec-content {
+    margin: 32px;
+  }
+}
