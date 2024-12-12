@@ -13,7 +13,7 @@ export class IconComponent {
   name!: string;
 
   @Input()
-  size: 18 | 24 | 30 | 38 = 24;
+  size: 16 | 18 | 20 | 22 | 24 | 30 | 38 = 24;
 
   @Input()
   weight: 200 | 300 | 400 | 500 | 600 = 300;

@@ -15,4 +15,8 @@
   sec-content {
     margin: 32px;
   }
+
+  &.not-logged {
+    max-width: none;
+  }
 }

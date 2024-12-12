@@ -1,0 +1,16 @@
+<div class="input" [style.width]="width" [style.max-width]="maxWidth" [style.margin]="maxWidth ? 'auto' : 0">
+  <div class="form {{style}}" [class.invalid]="control.invalid">
+    <input [formControl]="control"
+           [id]="id"
+           [name]="name"
+           [placeholder]="placeholder"
+           [type]="type"/>
+
+    <sec-icon *ngIf="icon && !password" class="icon" (click)="switchVisibility()" [name]="icon" [size]="20"></sec-icon>
+
+    <sec-icon *ngIf="password" class="icon active" (click)="switchVisibility()"
+              [name]="type == 'password' ? 'visibility' : 'visibility_off'"
+              [size]="20">
+    </sec-icon>
+  </div>
+</div>

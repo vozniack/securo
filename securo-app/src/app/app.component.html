@@ -1,4 +1,6 @@
-<div class="securo-main-wrapper">
-  <sec-toolbar *ngIf="toolbar && logged"></sec-toolbar>
-  <sec-content [logged]="logged"></sec-content>
+<div class="securo-main-wrapper" [class.not-logged]="!logged">
+  <sec-toolbar *ngIf="logged"></sec-toolbar>
+  <sec-content *ngIf="logged"></sec-content>
+
+  <sec-login *ngIf="!logged"></sec-login>
 </div>

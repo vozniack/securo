@@ -1,4 +1,4 @@
-<div class="toolbar-wrapper" @fadeInAnimation>
+<div class="toolbar-wrapper" @fadeInOutAnimation>
   <h1>securo</h1>
 
   <sec-nav-bar [navLinks]="navigationLinks"></sec-nav-bar>
@@ -6,5 +6,6 @@
   <div class="action-bar">
     <sec-icon-button [icon]="darkMode ? 'light_mode' : 'dark_mode'" (click)="switchTheme()"></sec-icon-button>
     <sec-icon-button [icon]="'settings'"></sec-icon-button>
+    <sec-icon-button [icon]="'logout'" (click)="logout()"></sec-icon-button>
   </div>
 </div>
