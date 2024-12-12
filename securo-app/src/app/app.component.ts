@@ -1,19 +1,39 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
 import { ContentComponent } from './core/content/content.component';
+import { LoginComponent } from './core/login/login.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { SELECT_USER_STATE } from './store/app/app.selectors';
+import { UserState } from './store/app/app.state';
 
 @Component({
   selector: 'sec-root',
   standalone: true,
-  imports: [ToolbarComponent, NgIf, ContentComponent],
+  imports: [ToolbarComponent, ContentComponent, NgIf, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   logged: boolean = true;
 
-  toolbar: boolean = true;
-  sidebar: boolean = true;
+  constructor(private store: Store, private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.store.pipe(
+      select(SELECT_USER_STATE),
+      tap((state: UserState) => this.logged = !!state.token),
+      tap(() => this.redirectToLogin())
+    ).subscribe();
+  }
+
+  redirectToLogin(): void {
+    if (!this.logged) {
+      this.router.navigate(['/login']).then();
+    }
+  }
 }

@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="login-wrapper" @fadeInOutAnimation>
+
+  <sec-animated-background style="flex: 60"></sec-animated-background>
+
+  <div class="login-form-wrapper" style="flex: 40">
+    <div class="welcome-wrapper">
+      <h1>Welcome, stranger</h1>
+      <span>To gain access talk to your manager or ask on <a href="">yourcompany&#64;contact.com</a>.</span>
+    </div>
+
+    <div class="form-wrapper">
+      <sec-input
+        [control]="getControl('email')"
+        [id]="'email'"
+        [name]="'Email address'"
+        [icon]="'mail'"
+        [maxWidth]="'448px'"
+        [style]="'tonal'">
+      </sec-input>
+
+      <sec-input
+        [control]="getControl('password')"
+        [id]="'password'"
+        [type]="'password'"
+        [name]="'Password'"
+        [password]="true"
+        [style]="'tonal'"
+        [maxWidth]="'448px'">
+      </sec-input>
+
+      <sec-button
+        (click)="login()"
+        [disabled]="form.invalid"
+        [text]="'Log me in'"
+        [style]="'filled'"
+        [maxWidth]="'448px'">
+      </sec-button>
+    </div>
+
+  </div>
+</div>

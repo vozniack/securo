@@ -1,0 +1,28 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  .login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+
+    padding: 16px 32px;
+
+    .welcome-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      h1, span {
+        text-align: center;
+      }
+    }
+
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+}

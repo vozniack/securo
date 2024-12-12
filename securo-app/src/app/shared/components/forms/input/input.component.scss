@@ -1,0 +1,113 @@
+@import 'theme.scss';
+
+.input {
+  margin: 0;
+  padding: 0;
+
+  .name {
+    margin-bottom: 8px;
+    color: $neutral;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .form {
+    width: 100%;
+    border-radius: 8px;
+
+    position: relative;
+    box-shadow: none;
+
+    transition: border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+    input {
+      height: 40px;
+      width: 100%;
+      padding: 5px 20px;
+
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: $secondary;
+
+      box-sizing: border-box;
+      background: none;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba($neutral, 0.4);
+      }
+
+      ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    input:-webkit-autofill {
+      font-size: 14px;
+
+      -webkit-text-fill-color: $primary !important;
+      transition: background-color 5000s ease-in-out 0s;
+
+      &:hover, &:focus, &:active {
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
+
+    .icon {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+
+      color: $secondary;
+
+      transition: color 0.2s ease-in-out;
+
+      &.active {
+        cursor: pointer;
+
+        &:hover {
+          font-variation-settings: 'FILL' 1;
+        }
+      }
+    }
+
+    &.tonal {
+      background-color: rgba($primary, 0.05);
+
+      &:hover, &:focus {
+        background-color: rgba($primary, 0.1);
+      }
+
+      &.invalid {
+        background-color: rgba($error, 0.05);
+
+        .icon {
+          color: $error;
+        }
+      }
+    }
+
+    &.outlined {
+      border: 1px solid rgba($primary, 0.25);
+
+      &:hover, &:focus {
+        border-color: $primary;
+      }
+
+      &.invalid {
+        border-color: $error;
+
+        .icon {
+          color: $error;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
 
@@ -11,7 +11,4 @@ import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animatio
   animations: [fadeInOutAnimation]
 })
 export class ContentComponent {
-
-  @Input()
-  logged!: boolean;
 }

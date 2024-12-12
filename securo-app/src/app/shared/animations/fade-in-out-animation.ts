@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
-export const fadeInOutAnimation = trigger('fadeInAnimation', [
+export const fadeInOutAnimation = trigger('fadeInOutAnimation', [
   transition(':enter', [
     style({
       opacity: 0
