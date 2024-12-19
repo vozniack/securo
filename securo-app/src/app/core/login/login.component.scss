@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 .login-wrapper {
   display: flex;
   flex-direction: row;
@@ -13,6 +15,7 @@
     .welcome-wrapper {
       display: flex;
       flex-direction: column;
+      color: $primary;
 
       h1, span {
         text-align: center;

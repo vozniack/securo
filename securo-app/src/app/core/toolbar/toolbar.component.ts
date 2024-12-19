@@ -7,6 +7,7 @@ import { NavBarComponent } from '../../shared/components/collection/nav-bar/nav-
 import { ACTION_USER_LOGOUT } from '../../store/app/app.actions';
 import { NavLink } from '../navigation/navigation.interface';
 import { navigationLinks } from '../navigation/navigation.const';
+import { ThemeService } from '../theme/theme.service';
 
 @Component({
   selector: 'sec-toolbar',
@@ -21,15 +22,13 @@ import { navigationLinks } from '../navigation/navigation.const';
 })
 export class ToolbarComponent {
 
-  constructor(private store: Store, private router: Router) {
-  }
-
   navigationLinks: NavLink[] = navigationLinks;
 
-  darkMode: Boolean = false;
+  constructor(private store: Store, private router: Router, private themeService: ThemeService) {
+  }
 
   switchTheme(): void {
-    this.darkMode = !this.darkMode;
+    this.themeService.switchTheme();
   }
 
   logout(): void {

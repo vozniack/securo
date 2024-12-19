@@ -34,14 +34,14 @@
     }
 
     &:disabled {
-      border-color: rgba($primary, 0);
-      background-color: rgba($primary, 0.5);
+      border-color: color-mix(in srgb, $primary 0%, transparent);
+      background-color: color-mix(in srgb, $primary 50%, transparent);
       color: rgba($white, 0.5);
     }
   }
 
   &.tonal {
-    background-color: rgba($primary, 0.05);
+    background-color: color-mix(in srgb, $primary 5%, transparent);
     color: $primary;
 
     &:hover {
@@ -50,13 +50,13 @@
     }
 
     &:disabled {
-      background-color: rgba($primary, 0.05);
-      color: rgba($primary, 0.5);
+      background-color: color-mix(in srgb, $primary 5%, transparent);
+      color: color-mix(in srgb, $primary 50%, transparent);
     }
   }
 
   &.outlined {
-    border: 1px solid rgba($primary, 0.25);
+    border: 1px solid color-mix(in srgb, $primary 25%, transparent);
     background: none;
     color: $primary;
 
@@ -65,10 +65,10 @@
     }
 
     &:disabled {
-      color: rgba($primary, 0.5);
+      color: color-mix(in srgb, $primary 50%, transparent);
 
       &:hover {
-        border: 1px solid rgba($primary, 0.25);
+        border: 1px solid color-mix(in srgb, $primary 25%, transparent);
       }
     }
   }
