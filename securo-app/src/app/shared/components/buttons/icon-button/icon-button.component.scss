@@ -15,10 +15,10 @@
 
   &:hover {
     cursor: pointer;
-    background: $container;
+    background: $surface-container;
   }
 
   &.active {
-    background: $container;
+    background: $surface-container;
   }
 }

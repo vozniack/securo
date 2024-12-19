@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map} from 'rxjs/operators';
-import {ACTION_USER_LOGIN, ACTION_USER_LOGOUT,} from './app.actions';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map } from 'rxjs/operators';
+import { ACTION_USER_LOGIN, ACTION_USER_LOGOUT, } from './app.actions';
 
 @Injectable()
 export class AppEffects {

@@ -40,7 +40,7 @@
       &::placeholder {
         font-size: 12px;
         font-weight: 500;
-        color: rgba($neutral, 0.4);
+        color: color-mix(in srgb, $primary 40%, transparent);
       }
 
       ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
@@ -79,14 +79,14 @@
     }
 
     &.tonal {
-      background-color: rgba($primary, 0.05);
+      background-color: color-mix(in srgb, $primary 5%, transparent);
 
       &:hover, &:focus {
-        background-color: rgba($primary, 0.1);
+        background-color: color-mix(in srgb, $primary 10%, transparent);
       }
 
       &.invalid {
-        background-color: rgba($error, 0.05);
+        background-color: color-mix(in srgb, $error 5%, transparent);
 
         .icon {
           color: $error;
@@ -95,7 +95,7 @@
     }
 
     &.outlined {
-      border: 1px solid rgba($primary, 0.25);
+      border: 1px solid color-mix(in srgb, $primary 25%, transparent);
 
       &:hover, &:focus {
         border-color: $primary;

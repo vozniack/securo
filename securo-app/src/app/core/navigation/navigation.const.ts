@@ -15,5 +15,10 @@ export const navigationLinks: NavLink[] = [
     'title': 'Systems',
     'icon': 'host',
     'link': 'systems'
+  },
+  {
+    'title': 'Environments',
+    'icon': 'dns',
+    'link': 'environments'
   }
 ];

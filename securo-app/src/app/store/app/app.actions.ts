@@ -1,7 +1,11 @@
-import {createAction, props} from '@ngrx/store';
-import {UserState} from './app.state';
+import { createAction, props } from '@ngrx/store';
+import { UserState } from './app.state';
 
 /* User */
+
+export const ACTION_THEME = createAction(
+  '[App][User] Set theme', props<{ theme: string }>()
+);
 
 export const ACTION_USER_LOGIN = createAction(
   '[App][User] Set user state', props<{ user: UserState }>()

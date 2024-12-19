@@ -1,4 +1,5 @@
 export interface AppState {
+  theme: string;
 
   user: UserState;
 }

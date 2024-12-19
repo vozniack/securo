@@ -18,6 +18,11 @@ export const routes: Routes = [
     canActivate: [TokenGuard]
   },
   {
+    path: 'environments',
+    loadComponent: () => import('./modules/environments/environments.component').then(m => m.EnvironmentsComponent),
+    canActivate: [TokenGuard]
+  },
+  {
     path: 'profile',
     loadComponent: () => import('./modules/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [TokenGuard]
