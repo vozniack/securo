@@ -1,0 +1,17 @@
+<div class="standard-surface-container">
+
+  <div class="space-between">
+    <h3>Theme</h3>
+    <sec-icon-button [icon]="dark ? 'dark_mode' : 'light_mode'" (click)="switchMode()"></sec-icon-button>
+  </div>
+
+  <div class="themes-container">
+    <ng-container *ngFor="let theme of themes">
+        <span class="theme" [class.active]="theme.name === themeService.theme"
+              [style.background-color]="theme.primary"
+              (click)="setTheme(theme.name)">
+          <sec-icon [name]="'check'" [size]="20"></sec-icon>
+        </span>
+    </ng-container>
+  </div>
+</div>

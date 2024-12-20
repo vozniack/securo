@@ -5,15 +5,13 @@
   flex-direction: column;
   justify-content: center;
 
-  gap: 8px;
-
-  margin: auto;
+  margin: 0 auto;
 
   flex: 0 0 100%;
   max-width: 1600px;
 
   sec-content {
-    margin: 32px;
+    margin: 8px 16px;
   }
 
   &.not-logged {

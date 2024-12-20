@@ -1,8 +1,7 @@
-<div class="login-wrapper" [style.height]="mobile ? '100vh' : 'auto'" @fadeInOutAnimation>
+<div class="login-wrapper" [style.height]="isMobile ? '100vh' : 'auto'" @fadeInOutAnimation>
+  <sec-animated-background *ngIf="!isMobile" style="flex: 60"></sec-animated-background>
 
-  <sec-animated-background *ngIf="!mobile" style="flex: 60"></sec-animated-background>
-
-  <div class="login-form-wrapper" [style.flex]="mobile ? 100 : 40">
+  <div class="login-form-wrapper" [style.flex]="isMobile ? 100 : 40">
     <h1>securo</h1>
 
     <div class="welcome-wrapper">
@@ -38,6 +37,5 @@
         [maxWidth]="'448px'">
       </sec-button>
     </div>
-
   </div>
 </div>

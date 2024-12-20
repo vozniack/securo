@@ -1,0 +1,38 @@
+@import 'theme.scss';
+
+.themes-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  margin: 8px 0 16px 0;
+
+  .theme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
+    transition: box-shadow 0.1s ease-in-out, border 0.1s ease-in-out;
+
+    cursor: pointer;
+
+    sec-icon {
+      color: $white;
+      margin-top: 2px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    &:hover, &.active {
+      box-shadow: 0 0 8px $neutral;
+    }
+
+    &.active sec-icon {
+      opacity: 1;
+    }
+  }
+}

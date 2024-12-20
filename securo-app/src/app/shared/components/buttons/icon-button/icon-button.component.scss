@@ -11,7 +11,7 @@
   background: none;
   color: $primary;
 
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 
   &:hover {
     cursor: pointer;
@@ -20,5 +20,7 @@
 
   &.active {
     background: $surface-container;
+    font-variation-settings: 'FILL' 1;
+    animation: fillIconIn 0.2s linear;
   }
 }

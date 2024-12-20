@@ -1,30 +1,26 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
 import { ACTION_USER_LOGOUT } from '../../store/app/app.actions';
 import { NavigationBarComponent } from '../navigation/navigation-bar/navigation-bar.component';
-import { ThemeService } from '../theme/theme.service';
 
 @Component({
   selector: 'sec-top-bar',
   standalone: true,
-  imports: [NavigationBarComponent, IconButtonComponent, NgIf],
+  imports: [NavigationBarComponent, IconButtonComponent, NgIf, RouterLink],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
   animations: [fadeInOutAnimation]
 })
-export class TopBar {
+export class TopBar extends ResponsiveComponent {
 
-  @Input() mobile!: boolean;
-
-  constructor(private store: Store, private router: Router, private themeService: ThemeService) {
-  }
-
-  switchTheme(): void {
-    this.themeService.switchTheme();
+  constructor(private store: Store, private router: Router, override breakpointObserver: BreakpointObserver) {
+    super(breakpointObserver);
   }
 
   logout(): void {

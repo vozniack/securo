@@ -4,7 +4,7 @@ import { AppState } from './app.state';
 
 export const initialAppState = (): AppState => {
   return {
-    theme: 'brown-light',
+    theme: 'blue-light',
     user: {
       token: undefined
     }
