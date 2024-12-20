@@ -1,10 +1,12 @@
-<div class="login-wrapper" @fadeInOutAnimation>
+<div class="login-wrapper" [style.height]="mobile ? '100vh' : 'auto'" @fadeInOutAnimation>
 
-  <sec-animated-background style="flex: 60"></sec-animated-background>
+  <sec-animated-background *ngIf="!mobile" style="flex: 60"></sec-animated-background>
 
-  <div class="login-form-wrapper" style="flex: 40">
+  <div class="login-form-wrapper" [style.flex]="mobile ? 100 : 40">
+    <h1>securo</h1>
+
     <div class="welcome-wrapper">
-      <h1>Welcome, stranger</h1>
+      <h2>Welcome, stranger</h2>
       <span>To gain access talk to your manager or ask on <a href="">yourcompany&#64;contact.com</a>.</span>
     </div>
 

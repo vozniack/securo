@@ -32,6 +32,10 @@ body {
     background: $primary;
   }
 
+  a {
+    color: $secondary;
+  }
+
   button {
     outline: none;
   }

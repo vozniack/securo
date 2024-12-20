@@ -1,6 +1,6 @@
 @import 'theme.scss';
 
-.toolbar-wrapper {
+.top-bar-wrapper {
   height: 92px;
 
   display: flex;
@@ -8,7 +8,9 @@
   justify-content: space-between;
   align-items: baseline;
 
-  padding: 0 32px;
+  padding: 0 32px 8px 32px;
+
+  border-bottom: 1px solid color-mix(in srgb, $primary-container 20%, transparent);
 
   h1 {
     color: $primary;

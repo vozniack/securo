@@ -12,12 +12,19 @@
 
     padding: 16px 32px;
 
+    h1 {
+      margin-top: -32px;
+      margin-bottom: 64px;
+      text-align: center;
+      font-size: 64px;
+    }
+
     .welcome-wrapper {
       display: flex;
       flex-direction: column;
       color: $primary;
 
-      h1, span {
+      h2, span {
         text-align: center;
       }
     }

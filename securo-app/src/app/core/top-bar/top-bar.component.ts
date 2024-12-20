@@ -1,28 +1,24 @@
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
-import { NavBarComponent } from '../../shared/components/collection/nav-bar/nav-bar.component';
 import { ACTION_USER_LOGOUT } from '../../store/app/app.actions';
-import { NavLink } from '../navigation/navigation.interface';
-import { navigationLinks } from '../navigation/navigation.const';
+import { NavigationBarComponent } from '../navigation/navigation-bar/navigation-bar.component';
 import { ThemeService } from '../theme/theme.service';
 
 @Component({
-  selector: 'sec-toolbar',
+  selector: 'sec-top-bar',
   standalone: true,
-  imports: [
-    NavBarComponent,
-    IconButtonComponent
-  ],
-  templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss',
+  imports: [NavigationBarComponent, IconButtonComponent, NgIf],
+  templateUrl: './top-bar.component.html',
+  styleUrl: './top-bar.component.scss',
   animations: [fadeInOutAnimation]
 })
-export class ToolbarComponent {
+export class TopBar {
 
-  navigationLinks: NavLink[] = navigationLinks;
+  @Input() mobile!: boolean;
 
   constructor(private store: Store, private router: Router, private themeService: ThemeService) {
   }

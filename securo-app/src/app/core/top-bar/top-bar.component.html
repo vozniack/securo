@@ -1,7 +1,7 @@
-<div class="toolbar-wrapper" @fadeInOutAnimation>
+<div class="top-bar-wrapper" @fadeInOutAnimation>
   <h1>securo</h1>
 
-  <sec-nav-bar [navLinks]="navigationLinks"></sec-nav-bar>
+  <sec-navigation-bar *ngIf="!mobile"></sec-navigation-bar>
 
   <div class="action-bar">
     <sec-icon-button [icon]="'settings'" (click)="switchTheme()"></sec-icon-button>
