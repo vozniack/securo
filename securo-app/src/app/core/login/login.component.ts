@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -15,16 +16,14 @@ import { AnimatedBackgroundComponent } from './animated-background/animated-back
 @Component({
   selector: 'sec-login',
   standalone: true,
-  imports: [
-    AnimatedBackgroundComponent,
-    InputComponent,
-    ButtonComponent
-  ],
+  imports: [AnimatedBackgroundComponent, InputComponent, ButtonComponent, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   animations: [fadeInOutAnimation]
 })
 export class LoginComponent {
+
+  @Input() mobile!: boolean;
 
   form!: FormGroup;
 

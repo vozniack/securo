@@ -1,0 +1,11 @@
+@import 'theme.scss';
+
+.bottom-bar-wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  padding: 4px 0;
+  border-top: 1px solid color-mix(in srgb, $primary-container 20%, transparent);
+}
