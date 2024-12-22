@@ -1,10 +1,10 @@
 <div class="top-bar-wrapper" @fadeInOutAnimation>
   <h1>securo</h1>
 
-  <sec-navigation-bar *ngIf="!mobile"></sec-navigation-bar>
+  <sec-navigation-bar *ngIf="!isMobile"></sec-navigation-bar>
 
   <div class="action-bar">
-    <sec-icon-button [icon]="'settings'" (click)="switchTheme()"></sec-icon-button>
+    <sec-icon-button [icon]="'settings'" [routerLink]="'settings'"></sec-icon-button>
     <sec-icon-button [icon]="'logout'" (click)="logout()"></sec-icon-button>
   </div>
 </div>

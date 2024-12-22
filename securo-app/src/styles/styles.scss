@@ -22,7 +22,7 @@ body {
   height: 100%;
 
   background: $surface;
-  color: $primary;
+  color: $neutral-inverse;
 
   font-family: 'Montserrat', serif;
   transition: background-color 0.1s ease-in-out;
@@ -56,4 +56,46 @@ h2 {
 h3 {
   font-weight: 400;
   font-size: 20px;
+}
+
+h4 {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4 {
+  transition: color 0.1s ease-in-out;
+}
+
+// Containers
+
+.standard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h2 {
+    padding-left: 4px;
+  }
+
+  .standard-content {
+    display: flex;
+    gap: 16px
+  }
+}
+
+.standard-surface-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  border-radius: 8px;
+  background-color: $surface-container;
+  transition: background-color 0.1s ease-in-out;
+
+  .space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

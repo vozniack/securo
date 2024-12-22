@@ -23,8 +23,8 @@ export const routes: Routes = [
     canActivate: [TokenGuard]
   },
   {
-    path: 'profile',
-    loadComponent: () => import('./modules/profile/profile.component').then(m => m.ProfileComponent),
+    path: 'settings',
+    loadComponent: () => import('./modules/settings/settings.component').then(m => m.SettingsComponent),
     canActivate: [TokenGuard]
   },
   {

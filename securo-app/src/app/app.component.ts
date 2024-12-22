@@ -1,5 +1,6 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
@@ -8,6 +9,7 @@ import { ContentComponent } from './core/content/content.component';
 import { LoginComponent } from './core/login/login.component';
 import { ThemeService } from './core/theme/theme.service';
 import { TopBar } from './core/top-bar/top-bar.component';
+import { ResponsiveComponent } from './shared/common/responsive.component';
 import { SELECT_USER_STATE } from './store/app/app.selectors';
 import { UserState } from './store/app/app.state';
 
@@ -18,13 +20,13 @@ import { UserState } from './store/app/app.state';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends ResponsiveComponent implements OnInit {
 
   logged: boolean = true;
-  mobile: boolean = false;
 
-  constructor(private store: Store, private router: Router, private themeService: ThemeService) {
-    this.detectMobile();
+  constructor(private store: Store, private router: Router, private themeService: ThemeService, override breakpointObserver: BreakpointObserver) {
+    super(breakpointObserver);
+    this.themeService.applyTheme();
   }
 
   ngOnInit(): void {
@@ -33,18 +35,6 @@ export class AppComponent implements OnInit {
       tap((state: UserState) => this.logged = !!state.token),
       tap(() => this.redirectToLogin())
     ).subscribe();
-  }
-
-  // temp solution for fun
-  @HostListener('window:keydown.control.b', ['$event'])
-  public switchTheme(event: KeyboardEvent) {
-    event.preventDefault();
-    this.themeService.switchTheme();
-  }
-
-  @HostListener('window:resize', [])
-  public detectMobile() {
-    this.mobile = window.innerWidth <= 820;
   }
 
   private redirectToLogin(): void {

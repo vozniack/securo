@@ -1,7 +1,7 @@
 <div class="securo-main-wrapper" [class.not-logged]="!logged">
-  <sec-top-bar *ngIf="logged" [mobile]="mobile"></sec-top-bar>
+  <sec-top-bar *ngIf="logged"></sec-top-bar>
   <sec-content *ngIf="logged"></sec-content>
-  <sec-bottom-bar *ngIf="logged && mobile"></sec-bottom-bar>
+  <sec-bottom-bar *ngIf="logged && isMobile"></sec-bottom-bar>
 
-  <sec-login *ngIf="!logged" [mobile]="mobile"></sec-login>
+  <sec-login *ngIf="!logged"></sec-login>
 </div>

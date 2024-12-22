@@ -1,10 +1,12 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
 import { InputComponent } from '../../shared/components/forms/input/input.component';
 import { emailRegex } from '../../shared/const/regex.const';
@@ -21,13 +23,13 @@ import { AnimatedBackgroundComponent } from './animated-background/animated-back
   styleUrl: './login.component.scss',
   animations: [fadeInOutAnimation]
 })
-export class LoginComponent {
-
-  @Input() mobile!: boolean;
+export class LoginComponent extends ResponsiveComponent {
 
   form!: FormGroup;
 
-  constructor(private authService: AuthService, private store: Store, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private store: Store, private router: Router, private formBuilder: FormBuilder, override breakpointObserver: BreakpointObserver) {
+    super(breakpointObserver);
+
     this.form = this.formBuilder.group({
       email: new FormControl('admin@securo.com', [Validators.required, Validators.pattern(emailRegex)]),
       password: new FormControl('Admin123!', [Validators.required])
