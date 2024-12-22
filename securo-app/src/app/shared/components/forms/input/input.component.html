@@ -1,6 +1,7 @@
 <div class="input" [style.width]="width" [style.max-width]="maxWidth" [style.margin]="maxWidth ? 'auto' : 0">
   <div class="form {{style}}" [class.invalid]="control.invalid">
-    <input [formControl]="control"
+    <input [style.padding-right]="icon ? '40px' : '16px'"
+           [formControl]="control"
            [id]="id"
            [name]="name"
            [placeholder]="placeholder"

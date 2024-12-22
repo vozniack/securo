@@ -1,7 +1,7 @@
-<div class="standard-container" @fadeInOutAnimation>
-  <h2>Settings</h2>
+<div class="column-container" @fadeInOutAnimation>
+  <h2 class="title">Settings</h2>
 
-  <div class="standard-content" [style.flex-direction]="isMobile ? 'column' : 'row'">
+  <div class="column-container gap" [style.flex-direction]="isMobile ? 'column' : 'row'">
     <sec-settings-profile [style.flex]="isMobile ? 100 : 65"></sec-settings-profile>
     <sec-settings-theme [style.flex]="isMobile ? 100 : 35"></sec-settings-theme>
   </div>

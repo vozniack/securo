@@ -17,6 +17,8 @@ export class ButtonComponent {
   @Input() disabled: boolean = false;
 
   @Input() text?: string;
+
+  @Input() icon?: string;
   @Input() iconLeft?: string;
   @Input() iconRight?: string;
 
