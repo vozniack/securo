@@ -86,7 +86,7 @@
       }
 
       &.invalid {
-        background-color: color-mix(in srgb, $error 5%, transparent);
+        background-color: color-mix(in srgb, $error-container 10%, transparent);
 
         .icon {
           color: $error;

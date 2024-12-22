@@ -29,8 +29,10 @@ export class ThemeService {
     this.themeChange.next(this.theme);
   }
 
-  public switchMode() {
-    this.store.dispatch(ACTION_THEME({theme: this.theme = (this.theme.split('-')[0] + (this.theme.endsWith('-light') ? '-dark' : '-light'))}));
-    this.themeChange.next(this.theme);
+  public switchMode(darkMode: boolean) {
+    if ((darkMode && this.theme.endsWith('-light')) || (!darkMode && this.theme.endsWith('-dark'))) {
+      this.store.dispatch(ACTION_THEME({theme: this.theme = (this.theme.split('-')[0] + (darkMode ? '-dark' : '-light'))}));
+      this.themeChange.next(this.theme);
+    }
   }
 }
