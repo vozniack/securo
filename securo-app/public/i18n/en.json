@@ -1,4 +1,7 @@
 {
+  "common": {
+    "search": "Search..."
+  },
   "login": {
     "welcome": "Welcome, stranger",
     "gainAccess": "To gain access talk to your manager or ask on <a href=\"\">yourcompany&#64;contact.com</a>.",
