@@ -1,0 +1,31 @@
+{
+  "login": {
+    "welcome": "Witaj, nieznajomy",
+    "gainAccess": "Aby uzyskać dostęp porozmawiaj z menedżerem lub napisz na <a href=\"\">yourcompany&#64;contact.com</a>.",
+    "logMeIn": "Zaloguj się"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "users": {
+    "title": "Użytkownicy"
+  },
+  "systems": {
+    "title": "Systemy"
+  },
+  "environments": {
+    "title": "Środowiska"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "profile": {
+      "title": "Profil"
+    },
+    "language": {
+      "title": "Język"
+    },
+    "theme": {
+      "title": "Motyw"
+    }
+  }
+}

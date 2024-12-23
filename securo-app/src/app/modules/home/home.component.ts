@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
 
 @Component({
   selector: 'sec-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TranslatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   animations: [fadeInOutAnimation]

@@ -1,7 +1,7 @@
 import { AppState, UserState } from './app.state';
 import { initialAppState } from './app.const';
 import { Action, createReducer, on } from '@ngrx/store';
-import { ACTION_THEME, ACTION_USER_LOGIN, ACTION_USER_LOGOUT, } from './app.actions';
+import { ACTION_LANGUAGE, ACTION_THEME, ACTION_USER_LOGIN, ACTION_USER_LOGOUT, } from './app.actions';
 
 export const initialState = initialAppState();
 
@@ -10,10 +10,18 @@ export function appReducer(state: AppState = initialState, action: Action) {
 }
 
 const _appReducer = createReducer(initialState,
+  on(ACTION_LANGUAGE, (state, newState) => onSetLanguage(state, newState.language)),
   on(ACTION_THEME, (state, newState) => onSetTheme(state, newState.theme)),
   on(ACTION_USER_LOGIN, (state, newState) => onSetUser(state, newState.user)),
   on(ACTION_USER_LOGOUT, (state) => onSetUser(state, {})),
 );
+
+function onSetLanguage(state: AppState, language: string) {
+  return {
+    ...state,
+    language: language
+  };
+}
 
 function onSetTheme(state: AppState, theme: string) {
   return {
