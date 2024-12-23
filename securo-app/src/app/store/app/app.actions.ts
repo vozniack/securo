@@ -3,6 +3,10 @@ import { UserState } from './app.state';
 
 /* User */
 
+export const ACTION_LANGUAGE = createAction(
+  '[App][User] Set language', props<{ language: string }>()
+);
+
 export const ACTION_THEME = createAction(
   '[App][User] Set theme', props<{ theme: string }>()
 );

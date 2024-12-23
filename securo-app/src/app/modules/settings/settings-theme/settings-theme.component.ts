@@ -1,6 +1,7 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
 import { themes } from '../../../core/theme/theme.const';
 import { Theme } from '../../../core/theme/theme.interface';
@@ -11,7 +12,7 @@ import { SwitchComponent } from '../../../shared/components/forms/switch/switch.
 @Component({
   selector: 'sec-settings-theme',
   standalone: true,
-  imports: [NgForOf, IconComponent, SwitchComponent],
+  imports: [NgForOf, IconComponent, SwitchComponent, TranslatePipe],
   templateUrl: './settings-theme.component.html',
   styleUrl: './settings-theme.component.scss'
 })

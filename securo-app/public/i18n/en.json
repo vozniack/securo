@@ -1,0 +1,31 @@
+{
+  "login": {
+    "welcome": "Welcome, stranger",
+    "gainAccess": "To gain access talk to your manager or ask on <a href=\"\">yourcompany&#64;contact.com</a>.",
+    "logMeIn": "Log me in"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "users": {
+    "title": "Users"
+  },
+  "systems": {
+    "title": "Systems"
+  },
+  "environments": {
+    "title": "Environments"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": {
+      "title": "Profile"
+    },
+    "language": {
+      "title": "Language"
+    },
+    "theme": {
+      "title": "Theme"
+    }
+  }
+}

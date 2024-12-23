@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { BottomBarComponent } from './core/bottom-bar/bottom-bar.component';
 import { ContentComponent } from './core/content/content.component';
+import { I18nService } from './core/i18n/I18nService';
 import { LoginComponent } from './core/login/login.component';
 import { ThemeService } from './core/theme/theme.service';
 import { TopBar } from './core/top-bar/top-bar.component';
@@ -24,8 +25,9 @@ export class AppComponent extends ResponsiveComponent implements OnInit {
 
   logged: boolean = true;
 
-  constructor(private store: Store, private router: Router, private themeService: ThemeService, override breakpointObserver: BreakpointObserver) {
+  constructor(private store: Store, private router: Router, private i18nService: I18nService, private themeService: ThemeService, override breakpointObserver: BreakpointObserver) {
     super(breakpointObserver);
+    this.i18nService.applyLanguage();
     this.themeService.applyTheme();
   }
 
@@ -33,13 +35,11 @@ export class AppComponent extends ResponsiveComponent implements OnInit {
     this.store.pipe(
       select(SELECT_USER_STATE),
       tap((state: UserState) => this.logged = !!state.token),
-      tap(() => this.redirectToLogin())
+      tap(() => {
+        if (!this.logged) {
+          this.router.navigate(['/login']).then();
+        }
+      })
     ).subscribe();
-  }
-
-  private redirectToLogin(): void {
-    if (!this.logged) {
-      this.router.navigate(['/login']).then();
-    }
   }
 }
