@@ -1,0 +1,154 @@
+@import 'theme.scss';
+
+.select-input {
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+
+  .name {
+    margin-bottom: 8px;
+    color: $neutral;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .form {
+    width: 100%;
+    border-radius: 8px;
+
+    position: relative;
+    transition: border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+    .select {
+      height: 40px;
+      width: 100%;
+      padding: 5px 20px;
+
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: $secondary;
+
+      box-sizing: border-box;
+      background: none;
+      border: none;
+
+      cursor: pointer;
+
+      .value {
+        position: absolute;
+
+        top: 12px;
+        left: 20px;
+      }
+
+      &::placeholder {
+        font-size: 12px;
+        font-weight: 500;
+        color: color-mix(in srgb, $primary 40%, transparent);
+      }
+
+      ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    .icon {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+
+      color: $secondary;
+
+      transform: rotate(90deg);
+      transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
+
+      &.active {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &.tonal {
+      background-color: color-mix(in srgb, $primary 5%, transparent);
+
+      &:hover, &:focus {
+        background-color: color-mix(in srgb, $primary 10%, transparent);
+      }
+
+      &.invalid {
+        background-color: color-mix(in srgb, $error-container 10%, transparent);
+
+        .icon {
+          color: $error;
+        }
+      }
+    }
+
+    &.outlined {
+      border: 1px solid color-mix(in srgb, $primary 25%, transparent);
+
+      &:hover, &:focus {
+        border-color: $primary;
+      }
+
+      &.invalid {
+        border-color: $error;
+
+        .icon {
+          color: $error;
+        }
+      }
+    }
+  }
+
+  .select-options {
+    top: 40px;
+    left: 0;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+    position: absolute;
+
+    z-index: 100;
+
+    max-height: 256px;
+    overflow-y: auto;
+
+    background-color: $surface;
+    border: 1px solid color-mix(in srgb, $primary 25%, transparent);
+
+    border-radius: 8px;
+
+    .option {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      height: 16px;
+      padding: 8px;
+
+      font-size: 14px;
+      color: $neutral-inverse;
+      border-radius: 8px;
+
+      transition: background-color 0.1s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        background: $surface-container;
+      }
+
+      &.empty {
+        font-size: 14px;
+        color: $neutral-inverse;
+      }
+
+      sec-icon {
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgForOf } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sec-animated-background',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './animated-background.component.html',
+  imports: [NgForOf],
   styleUrl: './animated-background.component.scss'
 })
 export class AnimatedBackgroundComponent {

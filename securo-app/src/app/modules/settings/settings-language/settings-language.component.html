@@ -1,0 +1,14 @@
+<div class="standard-surface-container">
+  <div class="space-between">
+    <h3>{{ "settings.language.title" | translate }}</h3>
+  </div>
+
+  <sec-select-input
+    [control]="language"
+    [options]="languages"
+    [id]="'language'"
+    [name]="'Language'"
+    [style]="'tonal'"
+    [allowEmpty]="false"
+  ></sec-select-input>
+</div>

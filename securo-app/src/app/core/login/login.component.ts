@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
 import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
-import { InputComponent } from '../../shared/components/forms/input/input.component';
+import { TextInputComponent } from '../../shared/components/forms/text-input/text-input.component';
 import { emailRegex } from '../../shared/const/regex.const';
 import { ACTION_USER_LOGIN } from '../../store/app/app.actions';
 import { LoginRequest, LoginResponse } from '../auth/auth.interface';
@@ -18,7 +19,7 @@ import { AnimatedBackgroundComponent } from './animated-background/animated-back
 @Component({
   selector: 'sec-login',
   standalone: true,
-  imports: [AnimatedBackgroundComponent, InputComponent, ButtonComponent, NgIf],
+  imports: [AnimatedBackgroundComponent, TextInputComponent, ButtonComponent, NgIf, TranslatePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   animations: [fadeInOutAnimation]

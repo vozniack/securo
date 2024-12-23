@@ -4,17 +4,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '../../common/icon/icon.component';
 
 @Component({
-  selector: 'sec-input',
+  selector: 'sec-text-input',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    IconComponent,
-    NgIf
-  ],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss'
+  imports: [ReactiveFormsModule, IconComponent, NgIf],
+  templateUrl: './text-input.component.html',
+  styleUrl: './text-input.component.scss'
 })
-export class InputComponent {
+export class TextInputComponent {
 
   @Input() control: FormControl = new FormControl();
 

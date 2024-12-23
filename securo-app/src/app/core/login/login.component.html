@@ -5,21 +5,21 @@
     <h1>securo</h1>
 
     <div class="welcome-wrapper">
-      <h2>Welcome, stranger</h2>
-      <span>To gain access talk to your manager or ask on <a href="">yourcompany&#64;contact.com</a>.</span>
+      <h2 [innerHTML]="'login.welcome' | translate"></h2>
+      <span [innerHTML]="'login.gainAccess' | translate "></span>
     </div>
 
     <div class="form-wrapper">
-      <sec-input
+      <sec-text-input
         [control]="getControl('email')"
         [id]="'email'"
         [name]="'Email address'"
         [icon]="'mail'"
         [maxWidth]="'448px'"
         [style]="'tonal'">
-      </sec-input>
+      </sec-text-input>
 
-      <sec-input
+      <sec-text-input
         [control]="getControl('password')"
         [id]="'password'"
         [type]="'password'"
@@ -27,12 +27,12 @@
         [password]="true"
         [style]="'tonal'"
         [maxWidth]="'448px'">
-      </sec-input>
+      </sec-text-input>
 
       <sec-button
         (click)="login()"
         [disabled]="form.invalid"
-        [text]="'Log me in'"
+        [text]="'login.logMeIn' | translate"
         [style]="'filled'"
         [maxWidth]="'448px'">
       </sec-button>

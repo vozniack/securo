@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('../assets/font_montserrat.ttf');
+  src: url('../assets/fonts/font_montserrat.ttf');
 }
 
 @font-face {
   font-family: 'material-outlined';
-  src: url('../assets/icons_material_outlined.ttf');
+  src: url('../assets/fonts/icons_material_outlined.ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -74,7 +74,7 @@ h1, h2, h3, h4 {
 // Containers
 
 .surface-container {
-  padding: 0 16px;
+  padding: 0 16px 16px 16px;
   border-radius: 8px;
   background-color: $surface-container;
   transition: background-color 0.1s ease-in-out;

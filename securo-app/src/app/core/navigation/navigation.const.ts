@@ -2,22 +2,22 @@ import {NavigationLink} from './navigation.interface';
 
 export const navigationLinks: NavigationLink[] = [
   {
-    'title': 'Home',
+    'title': 'home.title',
     'icon': 'home',
     'link': 'home'
   },
   {
-    'title': 'Users',
+    'title': 'users.title',
     'icon': 'person',
     'link': 'users'
   },
   {
-    'title': 'Systems',
+    'title': 'systems.title',
     'icon': 'host',
     'link': 'systems'
   },
   {
-    'title': 'Environments',
+    'title': 'environments.title',
     'icon': 'dns',
     'link': 'environments'
   }
