@@ -1,6 +1,13 @@
 {
   "common": {
-    "search": "Wyszukaj..."
+    "search": "Wyszukaj...",
+    "table": {
+      "pagination": {
+        "itemsPerPage": "Elementów na stronę:",
+        "first": "Pierwsza",
+        "last": "Ostatnia"
+      }
+    }
   },
   "login": {
     "welcome": "Witaj, nieznajomy",
@@ -11,7 +18,11 @@
     "title": "Home"
   },
   "users": {
-    "title": "Użytkownicy"
+    "title": "Użytkownicy",
+    "table": {
+      "name": "Imię i nazwisko",
+      "email": "Email"
+    }
   },
   "systems": {
     "title": "Systemy"

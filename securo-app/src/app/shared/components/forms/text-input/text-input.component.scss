@@ -27,7 +27,7 @@
 
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
-      color: $secondary;
+      color: $primary;
 
       box-sizing: border-box;
       background: none;
@@ -40,7 +40,7 @@
       &::placeholder {
         font-size: 12px;
         font-weight: 500;
-        color: color-mix(in srgb, $primary 40%, transparent);
+        color: color-mix(in srgb, $neutral 50%, transparent);
       }
 
       ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
@@ -65,7 +65,7 @@
       top: 8px;
       right: 16px;
 
-      color: $secondary;
+      color: $primary;
 
       transition: color 0.1s ease-in-out;
 

@@ -1,6 +1,13 @@
 {
   "common": {
-    "search": "Search..."
+    "search": "Search...",
+    "table": {
+      "pagination": {
+        "itemsPerPage": "Items per page:",
+        "first": "First",
+        "last": "Last"
+      }
+    }
   },
   "login": {
     "welcome": "Welcome, stranger",
@@ -11,7 +18,11 @@
     "title": "Home"
   },
   "users": {
-    "title": "Users"
+    "title": "Users",
+    "table": {
+      "name": "Name",
+      "email": "Email"
+    }
   },
   "systems": {
     "title": "Systems"

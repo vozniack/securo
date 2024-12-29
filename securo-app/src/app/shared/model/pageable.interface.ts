@@ -1,7 +1,11 @@
 export interface Pageable<T> {
-
   content?: T[];
+  page?: Page;
+}
 
-  totalElements?: number;
-  totalPages?: number;
+export interface Page {
+  number: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
 }

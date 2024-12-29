@@ -3,10 +3,13 @@
     <h2 class="title">{{ "users.title" | translate }}</h2>
 
     <sec-text-input
+      [control]="getControl('search')"
       [placeholder]="'common.search' | translate"
       [icon]="'search'"
       [width]="'256px'"
       [style]="'tonal'">
     </sec-text-input>
   </div>
+
+  <sec-users-table [filters]="filters"></sec-users-table>
 </div>

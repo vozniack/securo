@@ -1,0 +1,65 @@
+<div class="table-pagination row-container space-between">
+  <div class="row-container gap-small space-between">
+    <span>{{ "common.table.pagination.itemsPerPage" | translate }}</span>
+
+    <sec-select-input
+      [control]="pageSizeForm"
+      [size]="'small'"
+      [style]="'tonal'"
+      [options]="pageSizes"
+      [allowEmpty]="false">
+    </sec-select-input>
+  </div>
+
+  <div *ngIf="totalPages > 1" class="row-container gap-small space-between" @fadeInOutAnimation>
+    <sec-button [text]="'common.table.pagination.first' | translate"
+                [iconLeft]="'keyboard_double_arrow_left'"
+                [size]="'small'"
+                [style]="'tonal'"
+                [disabled]="page == 1"
+                (click)="changePage(1)">
+    </sec-button>
+
+    <sec-button [icon]="'chevron_left'"
+                [size]="'small'"
+                [style]="'tonal'"
+                [disabled]="page < 2"
+                (click)="prevPage()">
+    </sec-button>
+
+    <sec-button *ngIf="(page - 1) > 0"
+                [text]="(page - 1).toString()"
+                [size]="'small'"
+                [style]="'tonal'"
+                (click)="changePage(page - 1)">
+    </sec-button>
+
+    <sec-button [text]="page.toString()"
+                [size]="'small'"
+                [style]="'filled'"
+                (click)="changePage(page)">
+    </sec-button>
+
+    <sec-button *ngIf="totalPages > page"
+                [text]="(page + 1).toString()"
+                [size]="'small'"
+                [style]="'tonal'"
+                (click)="changePage(page + 1)">
+    </sec-button>
+
+    <sec-button [icon]="'chevron_right'"
+                [size]="'small'"
+                [style]="'tonal'"
+                [disabled]="page + 1 > totalPages"
+                (click)="nextPage()">
+    </sec-button>
+
+    <sec-button [text]="'common.table.pagination.last' | translate"
+                [iconRight]="'keyboard_double_arrow_right'"
+                [size]="'small'"
+                [style]="'tonal'"
+                [disabled]="page == totalPages"
+                (click)="changePage(totalPages)">
+    </sec-button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="table-wrapper">
+  <table *ngIf="columns">
+    <thead>
+    <tr>
+      <th *ngFor="let column of columns">
+        <div class="row-container gap space-between" [class.sortable]="column.sortable" (click)="onSortChange(column)">
+          <span>{{ column.label | translate }}</span>
+
+          <sec-icon [class.inverted]="requestParam.sort?.direction === 'DESC'"
+                    [class.active]="requestParam.sort?.field === column.field"
+                    [name]="'chevron_right'"
+                    [size]="16">
+          </sec-icon>
+        </div>
+      </th>
+
+      <th *ngIf="actions.length > 0"></th>
+    </tr>
+    </thead>
+
+    <tbody *ngIf="_data">
+    <tr *ngFor="let row of _data.content; let i = index">
+      <th *ngFor="let column of columns">
+
+        <ng-container *ngIf="column.type === undefined">
+          <span>{{ getFieldValue(row, column?.field) }}</span>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.DATE">
+          <span>{{ getFieldValue(row, column?.field) | date: 'dd-MM-YYYY, HH:mm:ss' }}</span>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.USER">
+          <span>{{ getFieldValue(row, 'firstName') }} {{ getFieldValue(row, 'lastName') }}</span>
+        </ng-container>
+      </th>
+
+      <th *ngIf="actions.length > 0"></th>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <td [colSpan]="columns.length + 1">
+        <sec-table-pagination [pageSizeForm]="pageSizeForm"
+                              [totalPages]="totalPages"
+                              [reset]="paginationReset"
+                              (pageChange)="onPageChange($event)">
+        </sec-table-pagination>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
