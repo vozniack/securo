@@ -69,7 +69,7 @@
         transition: background-color 0.1s ease-in-out;
 
         &:hover {
-          background: color-mix(in srgb, $primary-container 5%, transparent);
+          background: color-mix(in srgb, $surface-container 25%, transparent);
         }
 
         span {
@@ -80,6 +80,10 @@
         th {
           padding: 8px 12px;
           text-align: left;
+
+          &.actions {
+            float: right;
+          }
         }
       }
     }

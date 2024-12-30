@@ -3,6 +3,7 @@
     "search": "Wyszukaj...",
     "table": {
       "pagination": {
+        "totalElements": "Elementów łącznie:",
         "itemsPerPage": "Elementów na stronę:",
         "first": "Pierwsza",
         "last": "Ostatnia"
@@ -19,9 +20,12 @@
   },
   "users": {
     "title": "Użytkownicy",
+    "user": {
+    },
     "table": {
       "name": "Imię i nazwisko",
-      "email": "Email"
+      "email": "Email",
+      "active": "Aktywny"
     }
   },
   "systems": {

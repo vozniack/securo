@@ -1,5 +1,8 @@
 <div class="column-container" @fadeInOutAnimation>
-  <h2 class="title">{{ "settings.title" | translate }}</h2>
+  <div class="row-container gap">
+    <sec-icon-button [icon]="'arrow_back'" (click)="routeBack()"></sec-icon-button>
+    <h2 class="title">{{ "settings.title" | translate }}</h2>
+  </div>
 
   <div class="column-container gap" [style.flex-direction]="isMobile ? 'column' : 'row'">
     <sec-settings-profile [style.flex]="isMobile ? 100 : 65"></sec-settings-profile>
@@ -8,6 +11,5 @@
       <sec-settings-language></sec-settings-language>
       <sec-settings-theme [style.flex]="isMobile ? 100 : 35"></sec-settings-theme>
     </div>
-
   </div>
 </div>

@@ -13,6 +13,8 @@ export class IconButtonComponent {
 
   @Input() icon!: string;
 
+  @Input() size: 'small' | 'normal' = 'normal';
+
   @Input() active: Boolean = false;
   @Input() routerLinkActive?: string;
 }

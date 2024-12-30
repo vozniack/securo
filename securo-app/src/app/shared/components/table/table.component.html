@@ -26,6 +26,12 @@
           <span>{{ getFieldValue(row, column?.field) }}</span>
         </ng-container>
 
+        <ng-container *ngIf="column.type === columnType.BOOLEAN">
+          <span class="badge {{getBooleanFieldValue(row, column?.field) ? 'primary' : 'tertiary'}}">
+            {{ getBooleanFieldValue(row, column?.field) ? 'yes' : 'no' }}
+          </span>
+        </ng-container>
+
         <ng-container *ngIf="column.type === columnType.DATE">
           <span>{{ getFieldValue(row, column?.field) | date: 'dd-MM-YYYY, HH:mm:ss' }}</span>
         </ng-container>
@@ -35,7 +41,14 @@
         </ng-container>
       </th>
 
-      <th *ngIf="actions.length > 0"></th>
+      <th class="actions" *ngIf="actions.length > 0">
+        <ng-container *ngFor="let action of actions">
+          <sec-icon-button [icon]="action.icon"
+                           [size]="'small'"
+                           (click)="onActionActive(action, row.id)">
+          </sec-icon-button>
+        </ng-container>
+      </th>
     </tr>
     </tbody>
 
@@ -44,6 +57,7 @@
       <td [colSpan]="columns.length + 1">
         <sec-table-pagination [pageSizeForm]="pageSizeForm"
                               [totalPages]="totalPages"
+                              [totalElements]="totalElements"
                               [reset]="paginationReset"
                               (pageChange)="onPageChange($event)">
         </sec-table-pagination>

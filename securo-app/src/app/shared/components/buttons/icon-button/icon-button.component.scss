@@ -5,16 +5,13 @@
   border: 0;
   border-radius: 50%;
 
-  width: 48px;
-  height: 48px;
-
   background: none;
   color: $primary;
 
+  cursor: pointer;
   transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 
   &:hover {
-    cursor: pointer;
     background: $surface-container;
   }
 
@@ -22,5 +19,17 @@
     background: $surface-container;
     font-variation-settings: 'FILL' 1;
     animation: fillIconIn 0.2s linear;
+  }
+
+  /* Sizes */
+
+  &.small {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.normal {
+    width: 48px;
+    height: 48px;
   }
 }

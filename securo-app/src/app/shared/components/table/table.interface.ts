@@ -6,14 +6,13 @@ export interface TableColumn {
 }
 
 export enum ColumnType {
+  BOOLEAN = 'BOOLEAN',
   DATE = 'DATE',
   USER = 'USER'
 }
 
 export interface TableAction {
-  name: 'EDIT' | 'VIEW' | string;
+  name: | 'VIEW' | string;
   icon: string;
-  theme: 'default' | 'primary' | 'secondary';
   data?: any;
-  custom: boolean;
 }

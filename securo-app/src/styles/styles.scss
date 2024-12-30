@@ -107,3 +107,24 @@ h1, h2, h3, h4 {
     align-items: center;
   }
 }
+
+// Badge
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  color: $surface-container;
+
+  &.primary {
+    background-color: $primary;
+  }
+
+  &.tertiary {
+    background-color: $tertiary;
+  }
+}

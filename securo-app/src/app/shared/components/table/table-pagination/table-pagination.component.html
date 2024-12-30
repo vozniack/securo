@@ -1,5 +1,8 @@
 <div class="table-pagination row-container space-between">
   <div class="row-container gap-small space-between">
+    <span>{{ "common.table.pagination.totalElements" | translate }}</span>
+    <span class="total">{{totalElements}}</span>
+
     <span>{{ "common.table.pagination.itemsPerPage" | translate }}</span>
 
     <sec-select-input

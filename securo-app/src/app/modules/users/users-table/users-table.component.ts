@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { TableComponent } from '../../../shared/components/table/table.component';
+import { TableAction } from '../../../shared/components/table/table.interface';
 import { Pageable } from '../../../shared/model/pageable.interface';
 import { RequestParam } from '../../../shared/model/request.interface';
 import { User } from '../users.interface';
@@ -30,7 +32,7 @@ export class UsersTableComponent implements OnInit {
 
   ngDestroyed$ = new Subject<boolean>();
 
-  constructor(private usersService: UsersService) {
+  constructor(private router: Router, private usersService: UsersService) {
     this.getUsers();
   }
 
@@ -39,7 +41,6 @@ export class UsersTableComponent implements OnInit {
       takeUntil(this.ngDestroyed$),
       tap((filters: any) => {
         this.requestParam.page = 0;
-        this.requestParam.size = filters.size;
         this.requestParam.search = filters.search;
       }),
       tap(() => this.getUsers())
@@ -55,5 +56,11 @@ export class UsersTableComponent implements OnInit {
   onRequestParamChange(requestParam: RequestParam): void {
     this.requestParam = requestParam;
     this.getUsers();
+  }
+
+  onActionActive(action: TableAction): void {
+    if (action.name == 'VIEW') {
+      this.router.navigate(['/users/' + action.data]).then();
+    }
   }
 }
