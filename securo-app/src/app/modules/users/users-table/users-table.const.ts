@@ -14,6 +14,12 @@ export const userColumns: TableColumn[] = [
     sortable: true
   },
   {
+    label: 'users.table.dateOfBirth',
+    field: 'dateOfBirth',
+    sortable: true,
+    type: ColumnType.DATE
+  },
+  {
     label: 'users.table.active',
     field: 'active',
     sortable: true,

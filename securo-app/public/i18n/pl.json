@@ -25,6 +25,7 @@
     "table": {
       "name": "Imię i nazwisko",
       "email": "Email",
+      "dateOfBirth": "Data urodzenia",
       "active": "Aktywny"
     }
   },

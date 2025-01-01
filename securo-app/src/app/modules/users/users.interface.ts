@@ -1,9 +1,12 @@
 export interface User {
   id: string;
 
+  email: string;
+
   firstName: string;
   lastName: String;
 
-  email: string;
+  dateOfBirth: string;
+
   active: boolean;
 }
