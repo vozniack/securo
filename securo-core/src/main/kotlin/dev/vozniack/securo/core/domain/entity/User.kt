@@ -14,6 +14,7 @@ import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import java.time.LocalDate
 import java.util.UUID
 
 @Entity
@@ -31,6 +32,8 @@ data class User(
 
     @Column(nullable = false) var firstName: String,
     @Column(nullable = false) var lastName: String,
+
+    @Column(nullable = false) var dateOfBirth: LocalDate,
 
     @Column(nullable = false) var language: String = "en_EN",
 

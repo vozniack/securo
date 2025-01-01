@@ -20,19 +20,21 @@ CREATE TABLE systems
 
 CREATE TABLE users
 (
-    id         UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+    id            UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    scope      VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
+    scope         VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
 
-    email      VARCHAR(255) NOT NULL UNIQUE,
-    password   VARCHAR(255),
+    email         VARCHAR(255) NOT NULL UNIQUE,
+    password      VARCHAR(255),
 
-    first_name VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
+    first_name    VARCHAR(255) NOT NULL,
+    last_name     VARCHAR(255) NOT NULL,
 
-    language   VARCHAR(255) NOT NULL             DEFAULT 'en_EN',
+    date_of_birth DATE         NOT NULL,
 
-    active     BOOLEAN      NOT NULL             DEFAULT TRUE
+    language      VARCHAR(255) NOT NULL             DEFAULT 'en_EN',
+
+    active        BOOLEAN      NOT NULL             DEFAULT TRUE
 );
 
 CREATE TABLE roles
@@ -147,9 +149,9 @@ VALUES ('98fa7b2c-6caa-4852-b632-e5c05b507021', 'INTERNAL', 'Admin', 'ADMIN',
        ('451adc34-f819-46d5-9e35-719ee343fb73', 'INTERNAL', 'User', 'USER', 'Securo user',
         '3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5');
 
-INSERT INTO users (id, scope, email, password, first_name, last_name)
+INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_birth)
 VALUES ('055cb1f2-162a-4f14-a445-883539a60002', 'INTERNAL', 'admin@securo.com',
-        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin');
+        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15');
 
 INSERT INTO privileges (id, scope, name, code, description, index, system_id, parent_id)
 VALUES ('39798f2b-df6f-4239-9736-138b245b151c', 'INTERNAL', 'Login', 'LOGIN',

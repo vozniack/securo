@@ -14,6 +14,8 @@ data class UserDto(
     val firstName: String,
     val lastName: String,
 
+    val dateOfBirth: String,
+
     val language: String,
 
     val active: Boolean,
@@ -26,6 +28,8 @@ data class CreateUserRequestDto(
     val firstName: String,
     val lastName: String,
 
+    val dateOfBirth: String,
+
     val language: String
 )
 
@@ -33,9 +37,13 @@ data class UpdateUserRequestDto(
     val firstName: String,
     val lastName: String,
 
-    val language: String
+    val dateOfBirth: String,
 )
 
 data class UpdateUserPasswordRequestDto(
     val password: String
+)
+
+data class UpdateUserLanguageRequestDto(
+    val language: String
 )

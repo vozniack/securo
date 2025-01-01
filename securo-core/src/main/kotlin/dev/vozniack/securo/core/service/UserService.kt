@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.api.extension.toUser
@@ -9,6 +10,7 @@ import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
+import dev.vozniack.securo.core.utils.toLocalDate
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -39,12 +41,16 @@ class UserService(private val userRepository: UserRepository, private val passwo
         getById(id).apply {
             firstName = request.firstName
             lastName = request.lastName
-            language = request.language
+            dateOfBirth = request.dateOfBirth.toLocalDate()
         }
     )
 
     fun updatePassword(id: UUID, request: UpdateUserPasswordRequestDto): User = userRepository.save(
         getById(id).apply { password = passwordEncoder.encode(request.password) }
+    )
+
+    fun updateLanguage(id: UUID, request: UpdateUserLanguageRequestDto): User = userRepository.save(
+        getById(id).apply { language = request.language }
     )
 
     fun delete(id: UUID) = userRepository.delete(getById(id))
