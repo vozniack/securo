@@ -1,3 +1,6 @@
-<button class="icon-button" [class.active]="active" [routerLinkActive]="'active'">
-  <sec-icon [name]="icon" [size]="24"></sec-icon>
+<button class="icon-button {{size}} {{style}}"
+        [class.active]="active"
+        [class.hover]="hover"
+        [routerLinkActive]="'active'">
+  <sec-icon [name]="icon" [size]="size == 'normal' ? 24 : 16"></sec-icon>
 </button>

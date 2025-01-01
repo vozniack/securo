@@ -9,17 +9,17 @@ export const routes: Routes = [
   },
   {
     path: 'users',
-    loadComponent: () => import('./modules/users/users.component').then(m => m.UsersComponent),
+    loadChildren: () => import('./modules/users/users.route').then(m => m.UsersRoute),
     canActivate: [TokenGuard]
   },
   {
     path: 'systems',
-    loadComponent: () => import('./modules/systems/systems.component').then(m => m.SystemsComponent),
+    loadChildren: () => import('./modules/systems/systems.routes').then(m => m.SystemsRoutes),
     canActivate: [TokenGuard]
   },
   {
     path: 'environments',
-    loadComponent: () => import('./modules/environments/environments.component').then(m => m.EnvironmentsComponent),
+    loadChildren: () => import('./modules/environments/environments.routes').then(m => m.EnvironmentsRoutes),
     canActivate: [TokenGuard]
   },
   {

@@ -21,13 +21,10 @@
     transition: border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 
     .select {
-      height: 40px;
       width: 100%;
-      padding: 5px 20px;
 
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      color: $secondary;
+      color: $primary;
 
       box-sizing: border-box;
       background: none;
@@ -37,15 +34,12 @@
 
       .value {
         position: absolute;
-
-        top: 12px;
-        left: 20px;
       }
 
       &::placeholder {
         font-size: 12px;
         font-weight: 500;
-        color: color-mix(in srgb, $primary 40%, transparent);
+        color: color-mix(in srgb, $neutral 50%, transparent);
       }
 
       ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
@@ -56,10 +50,7 @@
 
     .icon {
       position: absolute;
-      top: 8px;
-      right: 16px;
-
-      color: $secondary;
+      color: $primary;
 
       transform: rotate(90deg);
       transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
@@ -68,6 +59,50 @@
         transform: rotate(-90deg);
       }
     }
+
+    /* Sizes */
+
+    &.small {
+      min-width: 56px;
+      .icon {
+        top: 5px;
+        right: 10px;
+      }
+
+      .select {
+        height: 30px;
+        padding: 4px 16px;
+
+        font-size: 12px;
+
+        .value {
+          top: 8px;
+          left: 12px;
+        }
+      }
+    }
+
+    &.normal {
+      .icon {
+        top: 8px;
+        right: 16px;
+      }
+
+      .select {
+        height: 40px;
+        padding: 5px 20px;
+
+        font-size: 14px;
+
+        .value {
+          top: 12px;
+          left: 20px;
+        }
+
+      }
+    }
+
+    /* Styles */
 
     &.tonal {
       background-color: color-mix(in srgb, $primary 5%, transparent);
@@ -148,6 +183,28 @@
 
       sec-icon {
         color: $primary;
+      }
+    }
+
+    /* Sizes */
+
+    &.small {
+      padding: 4px;
+
+      .option {
+        font-size: 12px;
+
+        sec-icon {
+          margin-right: -4px;
+        }
+      }
+    }
+
+    &.normal {
+      padding: 8px;
+
+      .option {
+        font-size: 14px;
       }
     }
   }

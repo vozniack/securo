@@ -1,20 +1,25 @@
-<div class="select-input" [style.width]="width" [style.max-width]="maxWidth" [style.margin]="maxWidth ? 'auto' : 0">
-  <div class="form {{style}}" [class.invalid]="control.invalid">
-    <sec-icon [class.active]="active" class="icon" [name]="'chevron_right'" [size]="20"></sec-icon>
+<div class="select-input"
+     [style.width]="width"
+     [style.max-width]="maxWidth"
+     [style.margin]="maxWidth ? 'auto' : 0">
+  <div class="form {{size}} {{style}}" [class.invalid]="control.invalid">
+
+    <sec-icon class="icon" [class.active]="active" [name]="'chevron_right'"
+              [size]="size == 'normal' ? 20 : 16"></sec-icon>
 
     <div class="select">
       <span class="value">{{ getOptionName() }}</span>
     </div>
   </div>
 
-  <div class="select-options" [style.width]="width" *ngIf="active" @fadeInOutAnimation>
+  <div class="select-options {{size}}" [style.width]="width" *ngIf="active" @fadeInOutAnimation>
     <div class="option empty" *ngIf="allowEmpty" (click)="setValue(null)" @fadeInOutAnimation>
       <span>. . .</span>
     </div>
 
     <div class="option" *ngFor="let option of options" (click)="setValue(option.value)" @fadeInOutAnimation>
       <span>{{ option.name }}</span>
-      <sec-icon *ngIf="option.value == control.value" [name]="'check'" [size]="20"></sec-icon>
+      <sec-icon *ngIf="option.value == control.value" [name]="'check'" [size]="size == 'normal' ? 20 : 16"></sec-icon>
     </div>
   </div>
 </div>

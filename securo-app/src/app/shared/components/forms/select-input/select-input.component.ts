@@ -29,6 +29,7 @@ export class SelectInputComponent {
   @Input() width: string = '100%';
   @Input() maxWidth: string = '';
 
+  @Input() size: 'small' | 'normal' = 'normal';
   @Input() style: 'tonal' | 'outlined' = 'outlined';
 
   @Input() allowEmpty: boolean = true;

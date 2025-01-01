@@ -1,8 +1,12 @@
-<button [disabled]="disabled" class="button {{style}} {{size}}" [class.disabled]="disabled" [style.width]="width"
+<button [disabled]="disabled"
+        class="button {{style}} {{size}}"
+        [class.disabled]="disabled"
+        [style.width]="width"
         [style.max-width]="maxWidth">
-  <sec-icon *ngIf="iconLeft" [name]="iconLeft" [size]="getIconSize()"></sec-icon>
+  <sec-icon class="icon-left" *ngIf="iconLeft" [name]="iconLeft" [size]="getIconSize()"></sec-icon>
 
-  <span>{{ text }}</span>
+  <sec-icon *ngIf="icon" [name]="icon" [size]="getIconSize()"></sec-icon>
+  <span *ngIf="!icon">{{ text }}</span>
 
-  <sec-icon class="icon" *ngIf="iconRight" [name]="iconRight" [size]="getIconSize()"></sec-icon>
+  <sec-icon class="icon-right" *ngIf="iconRight" [name]="iconRight" [size]="getIconSize()"></sec-icon>
 </button>

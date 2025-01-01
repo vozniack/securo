@@ -1,4 +1,15 @@
 {
+  "common": {
+    "search": "Search...",
+    "table": {
+      "pagination": {
+        "totalElements": "Total elements:",
+        "itemsPerPage": "Items per page:",
+        "first": "First",
+        "last": "Last"
+      }
+    }
+  },
   "login": {
     "welcome": "Welcome, stranger",
     "gainAccess": "To gain access talk to your manager or ask on <a href=\"\">yourcompany&#64;contact.com</a>.",
@@ -8,7 +19,14 @@
     "title": "Home"
   },
   "users": {
-    "title": "Users"
+    "title": "Users",
+    "user": {
+    },
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "active": "Active"
+    }
   },
   "systems": {
     "title": "Systems"
