@@ -26,7 +26,7 @@
     background: none;
     color: $primary;
 
-    &:hover {
+    &.hover:hover {
       background: $surface-container;
     }
 
@@ -38,11 +38,11 @@
   }
 
   &.filled {
-    background: color-mix(in srgb, $primary-container 50%, transparent);
-    color: $neutral-inverse;
+    background: color-mix(in srgb, $primary-container 75%, transparent);
+    color: $white;
 
-    &:hover {
-      background: color-mix(in srgb, $primary-container 75%, transparent);
+    &.hover:hover {
+      background: color-mix(in srgb, $primary-container 100%, transparent);
     }
 
     &.active {

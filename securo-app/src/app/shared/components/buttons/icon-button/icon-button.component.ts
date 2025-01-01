@@ -17,5 +17,6 @@ export class IconButtonComponent {
   @Input() style: 'tonal' | 'filled' = 'tonal'
 
   @Input() active: Boolean = false;
+  @Input() hover: Boolean = true;
   @Input() routerLinkActive?: string;
 }

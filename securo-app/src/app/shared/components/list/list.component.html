@@ -1,7 +1,7 @@
 <div class="list-wrapper">
   <div class="column-container gap">
     <ng-container *ngFor="let row of _data.content">
-      <div class="list-entry row-container space-between">
+      <div class="list-entry row-container space-between" (click)="onActionActive(row.id)">
         <div class="row-container gap">
           <div *ngIf="entry.icon" class="icon">
             <sec-icon [name]="entry.icon" [size]="20"></sec-icon>
@@ -14,10 +14,7 @@
         </div>
 
         <div class="row-container gap-small">
-          <sec-icon-button [icon]="'arrow_forward'"
-                           [style]="'filled'"
-                           (click)="onActionActive(row.id)">
-          </sec-icon-button>
+          <sec-icon-button [icon]="'arrow_forward'" [style]="'filled'" [hover]="false"></sec-icon-button>
         </div>
       </div>
     </ng-container>

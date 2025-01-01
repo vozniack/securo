@@ -10,13 +10,19 @@
     border-radius: 8px;
     background-color: $surface-container;
 
+    &:hover {
+      cursor: pointer;
+      background-color: color-mix(in srgb, $secondary-container 15%, transparent);
+    }
+
     .icon {
       width: 24px;
       height: 24px;
       padding: 8px;
 
       border-radius: 100%;
-      background-color: $primary-container;
+      background-color: $secondary-container;
+      color: $white;
 
       sec-icon {
         margin: -2px 0 0 2px;
