@@ -3,30 +3,28 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { TableComponent } from '../../../shared/components/table/table.component';
-import { TableAction } from '../../../shared/components/table/table.interface';
+import { ListComponent } from '../../../shared/components/list/list.component';
 import { Pageable } from '../../../shared/model/pageable.interface';
 import { RequestParam } from '../../../shared/model/request.interface';
 import { User } from '../users.interface';
 import { UsersService } from '../users.service';
-import { userActions, userColumns } from './users-table.const';
+import { userListEntry } from './users-list.const';
 
 @Component({
-  selector: 'sec-users-table',
+  selector: 'sec-users-list',
   standalone: true,
-  imports: [TableComponent],
-  templateUrl: './users-table.component.html',
-  styleUrl: './users-table.component.scss'
+  imports: [ListComponent],
+  templateUrl: './users-list.component.html',
+  styleUrl: './users-list.component.scss'
 })
-export class UsersTableComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 
   @Input() filters!: FormGroup;
 
   data: Pageable<User> = {};
   requestParam: RequestParam = {page: 0, size: 25};
 
-  columns = userColumns;
-  actions = userActions;
+  userListEntry = userListEntry;
 
   ngDestroyed$ = new Subject<boolean>();
 
@@ -51,14 +49,7 @@ export class UsersTableComponent implements OnInit {
     ).subscribe();
   }
 
-  onRequestParamChange(requestParam: RequestParam): void {
-    this.requestParam = requestParam;
-    this.getUsers();
-  }
-
-  onActionActive(action: TableAction): void {
-    if (action.name == 'VIEW') {
-      this.router.navigate(['/users/' + action.data]).then();
-    }
+  onActionActive(id: string): void {
+    this.router.navigate(['/users/' + id]).then();
   }
 }

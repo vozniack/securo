@@ -14,6 +14,7 @@ export class IconButtonComponent {
   @Input() icon!: string;
 
   @Input() size: 'small' | 'normal' = 'normal';
+  @Input() style: 'tonal' | 'filled' = 'tonal'
 
   @Input() active: Boolean = false;
   @Input() routerLinkActive?: string;

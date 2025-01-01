@@ -11,5 +11,6 @@
     </sec-text-input>
   </div>
 
-  <sec-users-table [filters]="filters"></sec-users-table>
+  <sec-users-list *ngIf="isMobile" [filters]="filters"></sec-users-list>
+  <sec-users-table *ngIf="!isMobile" [filters]="filters"></sec-users-table>
 </div>

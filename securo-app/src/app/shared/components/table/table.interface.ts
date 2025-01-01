@@ -12,7 +12,7 @@ export enum ColumnType {
 }
 
 export interface TableAction {
-  name: | 'VIEW' | string;
+  name: 'VIEW' | string;
   icon: string;
   data?: any;
 }
