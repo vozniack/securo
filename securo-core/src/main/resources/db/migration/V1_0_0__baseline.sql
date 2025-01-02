@@ -1,23 +1,5 @@
 /* Schema */
 
-CREATE TABLE systems
-(
-    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
-
-    scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
-
-    name        VARCHAR(255) NOT NULL UNIQUE,
-    code        VARCHAR(8)   NOT NULL UNIQUE,
-
-    description VARCHAR(1024),
-
-    active      BOOLEAN      NOT NULL             DEFAULT TRUE,
-
-    parent_id   UUID,
-
-    CONSTRAINT system_parent_fk FOREIGN KEY (parent_id) REFERENCES systems (id)
-);
-
 CREATE TABLE users
 (
     id            UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -47,6 +29,25 @@ CREATE TABLE users
 
     created_at    TIMESTAMP    NOT NULL             DEFAULT now(),
     updated_at    TIMESTAMP
+);
+
+CREATE TABLE systems
+(
+    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
+
+    name        VARCHAR(255) NOT NULL UNIQUE,
+    code        VARCHAR(8)   NOT NULL UNIQUE,
+
+    description VARCHAR(1024),
+    icon        VARCHAR(64),
+
+    active      BOOLEAN      NOT NULL             DEFAULT TRUE,
+
+    parent_id   UUID,
+
+    CONSTRAINT system_parent_fk FOREIGN KEY (parent_id) REFERENCES systems (id)
 );
 
 CREATE TABLE roles
@@ -151,6 +152,10 @@ CREATE TABLE role_privileges
 
 /* Values */
 
+INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_birth)
+VALUES ('055cb1f2-162a-4f14-a445-883539a60002', 'INTERNAL', 'admin@securo.com',
+        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15');
+
 INSERT INTO systems (id, scope, name, code)
 VALUES ('3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5', 'INTERNAL', 'Securo', 'SEC');
 
@@ -160,10 +165,6 @@ VALUES ('98fa7b2c-6caa-4852-b632-e5c05b507021', 'INTERNAL', 'Admin', 'ADMIN',
         '3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5'),
        ('451adc34-f819-46d5-9e35-719ee343fb73', 'INTERNAL', 'User', 'USER', 'Securo user',
         '3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5');
-
-INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_birth)
-VALUES ('055cb1f2-162a-4f14-a445-883539a60002', 'INTERNAL', 'admin@securo.com',
-        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15');
 
 INSERT INTO privileges (id, scope, name, code, description, index, system_id, parent_id)
 VALUES ('39798f2b-df6f-4239-9736-138b245b151c', 'INTERNAL', 'Login', 'LOGIN',
