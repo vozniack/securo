@@ -25,7 +25,8 @@
     "table": {
       "name": "Name",
       "email": "Email",
-      "dateOfBirth": "Date of birth",
+      "country": "Country",
+      "city": "City",
       "active": "Active"
     }
   },

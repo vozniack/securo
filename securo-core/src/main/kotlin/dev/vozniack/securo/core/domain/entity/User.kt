@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.domain.entity
 
 import dev.vozniack.securo.core.domain.ScopeType
+import dev.vozniack.securo.core.domain.entity.common.Auditable
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -28,14 +29,21 @@ data class User(
     @Column(nullable = false) val scope: ScopeType = ScopeType.EXTERNAL,
 
     @Column(nullable = false) val email: String,
-    @Column(nullable = true) var password: String,
+    @Column(nullable = true) var password: String?,
+
+    @Column(nullable = true) var phonePrefix: String? = null,
+    @Column(nullable = true) var phoneNumber: String? = null,
 
     @Column(nullable = false) var firstName: String,
     @Column(nullable = false) var lastName: String,
-
     @Column(nullable = false) var dateOfBirth: LocalDate,
+    @Column(nullable = false) var language: String,
 
-    @Column(nullable = false) var language: String = "en_EN",
+    @Column(nullable = true) var country: String? = null,
+    @Column(nullable = true) var city: String? = null,
+    @Column(nullable = true) var zip: String? = null,
+    @Column(nullable = true) var street: String? = null,
+    @Column(nullable = true) var house: String? = null,
 
     @Column(nullable = false) var active: Boolean = true,
 
@@ -57,4 +65,4 @@ data class User(
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     var privileges: MutableList<UserPrivilege> = mutableListOf(),
-)
+) : Auditable()

@@ -14,6 +14,7 @@ import dev.vozniack.securo.core.utils.matchesPasswordRegex
 import dev.vozniack.securo.core.utils.throwIfTrue
 import dev.vozniack.securo.core.utils.toStringLocalDate
 import dev.vozniack.securo.core.utils.toLocalDate
+import dev.vozniack.securo.core.utils.toStringLocalDateTime
 
 fun CreateUserRequestDto.validate() {
     throwIfTrue(BadRequestException("Email can't be empty")) { email.isEmpty() }
@@ -79,9 +80,18 @@ fun User.toDto(): UserDto = UserDto(
     id = id,
     scope = scope,
     email = email,
+    phonePrefix = phonePrefix,
+    phoneNumber = phoneNumber,
     firstName = firstName,
     lastName = lastName,
     dateOfBirth = dateOfBirth.toStringLocalDate(),
     language = language,
+    country = country,
+    city = city,
+    zip = zip,
+    street = street,
+    house = house,
     active = active,
+    createdAt = createdAt.toStringLocalDateTime(),
+    updatedAt = updatedAt?.toStringLocalDateTime()
 )

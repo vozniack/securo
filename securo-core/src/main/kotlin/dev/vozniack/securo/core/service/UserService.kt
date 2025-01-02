@@ -10,7 +10,9 @@ import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
+import dev.vozniack.securo.core.utils.takeIfNotEmpty
 import dev.vozniack.securo.core.utils.toLocalDate
+import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -42,6 +44,16 @@ class UserService(private val userRepository: UserRepository, private val passwo
             firstName = request.firstName
             lastName = request.lastName
             dateOfBirth = request.dateOfBirth.toLocalDate()
+            updatedAt = LocalDateTime.now()
+        }.also { user ->
+            request.phonePrefix.takeIfNotEmpty()?.let { user.phonePrefix = it }
+            request.phoneNumber.takeIfNotEmpty()?.let { user.phoneNumber = it }
+
+            request.country.takeIfNotEmpty()?.let { user.country = it }
+            request.city.takeIfNotEmpty()?.let { user.city = it }
+            request.zip.takeIfNotEmpty()?.let { user.zip = it }
+            request.street.takeIfNotEmpty()?.let { user.street = it }
+            request.house.takeIfNotEmpty()?.let { user.house = it }
         }
     )
 

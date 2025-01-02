@@ -64,7 +64,7 @@ class UserServiceTest @Autowired constructor(
         val user: User = userRepository.save(mockUser())
         val fetchedUser: User = userService.getById(user.id)
 
-         assertEquals(user.id, fetchedUser.id)
+        assertEquals(user.id, fetchedUser.id)
     }
 
     @Test
@@ -107,9 +107,19 @@ class UserServiceTest @Autowired constructor(
         val updatedUser: User = userService.update(user.id, request)
 
         assertEquals(user.id, updatedUser.id)
+
+        assertEquals(request.phonePrefix, updatedUser.phonePrefix)
+        assertEquals(request.phoneNumber, updatedUser.phoneNumber)
+
         assertEquals(request.firstName, updatedUser.firstName)
         assertEquals(request.lastName, updatedUser.lastName)
         assertEquals(request.dateOfBirth.toLocalDate(), updatedUser.dateOfBirth)
+
+        assertEquals(request.country, updatedUser.country)
+        assertEquals(request.city, updatedUser.city)
+        assertEquals(request.zip, updatedUser.zip)
+        assertEquals(request.street, updatedUser.street)
+        assertEquals(request.house, updatedUser.house)
     }
 
     @Test

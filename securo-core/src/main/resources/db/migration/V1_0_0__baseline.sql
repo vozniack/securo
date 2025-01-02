@@ -27,6 +27,9 @@ CREATE TABLE users
     email         VARCHAR(255) NOT NULL UNIQUE,
     password      VARCHAR(255),
 
+    phone_prefix  VARCHAR(4),
+    phone_number  VARCHAR(16),
+
     first_name    VARCHAR(255) NOT NULL,
     last_name     VARCHAR(255) NOT NULL,
 
@@ -34,7 +37,16 @@ CREATE TABLE users
 
     language      VARCHAR(255) NOT NULL             DEFAULT 'en_EN',
 
-    active        BOOLEAN      NOT NULL             DEFAULT TRUE
+    country       VARCHAR(255),
+    city          VARCHAR(255),
+    zip           VARCHAR(16),
+    street        VARCHAR(255),
+    house         VARCHAR(255),
+
+    active        BOOLEAN      NOT NULL             DEFAULT TRUE,
+
+    created_at    TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at    TIMESTAMP
 );
 
 CREATE TABLE roles

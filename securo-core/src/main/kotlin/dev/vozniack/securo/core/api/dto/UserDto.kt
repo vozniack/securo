@@ -11,14 +11,24 @@ data class UserDto(
 
     val email: String,
 
+    val phonePrefix: String? = null,
+    val phoneNumber: String? = null,
+
     val firstName: String,
     val lastName: String,
-
     val dateOfBirth: String,
-
     val language: String,
 
+    val country: String? = null,
+    val city: String? = null,
+    val zip: String? = null,
+    val street: String? = null,
+    val house: String? = null,
+
     val active: Boolean,
+
+    val createdAt: String,
+    val updatedAt: String? = null
 )
 
 data class CreateUserRequestDto(
@@ -34,10 +44,19 @@ data class CreateUserRequestDto(
 )
 
 data class UpdateUserRequestDto(
+    val phonePrefix: String? = null,
+    val phoneNumber: String? = null,
+
     val firstName: String,
     val lastName: String,
 
     val dateOfBirth: String,
+
+    val country: String? = null,
+    val city: String? = null,
+    val zip: String? = null,
+    val street: String? = null,
+    val house: String? = null,
 )
 
 data class UpdateUserPasswordRequestDto(

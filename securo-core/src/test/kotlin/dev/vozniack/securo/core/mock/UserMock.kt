@@ -47,9 +47,16 @@ fun mockUpdateUserRequestDto(
     lastName: String = "Nowak",
     dateOfBirth: String = LocalDate.now().minusYears(25).toStringLocalDate(),
 ): UpdateUserRequestDto = UpdateUserRequestDto(
+    phonePrefix = "+48",
+    phoneNumber = "226567600",
     firstName = firstName,
     lastName = lastName,
-    dateOfBirth = dateOfBirth
+    dateOfBirth = dateOfBirth,
+    country = "PL",
+    city = "Warsaw",
+    zip = "00-901",
+    street = "Plac defilad",
+    house = "1"
 )
 
 fun mockUpdateUserPasswordRequestDto(

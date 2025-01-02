@@ -8,7 +8,8 @@ export interface TableColumn {
 export enum ColumnType {
   BOOLEAN = 'BOOLEAN',
   DATE = 'DATE',
-  USER = 'USER'
+  USER = 'USER',
+  BADGE = 'BADGE'
 }
 
 export interface TableAction {

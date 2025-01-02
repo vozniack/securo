@@ -14,10 +14,15 @@ export const userColumns: TableColumn[] = [
     sortable: true
   },
   {
-    label: 'users.table.dateOfBirth',
-    field: 'dateOfBirth',
+    label: 'users.table.country',
+    field: 'country',
     sortable: true,
-    type: ColumnType.DATE
+    type: ColumnType.BADGE,
+  },
+  {
+    label: 'users.table.city',
+    field: 'city',
+    sortable: true
   },
   {
     label: 'users.table.active',

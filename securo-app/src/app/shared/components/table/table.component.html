@@ -39,6 +39,10 @@
         <ng-container *ngIf="column.type === columnType.USER">
           <span>{{ getFieldValue(row, 'firstName') }} {{ getFieldValue(row, 'lastName') }}</span>
         </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.BADGE">
+          <span class="badge secondary">{{ getFieldValue(row, column?.field) }}</span>
+        </ng-container>
       </th>
 
       <th class="actions" *ngIf="actions.length > 0">

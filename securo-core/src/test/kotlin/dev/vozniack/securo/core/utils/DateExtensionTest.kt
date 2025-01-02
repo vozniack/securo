@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.utils
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -17,11 +18,19 @@ class DateExtensionTest {
     }
 
     @Test
-    fun `map date`() {
-        val localDate: LocalDate = LocalDate.of(1990, 1,1)
+    fun `map local date`() {
+        val localDate: LocalDate = LocalDate.of(1990, 1, 1)
         val stringLocalDate = "1990-01-01"
 
         assertEquals(localDate, stringLocalDate.toLocalDate())
-        assertEquals(stringLocalDate.toLocalDate(), localDate)
+        assertEquals(stringLocalDate, localDate.toStringLocalDate())
+    }
+
+    @Test
+    fun `map local datetime`() {
+        val localDateTime: LocalDateTime = LocalDateTime.of(1990, 1, 1, 12, 0, 0)
+        val stringLocalDate = "1990-01-01T12:00:00"
+
+        assertEquals(stringLocalDate, localDateTime.toStringLocalDateTime())
     }
 }
