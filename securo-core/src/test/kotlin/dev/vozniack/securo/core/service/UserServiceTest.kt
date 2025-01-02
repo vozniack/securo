@@ -2,6 +2,7 @@ package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.domain.entity.User
@@ -10,9 +11,11 @@ import dev.vozniack.securo.core.domain.repository.specification.UserQuery
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
 import dev.vozniack.securo.core.mock.mockCreateUserRequestDto
+import dev.vozniack.securo.core.mock.mockUpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserRequestDto
 import dev.vozniack.securo.core.mock.mockUser
+import dev.vozniack.securo.core.utils.toLocalDate
 import java.util.UUID
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -61,7 +64,7 @@ class UserServiceTest @Autowired constructor(
         val user: User = userRepository.save(mockUser())
         val fetchedUser: User = userService.getById(user.id)
 
-         assertEquals(user.id, fetchedUser.id)
+        assertEquals(user.id, fetchedUser.id)
     }
 
     @Test
@@ -82,6 +85,7 @@ class UserServiceTest @Autowired constructor(
         assertTrue(passwordEncoder.matches(request.password, user.password))
         assertEquals(request.firstName, user.firstName)
         assertEquals(request.lastName, user.lastName)
+        assertEquals(request.dateOfBirth.toLocalDate(), user.dateOfBirth)
         assertEquals(request.language, user.language)
         assertTrue(user.active)
     }
@@ -103,9 +107,19 @@ class UserServiceTest @Autowired constructor(
         val updatedUser: User = userService.update(user.id, request)
 
         assertEquals(user.id, updatedUser.id)
-        assertEquals(updatedUser.firstName, request.firstName)
-        assertEquals(updatedUser.lastName, request.lastName)
-        assertEquals(updatedUser.language, request.language)
+
+        assertEquals(request.phonePrefix, updatedUser.phonePrefix)
+        assertEquals(request.phoneNumber, updatedUser.phoneNumber)
+
+        assertEquals(request.firstName, updatedUser.firstName)
+        assertEquals(request.lastName, updatedUser.lastName)
+        assertEquals(request.dateOfBirth.toLocalDate(), updatedUser.dateOfBirth)
+
+        assertEquals(request.country, updatedUser.country)
+        assertEquals(request.city, updatedUser.city)
+        assertEquals(request.zip, updatedUser.zip)
+        assertEquals(request.street, updatedUser.street)
+        assertEquals(request.house, updatedUser.house)
     }
 
     @Test
@@ -117,6 +131,17 @@ class UserServiceTest @Autowired constructor(
 
         assertNotEquals(user.password, updatedUser.password)
         assertTrue(passwordEncoder.matches(request.password, updatedUser.password))
+    }
+
+    @Test
+    fun `update language`() {
+        val user: User = userRepository.save(mockUser())
+
+        val request: UpdateUserLanguageRequestDto = mockUpdateUserLanguageRequestDto()
+        val updatedUser: User = userService.updateLanguage(user.id, request)
+
+        assertNotEquals(user.language, updatedUser.language)
+        assertEquals(request.language, updatedUser.language)
     }
 
     @Test

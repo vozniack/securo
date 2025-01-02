@@ -1,9 +1,21 @@
 export interface User {
   id: string;
 
+  email: string;
+
+  phonePrefix: string | undefined;
+  phoneNumber: string | undefined;
+
   firstName: string;
   lastName: String;
 
-  email: string;
+  dateOfBirth: string;
+
+  country: string | undefined;
+  city: string | undefined;
+  zip: string | undefined;
+  street: string | undefined;
+  house: string | undefined;
+
   active: boolean;
 }

@@ -4,12 +4,14 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import dev.vozniack.securo.core.AbstractWebMvcTest
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UserDto
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.mock.mockCreateUserRequestDto
+import dev.vozniack.securo.core.mock.mockUpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserRequestDto
 import dev.vozniack.securo.core.mock.mockUser
@@ -119,6 +121,22 @@ class UserControllerTest @Autowired constructor(
         val userDto: UserDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
                 put("/api/v1/users/${user.id}/password")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(jacksonObjectMapper().writeValueAsString(request))
+            ).andExpect(status().isOk).andReturn().response.contentAsString
+        )
+
+        assertEquals(user.id, userDto.id)
+    }
+
+    @Test
+    fun `update user language`() {
+        val user: User = userRepository.save(mockUser())
+        val request: UpdateUserLanguageRequestDto = mockUpdateUserLanguageRequestDto()
+
+        val userDto: UserDto = jacksonObjectMapper().readValue(
+            mockMvc.perform(
+                put("/api/v1/users/${user.id}/language")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
             ).andExpect(status().isOk).andReturn().response.contentAsString

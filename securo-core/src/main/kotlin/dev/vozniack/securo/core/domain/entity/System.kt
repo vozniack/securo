@@ -31,6 +31,7 @@ data class System(
     @Column(nullable = false) var code: String,
 
     @Column(nullable = true) var description: String? = null,
+    @Column(nullable = true) var icon: String? = null,
 
     @Column(nullable = false) var active: Boolean = true,
 

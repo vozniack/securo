@@ -24,11 +24,13 @@ fun mockCreateSystemRequestDto(
     name: String = "System",
     code: String = "SYS",
     description: String = "System description",
+    icon: String = "system",
     parentId: UUID? = null
 ): CreateSystemRequestDto = CreateSystemRequestDto(
     name = name,
     code = code,
     description = description,
+    icon = icon,
     parentId = parentId
 )
 
@@ -36,10 +38,12 @@ fun mockUpdateSystemRequestDto(
     name: String = "System Zero",
     code: String = "SYS0",
     description: String = "System zero description",
+    icon: String = "grid",
     parentId: UUID? = null
 ): UpdateSystemRequestDto = UpdateSystemRequestDto(
     name = name,
     code = code,
     description = description,
+    icon = icon,
     parentId = parentId
 )

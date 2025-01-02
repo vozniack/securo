@@ -5,6 +5,7 @@ import dev.vozniack.securo.core.api.dto.UserDto
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.internal.exception.BadRequestException
 import dev.vozniack.securo.core.mock.mockCreateUserRequestDto
+import dev.vozniack.securo.core.mock.mockUpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.mock.mockUpdateUserRequestDto
 import dev.vozniack.securo.core.mock.mockUser
@@ -26,6 +27,11 @@ class UserExtensionTest {
         // missing last name
         assertThrows<BadRequestException> {
             mockCreateUserRequestDto(lastName = "").validate()
+        }
+
+        // missing date of birth
+        assertThrows<BadRequestException> {
+            mockCreateUserRequestDto(dateOfBirth = "").validate()
         }
 
         // missing language
@@ -68,6 +74,11 @@ class UserExtensionTest {
             mockCreateUserRequestDto(password = "pAssword!").validate()
         }
 
+        // date of birth in not correct ISO form
+        assertThrows<BadRequestException> {
+            mockCreateUserRequestDto(dateOfBirth = "01-01-1990").validate()
+        }
+
         // language in not correct ISO form
         assertThrows<BadRequestException> {
             mockCreateUserRequestDto(language = "EN_en").validate()
@@ -88,15 +99,14 @@ class UserExtensionTest {
             mockUpdateUserRequestDto(lastName = "").validate()
         }
 
-        // missing language
+        // missing date of birth
         assertThrows<BadRequestException> {
-            mockUpdateUserRequestDto(language = "").validate()
+            mockCreateUserRequestDto(dateOfBirth = "").validate()
         }
 
-
-        // language in not correct ISO form
+        // date of birth in not correct ISO form
         assertThrows<BadRequestException> {
-            mockUpdateUserRequestDto(language = "EN_en").validate()
+            mockCreateUserRequestDto(dateOfBirth = "01-01-1990").validate()
         }
     }
 
@@ -117,6 +127,21 @@ class UserExtensionTest {
         // password without special character
         assertThrows<BadRequestException> {
             mockUpdateUserPasswordRequestDto(password = "pAssword!").validate()
+        }
+    }
+
+    @Test
+    fun `validate update user language request`() {
+        mockUpdateUserLanguageRequestDto().validate()
+
+        // missing language
+        assertThrows<BadRequestException> {
+            mockUpdateUserLanguageRequestDto(language = "").validate()
+        }
+
+        // language in not correct ISO form
+        assertThrows<BadRequestException> {
+            mockUpdateUserLanguageRequestDto(language = "EN_en").validate()
         }
     }
 

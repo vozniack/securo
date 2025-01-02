@@ -23,7 +23,7 @@ export class UsersTableComponent implements OnInit {
   @Input() filters!: FormGroup;
 
   data: Pageable<User> = {};
-  requestParam: RequestParam = {page: 0, size: 25};
+  requestParam: RequestParam = {page: 0, size: 10};
 
   columns = userColumns;
   actions = userActions;

@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.api.controller
 
 import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UserDto
@@ -75,6 +76,15 @@ class UserController(private val userService: UserService) {
         }
 
         return userService.updatePassword(id, request).toDto()
+    }
+
+    @PutMapping("/{id}/language")
+    fun updateLanguage(@PathVariable id: UUID, @RequestBody request: UpdateUserLanguageRequestDto): UserDto {
+        request.validate().also {
+            logger.debug { "Updating user $id password" }
+        }
+
+        return userService.updateLanguage(id, request).toDto()
     }
 
     @DeleteMapping("/{id}")

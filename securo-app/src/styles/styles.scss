@@ -128,6 +128,10 @@ h1, h2, h3, h4 {
     background-color: $primary;
   }
 
+  &.secondary {
+    background-color: $secondary;
+  }
+
   &.tertiary {
     background-color: $tertiary;
   }
