@@ -47,10 +47,7 @@
 
       <th class="actions" *ngIf="actions.length > 0">
         <ng-container *ngFor="let action of actions">
-          <sec-icon-button [icon]="action.icon"
-                           [size]="'small'"
-                           (click)="onActionActive(action, row.id)">
-          </sec-icon-button>
+          <sec-icon-button [icon]="action.icon" [size]="'small'" (click)="onActionActive(action, row.id)"></sec-icon-button>
         </ng-container>
       </th>
     </tr>

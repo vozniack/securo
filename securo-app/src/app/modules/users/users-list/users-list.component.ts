@@ -29,7 +29,7 @@ export class UsersListComponent implements OnInit {
   ngDestroyed$ = new Subject<boolean>();
 
   constructor(private router: Router, private usersService: UsersService) {
-    this.getUsers();
+    this.getUsers(true);
   }
 
   ngOnInit(): void {
@@ -39,14 +39,25 @@ export class UsersListComponent implements OnInit {
         this.requestParam.page = 0;
         this.requestParam.search = filters.search;
       }),
-      tap(() => this.getUsers())
+      tap(() => this.getUsers(true))
     ).subscribe();
   }
 
-  getUsers(): void {
+  getUsers(refresh: boolean): void {
     this.usersService.getUsersPage(this.requestParam).pipe(
-      tap((response: Pageable<User>) => this.data = response),
+      tap((response: Pageable<User>) => {
+        if (refresh || this.data.content == null) {
+          this.data = response;
+        } else if (response.content != undefined) {
+          this.data.content = this.data.content.concat(response.content);
+        }
+      }),
     ).subscribe();
+  }
+
+  onRequestParamChange(requestParam: RequestParam): void {
+    this.requestParam = requestParam;
+    this.getUsers(false);
   }
 
   onActionActive(id: string): void {

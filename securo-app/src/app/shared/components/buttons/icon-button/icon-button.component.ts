@@ -13,7 +13,7 @@ export class IconButtonComponent {
 
   @Input() icon!: string;
 
-  @Input() size: 'small' | 'normal' = 'normal';
+  @Input() size: 'tiny' | 'small' | 'normal' = 'normal';
   @Input() style: 'tonal' | 'filled' = 'tonal'
 
   @Input() active: Boolean = false;

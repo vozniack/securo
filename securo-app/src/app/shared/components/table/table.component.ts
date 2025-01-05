@@ -18,7 +18,7 @@ import { Subject } from 'rxjs';
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent implements OnInit{
+export class TableComponent implements OnInit {
 
   @Input()
   set data(data: Pageable<any>) {

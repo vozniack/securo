@@ -1,12 +1,12 @@
 <div class="column-container gap" @fadeInOutAnimation>
-  <div class="row-container space-between">
+  <div class="{{isMobile ? 'column-container' : 'row-container space-between'}}">
     <h2 class="title">{{ "users.title" | translate }}</h2>
 
     <sec-text-input
       [control]="getControl('search')"
       [placeholder]="'common.search' | translate"
       [icon]="'search'"
-      [width]="'256px'"
+      [width]="isMobile ? '100%' : '256px'"
       [style]="'tonal'">
     </sec-text-input>
   </div>

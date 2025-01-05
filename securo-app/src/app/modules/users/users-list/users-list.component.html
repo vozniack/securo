@@ -1,5 +1,6 @@
 <sec-list [data]="data"
           [entry]="userListEntry"
           [requestParam]="requestParam"
-          (viewActive)="onActionActive($event)">
+          (requestParamChange)="onRequestParamChange($event)"
+          (actionActive)="onActionActive($event)">
 </sec-list>

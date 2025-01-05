@@ -10,9 +10,14 @@
 
   /* Sizes */
 
-  &.small {
+  &.tiny {
     width: 32px;
     height: 32px;
+  }
+
+  &.small {
+    width: 40px;
+    height: 40px;
   }
 
   &.normal {

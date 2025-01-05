@@ -8,6 +8,9 @@
         "first": "Pierwsza",
         "last": "Ostatnia"
       }
+    },
+    "list": {
+      "allElements": "Wszystkie elementy:"
     }
   },
   "login": {

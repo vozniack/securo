@@ -62,4 +62,12 @@
       text-shadow: 0 0 0.5px $primary;
     }
   }
+
+  &.mobile {
+    padding: 4px 12px;
+
+    span {
+      font-size: 10px;
+    }
+  }
 }
