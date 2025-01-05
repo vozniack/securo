@@ -47,6 +47,7 @@ class SystemService(private val systemRepository: SystemRepository) {
                 name = request.name
                 code = request.code
                 description = request.description
+                icon = request.icon
                 parent = findById(request.parentId)
             }
         )

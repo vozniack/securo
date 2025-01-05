@@ -22,6 +22,7 @@ fun CreateSystemRequestDto.toSystem(parent: System? = null): System =
         name = name,
         code = code,
         description = description,
+        icon = icon,
         parent = parent
     )
 
@@ -31,5 +32,6 @@ fun System.toDto(): SystemDto = SystemDto(
     name = name,
     code = code,
     description = description,
+    icon = icon,
     active = active
 )

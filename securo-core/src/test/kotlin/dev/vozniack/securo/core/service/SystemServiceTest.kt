@@ -94,6 +94,7 @@ class SystemServiceTest @Autowired constructor(
         assertEquals(request.name, system.name)
         assertEquals(request.code, system.code)
         assertEquals(request.description, system.description)
+        assertEquals(request.icon, system.icon)
         assertTrue(system.active)
     }
 
@@ -117,6 +118,7 @@ class SystemServiceTest @Autowired constructor(
         assertEquals(request.name, updatedSystem.name)
         assertEquals(request.code, updatedSystem.code)
         assertEquals(request.description, updatedSystem.description)
+        assertEquals(request.icon, updatedSystem.icon)
     }
 
     @Test

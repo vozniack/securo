@@ -13,6 +13,7 @@ data class SystemDto(
     val code: String,
 
     val description: String? = null,
+    val icon: String? = null,
 
     val active: Boolean,
 )
@@ -22,6 +23,7 @@ data class CreateSystemRequestDto(
     val code: String,
 
     val description: String? = null,
+    val icon: String? = null,
 
     val parentId: UUID? = null
 )
@@ -31,6 +33,7 @@ data class UpdateSystemRequestDto(
     val code: String,
 
     val description: String? = null,
+    val icon: String? = null,
 
     val parentId: UUID? = null
 )

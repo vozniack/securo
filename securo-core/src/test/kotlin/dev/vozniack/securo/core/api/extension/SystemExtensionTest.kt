@@ -61,6 +61,7 @@ class SystemExtensionTest @Autowired constructor(
         assertEquals(request.name, system.name)
         assertEquals(request.code, system.code)
         assertEquals(request.description, system.description)
+        assertEquals(request.icon, system.icon)
         assertEquals(parent, system.parent)
 
         val systemWithoutParent: System = request.toSystem(null)
@@ -68,6 +69,7 @@ class SystemExtensionTest @Autowired constructor(
         assertEquals(request.name, systemWithoutParent.name)
         assertEquals(request.code, systemWithoutParent.code)
         assertEquals(request.description, systemWithoutParent.description)
+        assertEquals(request.icon, systemWithoutParent.icon)
         assertNull(systemWithoutParent.parent)
     }
 
@@ -81,6 +83,7 @@ class SystemExtensionTest @Autowired constructor(
         assertEquals(system.name, dto.name)
         assertEquals(system.code, dto.code)
         assertEquals(system.description, dto.description)
+        assertEquals(system.icon, dto.icon)
         assertEquals(system.active, dto.active)
     }
 }

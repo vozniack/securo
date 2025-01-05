@@ -33,11 +33,15 @@
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE">
-          <span>{{ getFieldValue(row, column?.field) | date: 'dd-MM-YYYY, HH:mm:ss' }}</span>
+          <span>{{ getFieldValue(row, column?.field) | date: 'YYYY-MM-dd' }}</span>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.USER">
           <span>{{ getFieldValue(row, 'firstName') }} {{ getFieldValue(row, 'lastName') }}</span>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.BADGE">
+          <span class="badge secondary">{{ getFieldValue(row, column?.field) }}</span>
         </ng-container>
       </th>
 
