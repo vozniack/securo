@@ -38,7 +38,7 @@ CREATE TABLE systems
     scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
 
     name        VARCHAR(255) NOT NULL UNIQUE,
-    code        VARCHAR(8)   NOT NULL UNIQUE,
+    code        VARCHAR(16)  NOT NULL UNIQUE,
 
     description VARCHAR(1024),
     icon        VARCHAR(64),
@@ -156,8 +156,8 @@ INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_bi
 VALUES ('055cb1f2-162a-4f14-a445-883539a60002', 'INTERNAL', 'admin@securo.com',
         '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15');
 
-INSERT INTO systems (id, scope, name, code)
-VALUES ('3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5', 'INTERNAL', 'Securo', 'SEC');
+INSERT INTO systems (id, scope, name, code, description)
+VALUES ('3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5', 'INTERNAL', 'Securo', 'SEC', 'Internal Securo System');
 
 INSERT INTO roles (id, scope, name, code, description, system_id)
 VALUES ('98fa7b2c-6caa-4852-b632-e5c05b507021', 'INTERNAL', 'Admin', 'ADMIN',
