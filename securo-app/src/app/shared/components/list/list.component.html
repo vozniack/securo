@@ -1,16 +1,25 @@
 <div class="list-wrapper">
-  <div class="column-container gap">
+  <div class="column-container gap" infiniteScroll (scrollReached)="nextPage()">
     <ng-container *ngFor="let row of _data.content">
-      <div class="list-entry row-container space-between" (click)="onActionActive(row.id)">
+      <div class="list-entry row-container space-between" (click)="action(row.id)">
         <div class="column-container gap-small">
           <span class="first-line">{{ getLine(row, entry.firstLine) }}</span>
           <span class="second-line">{{ getLine(row, entry.secondLine) }}</span>
         </div>
 
         <div class="row-container gap-small">
-          <sec-icon-button [icon]="'arrow_forward'" [size]="'small'" [style]="'filled'" [hover]="false"></sec-icon-button>
+          <sec-icon-button [icon]="'arrow_forward'" [size]="'small'" [style]="'filled'" [hover]="false">
+          </sec-icon-button>
         </div>
       </div>
     </ng-container>
+
+    <sec-button *ngIf="!allElements" [text]="'Load more elements...'" [style]="'tonal'" (click)="nextPage()">
+    </sec-button>
+
+    <span class="summary" *ngIf="allElements" @fadeInOutAnimation>
+      {{ "common.list.allElements" | translate }}
+      <span class="badge primary">{{ this._data.page?.totalElements }}</span>
+    </span>
   </div>
 </div>

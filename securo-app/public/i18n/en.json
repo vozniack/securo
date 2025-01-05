@@ -8,6 +8,9 @@
         "first": "First",
         "last": "Last"
       }
+    },
+    "list": {
+      "allElements": "All elements:"
     }
   },
   "login": {
