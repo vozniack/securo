@@ -81,6 +81,20 @@ class UserControllerTest @Autowired constructor(
         assertEquals(user.id, userDto.id)
     }
 
+//    @Test #todo while implementing tests security
+//    fun `get logged`() {
+//        val user: User = userRepository.save(mockUser())
+//
+//        val userDto: UserDto = jacksonObjectMapper().readValue(
+//            mockMvc.perform(
+//                get("/api/v1/users/logged")
+//                    .contentType(MediaType.APPLICATION_JSON)
+//            ).andExpect(status().isOk).andReturn().response.contentAsString
+//        )
+//
+//        assertEquals(user.id, userDto.id)
+//    }
+
     @Test
     fun `create user`() {
         val request: CreateUserRequestDto = mockCreateUserRequestDto()

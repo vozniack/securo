@@ -23,8 +23,6 @@
   },
   "users": {
     "title": "Users",
-    "user": {
-    },
     "table": {
       "name": "Name",
       "email": "Email",
@@ -42,7 +40,27 @@
   "settings": {
     "title": "Settings",
     "profile": {
-      "title": "Profile"
+      "title": "Profile",
+      "personal": {
+        "title": "Personal data",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "dateOfBirth": "Date of birth"
+      },
+      "contact": {
+        "title": "Contact data",
+        "email": "Email",
+        "phonePrefix": "Phone prefix",
+        "phoneNumber": "Phone number"
+      },
+      "address": {
+        "title": "Address data",
+        "country": "Country",
+        "city": "City",
+        "zip": "Postal code / zip",
+        "street": "Street",
+        "house": "House / apartment"
+      }
     },
     "language": {
       "title": "Language"

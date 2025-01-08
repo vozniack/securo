@@ -19,9 +19,12 @@ export class TextInputComponent {
 
   @Input() name: string = '';
   @Input() placeholder: string = '';
+  @Input() placeholderShrink = true;
+
+  @Input() maxLength: number = 128;
+
   @Input() icon: string = '';
 
-  @Input() requiredLabel: boolean = false;
   @Input() password: boolean = false;
 
   @Input() width: string = '100%';

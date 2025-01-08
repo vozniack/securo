@@ -13,7 +13,9 @@
       <sec-text-input
         [control]="getControl('email')"
         [id]="'email'"
-        [name]="'Email address'"
+        [name]="'email'"
+        [placeholder]="'Email address'"
+        [placeholderShrink]="false"
         [icon]="'mail'"
         [maxWidth]="'448px'"
         [style]="'tonal'">
@@ -23,7 +25,9 @@
         [control]="getControl('password')"
         [id]="'password'"
         [type]="'password'"
-        [name]="'Password'"
+        [name]="'password'"
+        [placeholder]="'Password'"
+        [placeholderShrink]="false"
         [password]="true"
         [style]="'tonal'"
         [maxWidth]="'448px'">

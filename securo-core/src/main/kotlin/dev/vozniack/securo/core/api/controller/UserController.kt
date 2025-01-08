@@ -15,6 +15,7 @@ import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -49,6 +50,9 @@ class UserController(private val userService: UserService) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: UUID): UserDto = userService.getById(id).toDto()
+
+    @GetMapping("/logged")
+    fun getLogged(): UserDto = userService.getByEmail(SecurityContextHolder.getContext().authentication.name).toDto()
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

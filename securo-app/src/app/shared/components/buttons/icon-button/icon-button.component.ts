@@ -14,7 +14,7 @@ export class IconButtonComponent {
   @Input() icon!: string;
 
   @Input() size: 'tiny' | 'small' | 'normal' = 'normal';
-  @Input() style: 'tonal' | 'filled' = 'tonal'
+  @Input() style: 'flat' | 'tonal' | 'filled' = 'flat'
 
   @Input() active: Boolean = false;
   @Input() hover: Boolean = true;
