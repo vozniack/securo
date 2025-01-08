@@ -27,7 +27,7 @@
 
   /* Styles */
 
-  &.tonal {
+  &.flat {
     background: none;
     color: $primary;
 
@@ -37,6 +37,21 @@
 
     &.active {
       background: $surface-container;
+      font-variation-settings: 'FILL' 1;
+      animation: fillIconIn 0.2s linear;
+    }
+  }
+
+  &.tonal {
+    background: color-mix(in srgb, $primary-container 10%, transparent);
+    color: $neutral-inverse;
+
+    &.hover:hover {
+      background: color-mix(in srgb, $primary-container 75%, transparent);
+      color: $white;
+    }
+
+    &.active {
       font-variation-settings: 'FILL' 1;
       animation: fillIconIn 0.2s linear;
     }

@@ -75,6 +75,21 @@ class UserServiceTest @Autowired constructor(
     }
 
     @Test
+    fun `get user by email`() {
+        val user: User = userRepository.save(mockUser())
+        val fetchedUser: User = userService.getByEmail(user.email)
+
+        assertEquals(user.id, fetchedUser.id)
+    }
+
+    @Test
+    fun `get not existing user by email`() {
+        assertThrows<NotFoundException> {
+            userService.getByEmail("somerandomemail@securo.com")
+        }
+    }
+
+    @Test
     fun `create user`() {
         val request: CreateUserRequestDto = mockCreateUserRequestDto()
         val user: User = userService.create(request)

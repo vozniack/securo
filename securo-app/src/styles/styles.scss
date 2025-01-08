@@ -60,11 +60,15 @@ h2 {
 h3 {
   font-weight: 400;
   font-size: 20px;
+
+  margin: 16px 0 8px 0;
 }
 
 h4 {
   font-weight: 300;
   font-size: 16px;
+
+  margin: 4px 0;
 }
 
 h1, h2, h3, h4 {
@@ -110,6 +114,10 @@ h1, h2, h3, h4 {
     justify-content: space-between;
     align-items: center;
   }
+
+  &.end {
+    justify-content: flex-end
+  }
 }
 
 // Badge
@@ -135,4 +143,10 @@ h1, h2, h3, h4 {
   &.tertiary {
     background-color: $tertiary;
   }
+}
+
+// Common
+
+.flex {
+  flex: 100;
 }

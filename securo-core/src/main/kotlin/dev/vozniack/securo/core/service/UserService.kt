@@ -31,6 +31,9 @@ class UserService(private val userRepository: UserRepository, private val passwo
     fun getById(id: UUID): User = userRepository.findById(id)
         .orElseThrow { NotFoundException("Not found user with id $id") }
 
+    fun getByEmail(email: String): User = userRepository.findByEmail(email)
+        ?: throw NotFoundException("Not found user with email $email")
+
     fun create(request: CreateUserRequestDto): User {
         userRepository.findByEmail(request.email)?.let {
             throw ConflictException("User with email ${request.email} already exists")
@@ -41,19 +44,20 @@ class UserService(private val userRepository: UserRepository, private val passwo
 
     fun update(id: UUID, request: UpdateUserRequestDto): User = userRepository.save(
         getById(id).apply {
+            phonePrefix = request.phonePrefix.takeIfNotEmpty()
+            phoneNumber = request.phoneNumber.takeIfNotEmpty()
+
             firstName = request.firstName
             lastName = request.lastName
             dateOfBirth = request.dateOfBirth.toLocalDate()
-            updatedAt = LocalDateTime.now()
-        }.also { user ->
-            request.phonePrefix.takeIfNotEmpty()?.let { user.phonePrefix = it }
-            request.phoneNumber.takeIfNotEmpty()?.let { user.phoneNumber = it }
 
-            request.country.takeIfNotEmpty()?.let { user.country = it }
-            request.city.takeIfNotEmpty()?.let { user.city = it }
-            request.zip.takeIfNotEmpty()?.let { user.zip = it }
-            request.street.takeIfNotEmpty()?.let { user.street = it }
-            request.house.takeIfNotEmpty()?.let { user.house = it }
+            country = request.country.takeIfNotEmpty()
+            city = request.city.takeIfNotEmpty()
+            zip = request.zip.takeIfNotEmpty()
+            street = request.street.takeIfNotEmpty()
+            house = request.house.takeIfNotEmpty()
+
+            updatedAt = LocalDateTime.now()
         }
     )
 

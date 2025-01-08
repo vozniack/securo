@@ -1,0 +1,10 @@
+<div class="date-input" [style.width]="width" [style.max-width]="maxWidth" [style.margin]="maxWidth ? 'auto' : 0">
+  <div class="form {{style}}" [class.invalid]="control.invalid" [class.disabled]="control.disabled">
+    <span class="label">{{ label }}</span>
+
+    <input [formControl]="control"
+           [id]="id"
+           [name]="name"
+           [type]="'date'"/>
+  </div>
+</div>

@@ -5,10 +5,7 @@ import { IconComponent } from '../../common/icon/icon.component';
 @Component({
   selector: 'sec-button',
   standalone: true,
-  imports: [
-    IconComponent,
-    NgIf
-  ],
+  imports: [IconComponent, NgIf],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })
