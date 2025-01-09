@@ -1,0 +1,8 @@
+<div class="progress-indicator {{isMobile ? 'mobile' : 'desktop'}}" [class.active]="progress !== 'none'">
+  <div class="circle {{progress}}" @fadeInOutAnimation>
+    <sec-icon *ngIf="progress == 'success' || progress == 'failure'"
+              [name]="progress == 'success' ? 'check' : 'close'"
+              [size]="20" @fadeInOutAnimation>
+    </sec-icon>
+  </div>
+</div>

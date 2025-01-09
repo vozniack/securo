@@ -4,6 +4,7 @@ import { AppState } from './app.state';
 
 export const initialAppState = (): AppState => {
   return {
+    progress: undefined,
     language: 'en',
     theme: 'blue-light',
     user: {
