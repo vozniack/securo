@@ -1,4 +1,6 @@
 <div class="securo-main-wrapper" [class.not-logged]="!logged">
+  <sec-progress-indicator></sec-progress-indicator>
+
   <sec-top-bar *ngIf="logged"></sec-top-bar>
   <sec-content *ngIf="logged"></sec-content>
   <sec-bottom-bar *ngIf="logged && isMobile"></sec-bottom-bar>
