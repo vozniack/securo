@@ -5,7 +5,11 @@ import { environment } from '../../../environments/environment';
 import { Pageable } from '../../shared/model/pageable.interface';
 import { RequestParam } from '../../shared/model/request.interface';
 import { buildHttpParams } from '../../shared/utils/request.utils';
-import { UpdateUserRequestDto, User } from './users.interface';
+import {
+  UpdateUserPasswordRequestDto,
+  UpdateUserRequestDto,
+  User
+} from './users.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +37,9 @@ export class UsersService {
 
   updateUser(id: string, request: UpdateUserRequestDto): Observable<User> {
     return this.httpClient.put<User>(`${this.baseUrl}/${id}`, request);
+  }
+
+  updateUserPassword(id: string, request: UpdateUserPasswordRequestDto): Observable<User> {
+    return this.httpClient.put<User>(`${this.baseUrl}/${id}/password`, request);
   }
 }

@@ -1,12 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { fadeInOutAnimation } from '../../../shared/animations/fade-in-out-animation';
 import { ResponsiveComponent } from '../../../shared/common/responsive.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { DateInputComponent } from '../../../shared/components/forms/date-input/date-input.component';
@@ -21,20 +22,21 @@ import { UsersService } from '../../users/users.service';
   standalone: true,
   imports: [TranslatePipe, TextInputComponent, NgIf, ButtonComponent, DateInputComponent],
   templateUrl: './settings-profile.component.html',
-  styleUrl: './settings-profile.component.scss'
+  styleUrl: './settings-profile.component.scss',
+  animations: [fadeInOutAnimation]
 })
-export class SettingsProfileComponent extends ResponsiveComponent {
+export class SettingsProfileComponent extends ResponsiveComponent implements OnInit {
 
-  user!: User;
+  @Input() user!: User;
 
   userForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private userService: UsersService, private store: Store, override breakpointObserver: BreakpointObserver) {
     super(breakpointObserver);
+  }
 
-    this.userService.getLoggedUser().pipe(
-      tap((response: User) => this.buildForm(this.user = response))
-    ).subscribe();
+  ngOnInit(): void {
+    this.buildForm(this.user);
   }
 
   buildForm(user: User): void {
@@ -63,8 +65,8 @@ export class SettingsProfileComponent extends ResponsiveComponent {
     ).subscribe();
   }
 
-  getControl(form: FormGroup, name: string): FormControl {
-    return form?.get(name) as FormControl;
+  getControl(name: string): FormControl {
+    return this.userForm?.get(name) as FormControl;
   }
 
   private handleError(error: HttpErrorResponse) {

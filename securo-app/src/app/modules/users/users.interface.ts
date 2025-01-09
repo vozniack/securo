@@ -35,3 +35,7 @@ export interface UpdateUserRequestDto {
   street: string | undefined;
   house: string | undefined;
 }
+
+export interface UpdateUserPasswordRequestDto {
+  password: string;
+}
