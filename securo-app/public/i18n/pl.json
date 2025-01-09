@@ -1,6 +1,8 @@
 {
   "common": {
     "search": "Wyszukaj...",
+    "reset": "Zresetuj",
+    "save": "Zapisz",
     "table": {
       "pagination": {
         "totalElements": "Elementów łącznie:",
@@ -61,6 +63,11 @@
         "street": "Ulica",
         "house": "Dom"
       }
+    },
+    "password": {
+      "title": "Hasło",
+      "newPassword": "Nowe hasło",
+      "repeatPassword": "Powtórz hasło"
     },
     "language": {
       "title": "Język"

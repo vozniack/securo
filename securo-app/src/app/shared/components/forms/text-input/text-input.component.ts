@@ -15,9 +15,10 @@ export class TextInputComponent {
   @Input() control: FormControl = new FormControl();
 
   @Input() id: string = '';
+  @Input() name: string = '';
+
   @Input() type: string = 'text';
 
-  @Input() name: string = '';
   @Input() placeholder: string = '';
   @Input() placeholderShrink = true;
 
@@ -26,6 +27,7 @@ export class TextInputComponent {
   @Input() icon: string = '';
 
   @Input() password: boolean = false;
+  @Input() autocomplete: string = 'on';
 
   @Input() width: string = '100%';
   @Input() maxWidth: string = '';

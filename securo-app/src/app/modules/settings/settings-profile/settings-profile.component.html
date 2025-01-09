@@ -1,13 +1,13 @@
 <div class="column-container surface-container gap">
   <h3>{{ "settings.profile.title" | translate }}</h3>
 
-  <div class="column-container gap" *ngIf="user">
+  <div class="column-container gap" *ngIf="user" @fadeInOutAnimation>
     <h4>{{ "settings.profile.personal.title" | translate }}</h4>
 
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
         <sec-text-input [style.flex]="40"
-                        [control]="getControl(userForm, 'firstName')"
+                        [control]="getControl('firstName')"
                         [id]="'firstName'"
                         [name]="'firstName'"
                         [placeholder]="'settings.profile.personal.firstName' | translate"
@@ -15,7 +15,7 @@
         </sec-text-input>
 
         <sec-text-input [style.flex]="40"
-                        [control]="getControl(userForm,'lastName')"
+                        [control]="getControl('lastName')"
                         [id]="'lastName'"
                         [name]="'lastName'"
                         [placeholder]="'settings.profile.personal.lastName' | translate"
@@ -23,7 +23,7 @@
         </sec-text-input>
 
         <sec-date-input [style.flex]="20"
-                        [control]="getControl(userForm,'dateOfBirth')"
+                        [control]="getControl('dateOfBirth')"
                         [id]="'dateOfBirth'"
                         [name]="'dateOfBirth'"
                         [label]="'settings.profile.personal.dateOfBirth' | translate"
@@ -39,7 +39,7 @@
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
         <sec-text-input [style.flex]="50"
-                        [control]="getControl(userForm, 'email')"
+                        [control]="getControl('email')"
                         [id]="'email'"
                         [name]="'email'"
                         [placeholder]="'settings.profile.contact.email' | translate"
@@ -47,7 +47,7 @@
         </sec-text-input>
 
         <sec-text-input [style.flex]="20"
-                        [control]="getControl(userForm,'phonePrefix')"
+                        [control]="getControl('phonePrefix')"
                         [id]="'phonePrefix'"
                         [name]="'phonePrefix'"
                         [placeholder]="'settings.profile.contact.phonePrefix' | translate"
@@ -57,7 +57,7 @@
         </sec-text-input>
 
         <sec-text-input [style.flex]="30"
-                        [control]="getControl(userForm,'phoneNumber')"
+                        [control]="getControl('phoneNumber')"
                         [id]="'phoneNumber'"
                         [name]="'phoneNumber'"
                         [placeholder]="'settings.profile.contact.phoneNumber' | translate"
@@ -74,14 +74,14 @@
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
         <sec-text-input [style.flex]="50"
-                        [control]="getControl(userForm, 'country')"
+                        [control]="getControl('country')"
                         [id]="'country'"
                         [name]="'country'"
                         [placeholder]="'settings.profile.address.country' | translate"
                         [style]="'tonal'">
         </sec-text-input>
         <sec-text-input [style.flex]="50"
-                        [control]="getControl(userForm,'city')"
+                        [control]="getControl('city')"
                         [id]="'city'"
                         [name]="'city'"
                         [placeholder]="'settings.profile.address.city' | translate"
@@ -93,7 +93,7 @@
     <div class="column-container gap-small" *ngIf="user">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
         <sec-text-input [style.flex]="20"
-                        [control]="getControl(userForm,'zip')"
+                        [control]="getControl('zip')"
                         [id]="'zip'"
                         [name]="'zip'"
                         [placeholder]="'settings.profile.address.zip' | translate"
@@ -101,7 +101,7 @@
         </sec-text-input>
 
         <sec-text-input [style.flex]="45"
-                        [control]="getControl(userForm,'street')"
+                        [control]="getControl('street')"
                         [id]="'street'"
                         [name]="'street'"
                         [placeholder]="'settings.profile.address.street' | translate"
@@ -109,7 +109,7 @@
         </sec-text-input>
 
         <sec-text-input [style.flex]="45"
-                        [control]="getControl(userForm,'house')"
+                        [control]="getControl('house')"
                         [id]="'house'"
                         [name]="'house'"
                         [placeholder]="'settings.profile.address.house' | translate"
@@ -121,7 +121,7 @@
 
   <div class="row-container gap end" *ngIf="user">
     <sec-button [class.flex]="isMobile"
-                [text]="'Refresh'"
+                [text]="'common.reset' | translate"
                 [size]="'small'"
                 [style]="'outlined'"
                 [width]="isMobile ? '100%' : '128px'"
@@ -129,7 +129,7 @@
     </sec-button>
 
     <sec-button [class.flex]="isMobile"
-                [text]="'Save'"
+                [text]="'common.save' | translate"
                 [size]="'small'"
                 [style]="'filled'"
                 [width]="isMobile ? '100%' : '128px'"
