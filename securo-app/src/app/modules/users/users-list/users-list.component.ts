@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -26,15 +26,22 @@ export class UsersListComponent implements OnInit {
 
   userListEntry = userListEntry;
 
-  ngDestroyed$ = new Subject<boolean>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(private router: Router, private usersService: UsersService) {
     this.getUsers(true);
   }
 
   ngOnInit(): void {
+    const destroyed = new Subject<void>();
+
+    this.destroyRef.onDestroy(() => {
+      destroyed.next();
+      destroyed.complete();
+    });
+
     this.filters.valueChanges.pipe(
-      takeUntil(this.ngDestroyed$),
+      takeUntil(destroyed),
       tap((filters: any) => {
         this.requestParam.page = 0;
         this.requestParam.search = filters.search;
