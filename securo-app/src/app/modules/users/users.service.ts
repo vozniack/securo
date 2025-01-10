@@ -6,6 +6,7 @@ import { Pageable } from '../../shared/model/pageable.interface';
 import { RequestParam } from '../../shared/model/request.interface';
 import { buildHttpParams } from '../../shared/utils/request.utils';
 import {
+  UpdateUserLanguageRequestDto,
   UpdateUserPasswordRequestDto,
   UpdateUserRequestDto,
   User
@@ -41,5 +42,9 @@ export class UsersService {
 
   updateUserPassword(id: string, request: UpdateUserPasswordRequestDto): Observable<User> {
     return this.httpClient.put<User>(`${this.baseUrl}/${id}/password`, request);
+  }
+
+  updateUserLanguage(id: string, request: UpdateUserLanguageRequestDto): Observable<User> {
+    return this.httpClient.put<User>(`${this.baseUrl}/${id}/language`, request);
   }
 }
