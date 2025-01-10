@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -33,12 +34,14 @@ export class SettingsLanguageComponent implements OnInit {
 
   constructor(private store: Store, private i18nService: I18nService, private userService: UsersService) {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_LANGUAGE),
       takeWhile((language: string) => this.language.value !== language),
       tap((language: string) => this.language.setValue(language))
     ).subscribe();
 
     this.language.valueChanges.pipe(
+      takeUntilDestroyed(),
       tap(() => this.store.dispatch(ACTION_PROGRESS({progress: 'loading'}))),
       switchMap((language: string) => this.userService.updateUserLanguage(this.user.id, {language: language})),
       tap((user: User) => this.i18nService.setLanguage(user.language)),

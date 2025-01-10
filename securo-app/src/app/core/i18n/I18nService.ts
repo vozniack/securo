@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
@@ -16,6 +17,7 @@ export class I18nService {
 
   public applyLanguage() {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_LANGUAGE),
       tap((language: string) => this.translateService.use(language.split('_')[0]))
     ).subscribe();

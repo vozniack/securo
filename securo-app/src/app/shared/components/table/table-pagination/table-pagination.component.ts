@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../../animations/fade-in-out-animation';
 import { ButtonComponent } from '../../buttons/button/button.component';
@@ -39,10 +39,20 @@ export class TablePaginationComponent implements OnInit {
     {value: 25, name: '25'},
   ];
 
+  private destroyRef = inject(DestroyRef);
+
   ngOnInit(): void {
+    const destroyed = new Subject<void>();
+
+    this.destroyRef.onDestroy(() => {
+      destroyed.next();
+      destroyed.complete();
+    });
+
     setTimeout(() => this.countPages(false), 32);
 
     this.reset.pipe(
+      takeUntil(destroyed),
       tap(() => this.page = 1)
     ).subscribe();
   }

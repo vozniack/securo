@@ -1,5 +1,5 @@
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { IconButtonComponent } from '../buttons/icon-button/icon-button.componen
 import { IconComponent } from '../common/icon/icon.component';
 import { TablePaginationComponent } from './table-pagination/table-pagination.component';
 import { ColumnType, TableAction, TableColumn } from './table.interface';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'sec-table',
@@ -50,8 +50,25 @@ export class TableComponent implements OnInit {
 
   columnType = ColumnType;
 
+  private destroyRef = inject(DestroyRef);
+
   ngOnInit(): void {
-    this.onPageSizeChange();
+    const destroyed = new Subject<void>();
+
+    this.destroyRef.onDestroy(() => {
+      destroyed.next();
+      destroyed.complete();
+    });
+
+    this.pageSizeForm.valueChanges.pipe(
+      takeUntil(destroyed),
+      tap((size: number) => {
+        if (this.requestParam.size != size) {
+          this.requestParamChange.emit({...this.requestParam, page: 0, size: size});
+          this.paginationReset.next(true);
+        }
+      })
+    ).subscribe();
   }
 
   /* Changes */
@@ -78,17 +95,6 @@ export class TableComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.requestParamChange.emit({...this.requestParam, page: page});
-  }
-
-  onPageSizeChange(): void {
-    this.pageSizeForm.valueChanges.pipe(
-      tap((size: number) => {
-        if (this.requestParam.size != size) {
-          this.requestParamChange.emit({...this.requestParam, page: 0, size: size});
-          this.paginationReset.next(true);
-        }
-      })
-    ).subscribe();
   }
 
   onActionActive(action: TableAction, id: string): void {

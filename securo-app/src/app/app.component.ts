@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
@@ -22,18 +23,18 @@ import { UserState } from './store/app/app.state';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent extends ResponsiveComponent implements OnInit {
+export class AppComponent extends ResponsiveComponent {
 
   logged: boolean = true;
 
   constructor(private store: Store, private router: Router, private i18nService: I18nService, private themeService: ThemeService, override breakpointObserver: BreakpointObserver) {
     super(breakpointObserver);
+
     this.i18nService.applyLanguage();
     this.themeService.applyTheme();
-  }
 
-  ngOnInit(): void {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_USER_STATE),
       tap((state: UserState) => this.logged = !!state.token),
       tap(() => {

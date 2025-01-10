@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
@@ -25,6 +26,7 @@ export class ProgressIndicatorComponent extends ResponsiveComponent {
     super(breakpointObserver);
 
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_PROGRESS),
       tap((progress: 'none' | 'loading' | 'success' | 'failure') => this.hideIndicator(this.progress = progress))
     ).subscribe();

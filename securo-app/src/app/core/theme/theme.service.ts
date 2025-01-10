@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -19,6 +20,7 @@ export class ThemeService {
 
   public applyTheme() {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_THEME),
       tap((theme: string) => document.body.setAttribute('theme', this.theme = theme))
     ).subscribe();

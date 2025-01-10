@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -18,6 +19,7 @@ export class AuthService {
 
   constructor(private store: Store, private httpClient: HttpClient) {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_APP_STATE),
       tap((state: AppState) => this.token = state?.user?.token),
     ).subscribe();

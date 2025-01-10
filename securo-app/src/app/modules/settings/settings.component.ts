@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
@@ -29,6 +30,7 @@ export class SettingsComponent extends ResponsiveComponent {
     super(breakpointObserver);
 
     this.userService.getLoggedUser().pipe(
+      takeUntilDestroyed(),
       tap((response: User) => this.user = response)
     ).subscribe();
   }

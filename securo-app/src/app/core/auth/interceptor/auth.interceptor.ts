@@ -1,5 +1,6 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {tap} from 'rxjs/operators';
@@ -13,6 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private store: Store) {
     this.store.pipe(
+      takeUntilDestroyed(),
       select(SELECT_USER_TOKEN),
       tap((token: string) => this.token = token)
     ).subscribe();

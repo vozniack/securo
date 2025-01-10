@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { fadeInOutAnimation } from '../../../shared/animations/fade-in-out-animation';
@@ -20,6 +21,7 @@ export class UserComponent {
 
   constructor(private location: Location, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.data.pipe(
+      takeUntilDestroyed(),
       tap((data: any) => this.user = data.user)
     ).subscribe();
   }

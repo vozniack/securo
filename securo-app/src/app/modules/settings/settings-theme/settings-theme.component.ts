@@ -1,5 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
@@ -24,12 +25,14 @@ export class SettingsThemeComponent {
 
   constructor(public themeService: ThemeService) {
     this.themeService.themeChange.pipe(
+      takeUntilDestroyed(),
       tap((theme: string) => this.readTheme(theme))
     ).subscribe();
 
     this.readTheme(this.themeService.theme);
 
     this.darkMode.valueChanges.pipe(
+      takeUntilDestroyed(),
       tap((value: boolean) => this.themeService.switchMode(value))
     ).subscribe();
   }
