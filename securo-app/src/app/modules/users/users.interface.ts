@@ -11,6 +11,8 @@ export interface User {
 
   dateOfBirth: string;
 
+  language: string;
+
   country: string | undefined;
   city: string | undefined;
   zip: string | undefined;
@@ -38,4 +40,8 @@ export interface UpdateUserRequestDto {
 
 export interface UpdateUserPasswordRequestDto {
   password: string;
+}
+
+export interface UpdateUserLanguageRequestDto {
+  language: string;
 }

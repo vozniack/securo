@@ -85,7 +85,7 @@ class UserController(private val userService: UserService) {
     @PutMapping("/{id}/language")
     fun updateLanguage(@PathVariable id: UUID, @RequestBody request: UpdateUserLanguageRequestDto): UserDto {
         request.validate().also {
-            logger.debug { "Updating user $id password" }
+            logger.debug { "Updating user $id language" }
         }
 
         return userService.updateLanguage(id, request).toDto()

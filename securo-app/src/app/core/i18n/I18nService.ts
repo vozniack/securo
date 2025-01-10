@@ -17,11 +17,11 @@ export class I18nService {
   public applyLanguage() {
     this.store.pipe(
       select(SELECT_LANGUAGE),
-      tap((language: string) => this.translateService.use(language))
+      tap((language: string) => this.translateService.use(language.split('_')[0]))
     ).subscribe();
   }
 
   setLanguage(language: string) {
-    this.store.dispatch(ACTION_LANGUAGE({language: language != null ? language : 'en'}));
+    this.store.dispatch(ACTION_LANGUAGE({language: language != null ? language : 'en_US'}));
   }
 }
