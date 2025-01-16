@@ -30,7 +30,7 @@ class AuthService(
 
     private fun buildToken(user: User): String = Jwts.builder()
         .setSubject(user.email)
-        .addClaims(mapOf(Pair("roles", user.roles.map { "${it.system.code}_${it.code}" })) as Map<String, Any>?)
+        .addClaims(mapOf(Pair("roles", user.roles.map { "${it.team.code}_${it.code}" })) as Map<String, Any>?)
         .addClaims(mapOf(Pair("privileges", collectPrivileges(user).collectCodes())) as Map<String, Any>?)
         .signWith(Keys.hmacShaKeyFor(jwtSecret.toByteArray(StandardCharsets.UTF_8)))
         .setExpiration(Date(Date().time + jwtExpiration.toInt()))

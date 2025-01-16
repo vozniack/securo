@@ -1,54 +1,27 @@
-package dev.vozniack.securo.core.api.extension
+package dev.vozniack.securo.core.api.extension.mapper
 
 import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
 import dev.vozniack.securo.core.api.dto.SystemDto
 import dev.vozniack.securo.core.domain.entity.System
 import dev.vozniack.securo.core.domain.repository.SystemRepository
-import dev.vozniack.securo.core.internal.exception.BadRequestException
 import dev.vozniack.securo.core.mock.mockCreateSystemRequestDto
 import dev.vozniack.securo.core.mock.mockSystem
-import dev.vozniack.securo.core.mock.mockUpdateSystemRequestDto
+import dev.vozniack.securo.core.utils.toStringLocalDateTime
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 
-class SystemExtensionTest @Autowired constructor(
+class SystemMapperTest @Autowired constructor(
     private val systemRepository: SystemRepository
 ) : AbstractUnitTest() {
 
     @AfterEach
     fun `clean up`() {
         systemRepository.deleteAll()
-    }
-
-    @Test
-    fun `validate create system request`() {
-        mockCreateSystemRequestDto().validate()
-
-        assertThrows<BadRequestException> {
-            mockCreateSystemRequestDto(name = "").validate()
-        }
-
-        assertThrows<BadRequestException> {
-            mockCreateSystemRequestDto(code = "").validate()
-        }
-    }
-
-    @Test
-    fun `validate update system request`() {
-        mockUpdateSystemRequestDto().validate()
-
-        assertThrows<BadRequestException> {
-            mockUpdateSystemRequestDto(name = "").validate()
-        }
-
-        assertThrows<BadRequestException> {
-            mockUpdateSystemRequestDto(code = "").validate()
-        }
     }
 
     @Test
@@ -63,6 +36,8 @@ class SystemExtensionTest @Autowired constructor(
         assertEquals(request.description, system.description)
         assertEquals(request.icon, system.icon)
         assertEquals(parent, system.parent)
+        assertNotNull(system.createdAt)
+        assertNull(system.updatedAt)
 
         val systemWithoutParent: System = request.toSystem(null)
 
@@ -71,19 +46,23 @@ class SystemExtensionTest @Autowired constructor(
         assertEquals(request.description, systemWithoutParent.description)
         assertEquals(request.icon, systemWithoutParent.icon)
         assertNull(systemWithoutParent.parent)
+        assertNotNull(systemWithoutParent.createdAt)
+        assertNull(systemWithoutParent.updatedAt)
     }
 
     @Test
     fun `map system to dto`() {
         val system: System = mockSystem()
-        val dto: SystemDto = system.toDto()
+        val systemDto: SystemDto = system.toDto()
 
-        assertEquals(system.id, dto.id)
-        assertEquals(system.scope, dto.scope)
-        assertEquals(system.name, dto.name)
-        assertEquals(system.code, dto.code)
-        assertEquals(system.description, dto.description)
-        assertEquals(system.icon, dto.icon)
-        assertEquals(system.active, dto.active)
+        assertEquals(system.id, systemDto.id)
+        assertEquals(system.scope, systemDto.scope)
+        assertEquals(system.name, systemDto.name)
+        assertEquals(system.code, systemDto.code)
+        assertEquals(system.description, systemDto.description)
+        assertEquals(system.icon, systemDto.icon)
+        assertEquals(system.active, systemDto.active)
+        assertEquals(system.createdAt.toStringLocalDateTime(), systemDto.createdAt)
+        assertEquals(system.updatedAt?.toStringLocalDateTime(), systemDto.updatedAt)
     }
 }

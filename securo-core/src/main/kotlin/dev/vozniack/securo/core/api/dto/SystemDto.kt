@@ -4,7 +4,6 @@ import dev.vozniack.securo.core.domain.ScopeType
 import java.util.UUID
 
 data class SystemDto(
-
     val id: UUID,
 
     val scope: ScopeType,
@@ -16,6 +15,9 @@ data class SystemDto(
     val icon: String? = null,
 
     val active: Boolean,
+
+    val createdAt: String,
+    val updatedAt: String? = null
 )
 
 data class CreateSystemRequestDto(

@@ -2,12 +2,6 @@ INSERT INTO systems (id, name, code, description)
 VALUES ('7c8e12b9-d456-4423-8a99-276c60e8f92f', 'Onboarding System', 'ONBOARD',
         'System to manage employee training programs and development activities');
 
-INSERT INTO roles (id, name, code, description, system_id)
-VALUES ('5a6f9c48-8e87-432f-8c31-3d7867e7123f', 'Onboarding Supervisor', 'SUPERVISOR',
-        'Supervisor responsible for overseeing training programs', '7c8e12b9-d456-4423-8a99-276c60e8f92f'),
-       ('7f8d9b24-44a3-4c2a-b5f1-6e3479e8a4c7', 'Employee', 'EMPLOYEE',
-        'Regular employee participating in training programs', '7c8e12b9-d456-4423-8a99-276c60e8f92f');
-
 INSERT INTO privileges (id, name, code, description, index, system_id, parent_id)
 VALUES ('1a5e8f29-9d75-4d27-b0c3-d6a26c4b79e3', 'View Training Programs', 'VIEW_TRAINING',
         'Privilege to view training programs and schedules', 1, '7c8e12b9-d456-4423-8a99-276c60e8f92f', NULL),

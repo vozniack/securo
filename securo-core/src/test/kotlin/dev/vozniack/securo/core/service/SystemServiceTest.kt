@@ -16,6 +16,7 @@ import dev.vozniack.securo.core.mock.mockUpdateSystemRequestDto
 import java.util.UUID
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -96,6 +97,8 @@ class SystemServiceTest @Autowired constructor(
         assertEquals(request.description, system.description)
         assertEquals(request.icon, system.icon)
         assertTrue(system.active)
+        assertNotNull(system.createdAt)
+        assertNull(system.updatedAt)
     }
 
     @Test
@@ -119,6 +122,8 @@ class SystemServiceTest @Autowired constructor(
         assertEquals(request.code, updatedSystem.code)
         assertEquals(request.description, updatedSystem.description)
         assertEquals(request.icon, updatedSystem.icon)
+        assertNotNull(updatedSystem.createdAt)
+        assertNotNull(updatedSystem.updatedAt)
     }
 
     @Test

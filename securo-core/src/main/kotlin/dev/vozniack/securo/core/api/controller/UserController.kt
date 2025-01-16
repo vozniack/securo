@@ -5,8 +5,8 @@ import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UserDto
-import dev.vozniack.securo.core.api.extension.toDto
-import dev.vozniack.securo.core.api.extension.validate
+import dev.vozniack.securo.core.api.extension.mapper.toDto
+import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.repository.specification.UserQuery
 import dev.vozniack.securo.core.internal.logging.KLogging

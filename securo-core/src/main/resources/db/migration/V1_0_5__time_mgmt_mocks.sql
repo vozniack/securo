@@ -2,12 +2,6 @@ INSERT INTO systems (id, name, code, description)
 VALUES ('ba24fd1c-d8df-482d-92f8-1c17eb299eab', 'Working Time Management System', 'TIME_MGMT',
         'System to manage working hours and attendance');
 
-INSERT INTO roles (id, name, code, description, system_id)
-VALUES ('5d4b78e9-b8a6-486f-8b87-36a2be18700e', 'Time Administrator', 'TIME_ADMIN',
-        'Administrator responsible for working time management', 'ba24fd1c-d8df-482d-92f8-1c17eb299eab'),
-       ('4c21f9b7-d3f1-4723-9355-028aa6d981ab', 'Employee', 'EMPLOYEE', 'Regular employee with basic privileges',
-        'ba24fd1c-d8df-482d-92f8-1c17eb299eab');
-
 INSERT INTO privileges (id, name, code, description, index, system_id, parent_id)
 VALUES ('2c64ef9d-95a6-44e8-80ae-dc43c0a6d4f5', 'View Working Time', 'VIEW_TIME',
         'Privilege to view working time entries', 1, 'ba24fd1c-d8df-482d-92f8-1c17eb299eab', NULL),

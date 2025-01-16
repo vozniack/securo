@@ -3,8 +3,8 @@ package dev.vozniack.securo.core.api.controller
 import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
 import dev.vozniack.securo.core.api.dto.RoleDto
 import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
-import dev.vozniack.securo.core.api.extension.toDto
-import dev.vozniack.securo.core.api.extension.validate
+import dev.vozniack.securo.core.api.extension.mapper.toDto
+import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.repository.specification.RoleQuery
 import dev.vozniack.securo.core.internal.logging.KLogging
@@ -31,18 +31,18 @@ class RoleController(private val roleService: RoleService) {
     @GetMapping("/page")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) systemId: String?,
+        @RequestParam(required = false) teamId: String?,
         pageable: Pageable
     ): Page<RoleDto> = roleService.findAll(
-        RoleQuery(ScopeType.EXTERNAL, search, search, systemId), pageable
+        RoleQuery(ScopeType.EXTERNAL, search, search, teamId), pageable
     ).map { it.toDto() }
 
     @GetMapping("/list")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) systemId: String?,
+        @RequestParam(required = false) teamId: String?,
     ): List<RoleDto> = roleService.findAll(
-        RoleQuery(ScopeType.EXTERNAL, search, search, systemId)
+        RoleQuery(ScopeType.EXTERNAL, search, search, teamId)
     ).map { it.toDto() }
 
     @GetMapping("/{id}")

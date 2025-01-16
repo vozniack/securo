@@ -31,6 +31,21 @@ CREATE TABLE users
     updated_at    TIMESTAMP
 );
 
+CREATE TABLE teams
+(
+    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
+
+    name        VARCHAR(255) NOT NULL UNIQUE,
+    code        VARCHAR(16)  NOT NULL UNIQUE,
+
+    description VARCHAR(1024),
+
+    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP
+);
+
 CREATE TABLE systems
 (
     id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -47,6 +62,9 @@ CREATE TABLE systems
 
     parent_id   UUID,
 
+    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP,
+
     CONSTRAINT system_parent_fk FOREIGN KEY (parent_id) REFERENCES systems (id)
 );
 
@@ -60,13 +78,16 @@ CREATE TABLE roles
     code        VARCHAR(16)  NOT NULL,
     description VARCHAR(1024),
 
-    system_id   UUID         NOT NULL,
+    team_id     UUID         NOT NULL,
 
     active      BOOLEAN      NOT NULL             DEFAULT TRUE,
 
-    CONSTRAINT role_name_system_unique UNIQUE (name, system_id),
-    CONSTRAINT role_code_system_unique UNIQUE (code, system_id),
-    CONSTRAINT role_system_fk FOREIGN KEY (system_id) REFERENCES systems (id)
+    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP,
+
+    CONSTRAINT role_name_team_unique UNIQUE (name, team_id),
+    CONSTRAINT role_code_team_unique UNIQUE (code, team_id),
+    CONSTRAINT role_team_fk FOREIGN KEY (team_id) REFERENCES teams (id)
 );
 
 CREATE TABLE privileges
@@ -85,7 +106,7 @@ CREATE TABLE privileges
     parent_id   UUID,
 
     created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
-    updated_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP,
 
     CONSTRAINT privilege_name_system_unique UNIQUE (name, system_id),
     CONSTRAINT privilege_code_system_unique UNIQUE (code, system_id),
@@ -152,19 +173,22 @@ CREATE TABLE role_privileges
 
 /* Values */
 
-INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_birth)
+INSERT INTO users (id, scope, email, password, first_name, last_name, date_of_birth, language)
 VALUES ('055cb1f2-162a-4f14-a445-883539a60002', 'INTERNAL', 'admin@securo.com',
-        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15');
+        '$2y$10$8K1qTenpN7PtyCB4KMkCdejBfGxOczmYM1LP9nbJdRzSPyijoLtce', 'Admin', 'Admin', '1995-08-15', 'en_US');
 
 INSERT INTO systems (id, scope, name, code, description)
 VALUES ('3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5', 'INTERNAL', 'Securo', 'SEC', 'Internal Securo System');
 
-INSERT INTO roles (id, scope, name, code, description, system_id)
+INSERT INTO teams (id, scope, name, code, description)
+VALUES ('6bdd108b-10b5-442c-8d51-abf6391dc8d5', 'INTERNAL', 'Securo Team', 'SEC', 'Internal Securo Team');
+
+INSERT INTO roles (id, scope, name, code, description, team_id)
 VALUES ('98fa7b2c-6caa-4852-b632-e5c05b507021', 'INTERNAL', 'Admin', 'ADMIN',
         'Securo administrator',
-        '3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5'),
+        '6bdd108b-10b5-442c-8d51-abf6391dc8d5'),
        ('451adc34-f819-46d5-9e35-719ee343fb73', 'INTERNAL', 'User', 'USER', 'Securo user',
-        '3f9b1f2c-fa15-4cd0-94ab-e5a9588d42d5');
+        '6bdd108b-10b5-442c-8d51-abf6391dc8d5');
 
 INSERT INTO privileges (id, scope, name, code, description, index, system_id, parent_id)
 VALUES ('39798f2b-df6f-4239-9736-138b245b151c', 'INTERNAL', 'Login', 'LOGIN',

@@ -5,16 +5,16 @@ import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.entity.Role
-import dev.vozniack.securo.core.domain.entity.System
+import dev.vozniack.securo.core.domain.entity.Team
 import dev.vozniack.securo.core.domain.repository.RoleRepository
-import dev.vozniack.securo.core.domain.repository.SystemRepository
+import dev.vozniack.securo.core.domain.repository.TeamRepository
 import dev.vozniack.securo.core.domain.repository.specification.RoleQuery
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.ForbiddenException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
 import dev.vozniack.securo.core.mock.mockCreateRoleRequestDto
 import dev.vozniack.securo.core.mock.mockRole
-import dev.vozniack.securo.core.mock.mockSystem
+import dev.vozniack.securo.core.mock.mockTeam
 import dev.vozniack.securo.core.mock.mockUpdateRoleRequestDto
 import java.util.UUID
 import org.junit.jupiter.api.AfterEach
@@ -29,21 +29,21 @@ import org.springframework.data.domain.PageRequest
 class RoleServiceTest @Autowired constructor(
     private val roleService: RoleService,
     private val roleRepository: RoleRepository,
-    private val systemRepository: SystemRepository
+    private val teamRepository: TeamRepository
 ) : AbstractUnitTest() {
 
     @AfterEach
     fun `clean up`() {
         roleRepository.deleteAll()
-        systemRepository.deleteAll()
+        teamRepository.deleteAll()
     }
 
     @Test
     fun `find all in page`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
+        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
 
         val roles: Page<Role> = roleService.findAll(RoleQuery(), PageRequest.of(0, 24))
 
@@ -52,10 +52,10 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `find all in list`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
+        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
 
         val roles: List<Role> = roleService.findAll(RoleQuery())
 
@@ -64,8 +64,8 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `get role by id`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
         val fetchedRole: Role = roleService.getById(role.id)
 
         assertEquals(role.id, fetchedRole.id)
@@ -80,8 +80,8 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `create role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(systemId = system.id)
+        val team: Team = teamRepository.save(mockTeam())
+        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(teamId = team.id)
 
         val role: Role = roleService.create(request)
 
@@ -95,19 +95,19 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `create role with already existing code within system`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        roleRepository.save(mockRole(system = system))
+        roleRepository.save(mockRole(team = team))
 
         assertThrows<ConflictException> {
-            roleService.create(mockCreateRoleRequestDto(systemId = system.id))
+            roleService.create(mockCreateRoleRequestDto(teamId = team.id))
         }
     }
 
     @Test
     fun `update role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
 
         val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
         val updatedRole: Role = roleService.update(role.id, request)
@@ -120,10 +120,10 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `update role with already existing code within system`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        val role: Role = roleRepository.save(mockRole(system = system))
-        val otherRole: Role = roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        val role: Role = roleRepository.save(mockRole(team = team))
+        val otherRole: Role = roleRepository.save(mockRole(name = "User", code = "USER", team = team))
 
         val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto(code = "ADMIN")
 
@@ -138,8 +138,8 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `delete role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
 
         assertEquals(1, roleRepository.count())
 
@@ -150,8 +150,8 @@ class RoleServiceTest @Autowired constructor(
 
     @Test
     fun `delete internal role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(scope = ScopeType.INTERNAL, system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(scope = ScopeType.INTERNAL, team = team))
 
         assertThrows<ForbiddenException> {
             roleService.delete(role.id)

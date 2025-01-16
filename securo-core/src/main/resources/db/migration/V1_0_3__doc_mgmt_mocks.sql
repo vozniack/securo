@@ -2,13 +2,6 @@ INSERT INTO systems (id, name, code, description)
 VALUES ('1d6f78a9-3c20-40b3-917a-b41efacb7c34', 'Document Management System', 'DOC_MGMT',
         'System to manage company documents');
 
-INSERT INTO roles (id, name, code, description, system_id)
-VALUES ('a3f2b50d-9817-4dbf-950e-78d96c4d3128', 'User', 'USER', 'Regular user of the document management system',
-        '1d6f78a9-3c20-40b3-917a-b41efacb7c34'),
-       ('d1f8476b-4745-4b2c-991e-c5ea24af6c96', 'Supervisor', 'SUPERVISOR',
-        'Supervisor with extended privileges in the document management system',
-        '1d6f78a9-3c20-40b3-917a-b41efacb7c34');
-
 INSERT INTO privileges (id, name, code, description, index, system_id, parent_id)
 VALUES ('c3a1fd64-8f26-420a-a3c1-98a4faef5c72', 'View Document', 'VIEW_DOC', 'Privilege to view documents', 1,
         '1d6f78a9-3c20-40b3-917a-b41efacb7c34', NULL),

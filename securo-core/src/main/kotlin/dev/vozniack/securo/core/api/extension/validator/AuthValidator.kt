@@ -1,4 +1,4 @@
-package dev.vozniack.securo.core.api.extension
+package dev.vozniack.securo.core.api.extension.validator
 
 import dev.vozniack.securo.core.api.dto.LoginRequestDto
 import dev.vozniack.securo.core.internal.exception.BadRequestException

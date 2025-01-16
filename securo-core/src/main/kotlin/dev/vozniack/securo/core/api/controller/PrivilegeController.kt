@@ -3,8 +3,8 @@ package dev.vozniack.securo.core.api.controller
 import dev.vozniack.securo.core.api.dto.CreatePrivilegeRequestDto
 import dev.vozniack.securo.core.api.dto.PrivilegeDto
 import dev.vozniack.securo.core.api.dto.UpdatePrivilegeRequestDto
-import dev.vozniack.securo.core.api.extension.toDto
-import dev.vozniack.securo.core.api.extension.validate
+import dev.vozniack.securo.core.api.extension.mapper.toDto
+import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.repository.specification.PrivilegeQuery
 import dev.vozniack.securo.core.internal.logging.KLogging

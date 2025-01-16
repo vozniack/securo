@@ -1,6 +1,5 @@
 package dev.vozniack.securo.core.domain.repository
 
-import dev.vozniack.securo.core.domain.entity.Role
 import dev.vozniack.securo.core.domain.entity.Team
 import java.util.UUID
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
@@ -9,9 +8,9 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface RoleRepository : CrudRepository<Role, UUID>,
-    PagingAndSortingRepository<Role, UUID>,
-    JpaSpecificationExecutor<Role> {
+interface TeamRepository : CrudRepository<Team, UUID>,
+    PagingAndSortingRepository<Team, UUID>,
+    JpaSpecificationExecutor<Team> {
 
-    fun findByCodeAndTeam(code: String, team: Team?): Role?
+    fun findByCode(code: String): Team?
 }

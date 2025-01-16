@@ -3,17 +3,14 @@ package dev.vozniack.securo.core.api.controller
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import dev.vozniack.securo.core.AbstractWebMvcTest
-import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
-import dev.vozniack.securo.core.api.dto.RoleDto
-import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
-import dev.vozniack.securo.core.domain.entity.Role
+import dev.vozniack.securo.core.api.dto.CreateTeamRequestDto
+import dev.vozniack.securo.core.api.dto.TeamDto
+import dev.vozniack.securo.core.api.dto.UpdateTeamRequestDto
 import dev.vozniack.securo.core.domain.entity.Team
-import dev.vozniack.securo.core.domain.repository.RoleRepository
 import dev.vozniack.securo.core.domain.repository.TeamRepository
-import dev.vozniack.securo.core.mock.mockCreateRoleRequestDto
-import dev.vozniack.securo.core.mock.mockRole
+import dev.vozniack.securo.core.mock.mockCreateTeamRequestDto
 import dev.vozniack.securo.core.mock.mockTeam
-import dev.vozniack.securo.core.mock.mockUpdateRoleRequestDto
+import dev.vozniack.securo.core.mock.mockUpdateTeamRequestDto
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -27,112 +24,103 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.web.context.WebApplicationContext
 
-class RoleControllerTest @Autowired constructor(
-    private val roleRepository: RoleRepository,
+class TeamControllerTest @Autowired constructor(
     private val teamRepository: TeamRepository,
     context: WebApplicationContext
 ) : AbstractWebMvcTest(context) {
 
     @AfterEach
     fun `clean up`() {
-        roleRepository.deleteAll()
         teamRepository.deleteAll()
     }
 
     @Test
     fun `find all in page`() {
-        val team: Team = teamRepository.save(mockTeam())
-
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
-        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
+        teamRepository.save(mockTeam(name = "Securo Internal", code = "SEC"))
+        teamRepository.save(mockTeam(name = "Securo External", code = "SEC_EXT"))
 
         // we just want to check if endpoint is fine
         // catching result is hard due to Page serialization problem in kotlin-jackson
 
         mockMvc.perform(
-            get("/api/v1/roles/page?team=${team.id}")
+            get("/api/v1/teams/page")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
     }
 
     @Test
     fun `find all in list`() {
-        val team: Team = teamRepository.save(mockTeam())
+        teamRepository.save(mockTeam(name = "Securo Internal", code = "SEC"))
+        teamRepository.save(mockTeam(name = "Securo External", code = "SEC_EXT"))
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
-        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
+        // we just want to check if endpoint is fine
+        // catching result is hard due to Page serialization problem in kotlin-jackson
 
-        val roles: List<RoleDto> = jacksonObjectMapper().readValue(
+        val teams: List<TeamDto> = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                get("/api/v1/roles/list?teamId=${team.id}")
+                get("/api/v1/teams/list")
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(2, roles.size)
+        assertEquals(2, teams.size)
     }
 
     @Test
     fun `get by id`() {
         val team: Team = teamRepository.save(mockTeam())
-        val role: Role = roleRepository.save(mockRole(team = team))
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val teamDto: TeamDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                get("/api/v1/roles/${role.id}")
+                get("/api/v1/teams/${team.id}")
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(role.id, roleDto.id)
+        assertEquals(team.id, teamDto.id)
     }
 
     @Test
-    fun `create role`() {
-        val team: Team = teamRepository.save(mockTeam())
-        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(teamId = team.id)
+    fun `create team`() {
+        val request: CreateTeamRequestDto = mockCreateTeamRequestDto()
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val teamDto: TeamDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                post("/api/v1/roles")
+                post("/api/v1/teams")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
             ).andExpect(status().isCreated).andReturn().response.contentAsString
         )
 
-        assertEquals(1, roleRepository.count())
-        assertNotNull(roleDto)
+        assertEquals(1, teamRepository.count())
+        assertNotNull(teamDto)
     }
 
     @Test
-    fun `update role`() {
+    fun `update system`() {
         val team: Team = teamRepository.save(mockTeam())
-        val role: Role = roleRepository.save(mockRole(team = team))
-        val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
+        val request: UpdateTeamRequestDto = mockUpdateTeamRequestDto()
 
-        val roleDto: RoleDto = jacksonObjectMapper().readValue(
+        val teamDto: TeamDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                put("/api/v1/roles/${role.id}")
+                put("/api/v1/teams/${team.id}")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jacksonObjectMapper().writeValueAsString(request))
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
 
-        assertEquals(role.id, roleDto.id)
+        assertEquals(team.id, teamDto.id)
     }
 
     @Test
-    fun `delete role`() {
+    fun `delete team`() {
         val team: Team = teamRepository.save(mockTeam())
-        val role: Role = roleRepository.save(mockRole(team = team))
-
-        assertEquals(1, roleRepository.count())
 
         mockMvc.perform(
-            delete("/api/v1/roles/${role.id}")
+            delete("/api/v1/teams/${team.id}")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
 
-        assertEquals(0, roleRepository.count())
+        assertEquals(0, teamRepository.count())
     }
 }

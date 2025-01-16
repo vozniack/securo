@@ -1,4 +1,4 @@
-package dev.vozniack.securo.core.api.extension
+package dev.vozniack.securo.core.api.extension.mapper
 
 import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.api.dto.CreatePrivilegeRequestDto
@@ -6,53 +6,19 @@ import dev.vozniack.securo.core.api.dto.PrivilegeDto
 import dev.vozniack.securo.core.domain.entity.Privilege
 import dev.vozniack.securo.core.domain.entity.System
 import dev.vozniack.securo.core.domain.repository.SystemRepository
-import dev.vozniack.securo.core.internal.exception.BadRequestException
 import dev.vozniack.securo.core.mock.mockCreatePrivilegeRequestDto
 import dev.vozniack.securo.core.mock.mockPrivilege
 import dev.vozniack.securo.core.mock.mockSystem
-import dev.vozniack.securo.core.mock.mockUpdatePrivilegeRequestDto
-import org.junit.jupiter.api.AfterEach
+import dev.vozniack.securo.core.utils.toStringLocalDateTime
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 
-class PrivilegeExtensionTest @Autowired constructor(
+class PrivilegeMapperTest @Autowired constructor(
     private val systemRepository: SystemRepository
 ) : AbstractUnitTest() {
-
-    @AfterEach
-    fun `clean up`() {
-        systemRepository.deleteAll()
-    }
-
-    @Test
-    fun `validate create privilege request`() {
-        val system: System = systemRepository.save(mockSystem())
-
-        mockCreatePrivilegeRequestDto(systemId = system.id).validate()
-
-        assertThrows<BadRequestException> {
-            mockCreatePrivilegeRequestDto(name = "", systemId = system.id).validate()
-        }
-
-        assertThrows<BadRequestException> {
-            mockCreatePrivilegeRequestDto(code = "", systemId = system.id).validate()
-        }
-    }
-
-    @Test
-    fun `validate update role request`() {
-        mockUpdatePrivilegeRequestDto().validate()
-
-        assertThrows<BadRequestException> {
-            mockUpdatePrivilegeRequestDto(name = "").validate()
-        }
-
-        assertThrows<BadRequestException> {
-            mockUpdatePrivilegeRequestDto(code = "").validate()
-        }
-    }
 
     @Test
     fun `map create privilege request to privilege`() {
@@ -67,6 +33,8 @@ class PrivilegeExtensionTest @Autowired constructor(
         assertEquals(request.index, privilege.index)
         assertEquals(request.systemId, privilege.system.id)
         assertEquals(request.parentId, privilege.parent?.id)
+        assertNotNull(privilege.createdAt)
+        assertNull(privilege.updatedAt)
     }
 
     @Test
@@ -84,5 +52,7 @@ class PrivilegeExtensionTest @Autowired constructor(
         assertEquals(privilege.index, privilegeDto.index)
         assertEquals(privilege.system.id, privilegeDto.systemId)
         assertEquals(privilege.parent?.id, privilegeDto.parentId)
+        assertEquals(privilege.createdAt.toStringLocalDateTime(), privilegeDto.createdAt)
+        assertEquals(privilege.updatedAt?.toStringLocalDateTime(), privilegeDto.updatedAt)
     }
 }

@@ -2,12 +2,6 @@ INSERT INTO systems (id, name, code, description)
 VALUES ('7e4d6a93-8d6f-47c2-a7b4-6f8d7e92a4c3', 'Inventory Management System', 'INV_MGMT',
         'System to track and manage company inventory and stock');
 
-INSERT INTO roles (id, name, code, description, system_id)
-VALUES ('9c7b4f21-3e14-487b-a9d7-2f6b9e8a3c52', 'Inventory Manager', 'INV_MGR',
-        'Manager responsible for overseeing inventory', '7e4d6a93-8d6f-47c2-a7b4-6f8d7e92a4c3'),
-       ('2e5b7f41-4d36-4c8f-a7b9-6f3b8d7e4c52', 'Stock Handler', 'STOCK_HANDLER',
-        'Employee handling stock-related tasks', '7e4d6a93-8d6f-47c2-a7b4-6f8d7e92a4c3');
-
 INSERT INTO privileges (id, name, code, description, index, system_id, parent_id)
 VALUES ('5d7b9f64-3e41-4b8c-a9e2-6f7c2d4a9b32', 'View Inventory', 'VIEW_INV', 'Privilege to view inventory details', 1,
         '7e4d6a93-8d6f-47c2-a7b4-6f8d7e92a4c3', NULL),

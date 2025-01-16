@@ -1,14 +1,14 @@
 package dev.vozniack.securo.core.api.controller
 
-import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
-import dev.vozniack.securo.core.api.dto.SystemDto
-import dev.vozniack.securo.core.api.dto.UpdateSystemRequestDto
+import dev.vozniack.securo.core.api.dto.CreateTeamRequestDto
+import dev.vozniack.securo.core.api.dto.TeamDto
+import dev.vozniack.securo.core.api.dto.UpdateTeamRequestDto
 import dev.vozniack.securo.core.api.extension.mapper.toDto
 import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.ScopeType
-import dev.vozniack.securo.core.domain.repository.specification.SystemQuery
+import dev.vozniack.securo.core.domain.repository.specification.TeamQuery
 import dev.vozniack.securo.core.internal.logging.KLogging
-import dev.vozniack.securo.core.service.SystemService
+import dev.vozniack.securo.core.service.TeamService
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -25,53 +25,51 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/systems")
-class SystemController(private val systemService: SystemService) {
+@RequestMapping("/api/v1/teams")
+class TeamController(private val teamService: TeamService) {
 
     @GetMapping("/page")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) parents: Boolean?,
         pageable: Pageable
-    ): Page<SystemDto> = systemService.findAll(
-        SystemQuery(ScopeType.EXTERNAL, search, search, parents), pageable
+    ): Page<TeamDto> = teamService.findAll(
+        TeamQuery(ScopeType.EXTERNAL, search, search), pageable
     ).map { it.toDto() }
 
     @GetMapping("/list")
     fun findAll(
         @RequestParam(required = false) search: String?,
-        @RequestParam(required = false) parents: Boolean?
-    ): List<SystemDto> = systemService.findAll(
-        SystemQuery(ScopeType.EXTERNAL, search, search, parents)
+    ): List<TeamDto> = teamService.findAll(
+        TeamQuery(ScopeType.EXTERNAL, search, search)
     ).map { it.toDto() }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): SystemDto = systemService.getById(id).toDto()
+    fun getById(@PathVariable id: UUID): TeamDto = teamService.getById(id).toDto()
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody request: CreateSystemRequestDto): SystemDto {
+    fun create(@RequestBody request: CreateTeamRequestDto): TeamDto {
         request.validate().also {
-            logger.debug { "Creating system with request $request" }
+            logger.debug { "Creating team with request $request" }
         }
 
-        return systemService.create(request).toDto()
+        return teamService.create(request).toDto()
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: UUID, @RequestBody request: UpdateSystemRequestDto): SystemDto {
+    fun update(@PathVariable id: UUID, @RequestBody request: UpdateTeamRequestDto): TeamDto {
         request.validate().also {
-            logger.debug { "Updating system $id with request $request" }
+            logger.debug { "Updating team $id with request $request" }
         }
 
-        return systemService.update(id, request).toDto()
+        return teamService.update(id, request).toDto()
     }
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: UUID) {
-        logger.debug { "Deleting system $id" }
+        logger.debug { "Deleting team $id" }
 
-        systemService.delete(id)
+        teamService.delete(id)
     }
 
     companion object : KLogging()

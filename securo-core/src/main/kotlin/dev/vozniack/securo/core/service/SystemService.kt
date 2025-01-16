@@ -2,7 +2,7 @@ package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateSystemRequestDto
-import dev.vozniack.securo.core.api.extension.toSystem
+import dev.vozniack.securo.core.api.extension.mapper.toSystem
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.entity.System
 import dev.vozniack.securo.core.domain.repository.SystemRepository
@@ -10,6 +10,7 @@ import dev.vozniack.securo.core.domain.repository.specification.Specificable
 import dev.vozniack.securo.core.internal.exception.ConflictException
 import dev.vozniack.securo.core.internal.exception.ForbiddenException
 import dev.vozniack.securo.core.internal.exception.NotFoundException
+import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -49,6 +50,7 @@ class SystemService(private val systemRepository: SystemRepository) {
                 description = request.description
                 icon = request.icon
                 parent = findById(request.parentId)
+                updatedAt = LocalDateTime.now()
             }
         )
     }

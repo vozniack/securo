@@ -3,7 +3,7 @@ package dev.vozniack.securo.core.api.dto
 import dev.vozniack.securo.core.domain.ScopeType
 import java.util.UUID
 
-data class RoleDto(
+data class TeamDto(
 
     val id: UUID,
 
@@ -14,22 +14,18 @@ data class RoleDto(
 
     val description: String? = null,
 
-    val active: Boolean,
-
     val createdAt: String,
     val updatedAt: String? = null
 )
 
-data class CreateRoleRequestDto(
+data class CreateTeamRequestDto(
     val name: String,
     val code: String,
 
     val description: String? = null,
-
-    val teamId: UUID
 )
 
-data class UpdateRoleRequestDto(
+data class UpdateTeamRequestDto(
     val name: String,
     val code: String,
 
