@@ -3,6 +3,8 @@
     "search": "Search...",
     "reset": "Reset",
     "save": "Save",
+    "user": "User",
+    "admin": "Admin",
     "table": {
       "pagination": {
         "totalElements": "Total elements:",
@@ -32,6 +34,9 @@
       "city": "City",
       "active": "Active"
     }
+  },
+  "teams": {
+    "title": "Teams"
   },
   "systems": {
     "title": "Systems"

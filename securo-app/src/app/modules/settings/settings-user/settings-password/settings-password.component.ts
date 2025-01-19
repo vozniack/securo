@@ -6,13 +6,13 @@ import { Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { ResponsiveComponent } from '../../../shared/common/responsive.component';
-import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { TextInputComponent } from '../../../shared/components/forms/text-input/text-input.component';
-import { isNotEmpty } from '../../../shared/utils/syntax.utils';
-import { ACTION_PROGRESS } from '../../../store/app/app.actions';
-import { User } from '../../users/users.interface';
-import { UsersService } from '../../users/users.service';
+import { ResponsiveComponent } from '../../../../shared/common/responsive.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { TextInputComponent } from '../../../../shared/components/forms/text-input/text-input.component';
+import { isNotEmpty } from '../../../../shared/utils/syntax.utils';
+import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
+import { User } from '../../../users/users.interface';
+import { UsersService } from '../../../users/users.service';
 
 @Component({
   selector: 'sec-settings-password',

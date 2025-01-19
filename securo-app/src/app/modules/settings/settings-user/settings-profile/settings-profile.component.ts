@@ -7,15 +7,15 @@ import { Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { fadeInOutAnimation } from '../../../shared/animations/fade-in-out-animation';
-import { ResponsiveComponent } from '../../../shared/common/responsive.component';
-import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { DateInputComponent } from '../../../shared/components/forms/date-input/date-input.component';
-import { TextInputComponent } from '../../../shared/components/forms/text-input/text-input.component';
-import { PhoneNumberValidator, PhonePrefixValidator } from '../../../shared/utils/validator.utils';
-import { ACTION_PROGRESS } from '../../../store/app/app.actions';
-import { User } from '../../users/users.interface';
-import { UsersService } from '../../users/users.service';
+import { ResponsiveComponent } from '../../../../shared/common/responsive.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DateInputComponent } from '../../../../shared/components/forms/date-input/date-input.component';
+import { TextInputComponent } from '../../../../shared/components/forms/text-input/text-input.component';
+import { fadeInAnimation } from '../../../../shared/animations/fade-in-animation';
+import { PhoneNumberValidator, PhonePrefixValidator } from '../../../../shared/utils/validator.utils';
+import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
+import { User } from '../../../users/users.interface';
+import { UsersService } from '../../../users/users.service';
 
 @Component({
   selector: 'sec-settings-profile',
@@ -23,7 +23,7 @@ import { UsersService } from '../../users/users.service';
   imports: [TranslatePipe, TextInputComponent, NgIf, ButtonComponent, DateInputComponent],
   templateUrl: './settings-profile.component.html',
   styleUrl: './settings-profile.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class SettingsProfileComponent extends ResponsiveComponent implements OnInit {
 

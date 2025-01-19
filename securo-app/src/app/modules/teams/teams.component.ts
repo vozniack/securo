@@ -7,14 +7,14 @@ import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { TextInputComponent } from '../../shared/components/forms/text-input/text-input.component';
 
 @Component({
-  selector: 'sec-systems',
+  selector: 'sec-teams',
   standalone: true,
-  imports: [TranslatePipe, TextInputComponent],
-  templateUrl: './systems.component.html',
-  styleUrl: './systems.component.scss',
+  imports: [TextInputComponent, TranslatePipe,],
+  templateUrl: './teams.component.html',
+  styleUrl: './teams.component.scss',
   animations: [fadeInAnimation]
 })
-export class SystemsComponent extends ResponsiveComponent {
+export class TeamsComponent extends ResponsiveComponent {
 
   filters!: FormGroup;
 
@@ -29,5 +29,4 @@ export class SystemsComponent extends ResponsiveComponent {
   getControl(name: string): FormControl {
     return this.filters.get(name) as FormControl;
   }
-
 }

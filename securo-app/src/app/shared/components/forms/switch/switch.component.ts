@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { fadeInOutAnimation } from '../../../animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../../animations/fade-in-animation';
 import { IconComponent } from '../../common/icon/icon.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { IconComponent } from '../../common/icon/icon.component';
   imports: [ReactiveFormsModule, IconComponent],
   templateUrl: './switch.component.html',
   styleUrl: './switch.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class SwitchComponent {
 

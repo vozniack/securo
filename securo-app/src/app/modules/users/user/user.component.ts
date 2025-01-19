@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { fadeInOutAnimation } from '../../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../../shared/animations/fade-in-animation';
 import { IconButtonComponent } from '../../../shared/components/buttons/icon-button/icon-button.component';
 import { User } from '../users.interface';
 
@@ -13,7 +13,7 @@ import { User } from '../users.interface';
   imports: [IconButtonComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class UserComponent {
 

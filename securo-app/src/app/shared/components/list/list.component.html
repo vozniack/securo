@@ -17,7 +17,7 @@
     <sec-button *ngIf="!allElements" [text]="'Load more elements...'" [style]="'tonal'" (click)="nextPage()">
     </sec-button>
 
-    <span class="summary" *ngIf="allElements" @fadeInOutAnimation>
+    <span class="summary" *ngIf="allElements" @fadeInAnimation>
       {{ "common.list.allElements" | translate }}
       <span class="badge primary">{{ this._data.page?.totalElements }}</span>
     </span>

@@ -1,7 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { fadeInOutAnimation } from '../../animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../animations/fade-in-animation';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
 import { Pageable } from '../../model/pageable.interface';
 import { RequestParam } from '../../model/request.interface';
@@ -15,7 +15,7 @@ import { ListEntry } from './list.interface';
   imports: [NgForOf, IconButtonComponent, InfiniteScrollDirective, NgIf, ButtonComponent, TranslatePipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class ListComponent {
 

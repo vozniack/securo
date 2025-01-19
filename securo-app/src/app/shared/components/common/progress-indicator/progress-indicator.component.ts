@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
 import { SELECT_PROGRESS } from '../../../../store/app/app.selectors';
-import { fadeInOutAnimation } from '../../../animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../../animations/fade-in-animation';
 import { ResponsiveComponent } from '../../../common/responsive.component';
 import { IconComponent } from '../icon/icon.component';
 
@@ -16,7 +16,7 @@ import { IconComponent } from '../icon/icon.component';
   imports: [NgIf, IconComponent],
   templateUrl: './progress-indicator.component.html',
   styleUrl: './progress-indicator.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class ProgressIndicatorComponent extends ResponsiveComponent {
 

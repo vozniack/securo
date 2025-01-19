@@ -3,7 +3,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { TextInputComponent } from '../../shared/components/forms/text-input/text-input.component';
 import { UsersListComponent } from './users-list/users-list.component';
@@ -15,7 +15,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
   imports: [TranslatePipe, TextInputComponent, UsersTableComponent, NgIf, UsersListComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class UsersComponent extends ResponsiveComponent {
 

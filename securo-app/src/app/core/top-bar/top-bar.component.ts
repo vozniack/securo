@@ -3,7 +3,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { IconButtonComponent } from '../../shared/components/buttons/icon-button/icon-button.component';
 import { ACTION_USER_LOGOUT } from '../../store/app/app.actions';
@@ -15,7 +15,7 @@ import { NavigationBarComponent } from '../navigation/navigation-bar/navigation-
   imports: [NavigationBarComponent, IconButtonComponent, NgIf, RouterLink],
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class TopBar extends ResponsiveComponent {
 

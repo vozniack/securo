@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 
 @Component({
   selector: 'sec-content',
@@ -8,7 +8,7 @@ import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animatio
   imports: [RouterOutlet],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class ContentComponent {
 }

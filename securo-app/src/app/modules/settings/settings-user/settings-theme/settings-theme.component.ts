@@ -4,11 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
-import { themes } from '../../../core/theme/theme.const';
-import { Theme } from '../../../core/theme/theme.interface';
-import { ThemeService } from '../../../core/theme/theme.service';
-import { IconComponent } from '../../../shared/components/common/icon/icon.component';
-import { SwitchComponent } from '../../../shared/components/forms/switch/switch.component';
+import { Theme } from '../../../../core/theme/theme.interface';
+import { ThemeService } from '../../../../core/theme/theme.service';
+import { IconComponent } from '../../../../shared/components/common/icon/icon.component';
+import { SwitchComponent } from '../../../../shared/components/forms/switch/switch.component';
+import { themes } from '../../../../core/theme/theme.const';
 
 @Component({
   selector: 'sec-settings-theme',

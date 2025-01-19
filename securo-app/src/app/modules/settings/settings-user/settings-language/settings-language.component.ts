@@ -6,13 +6,13 @@ import { select, Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeWhile, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
-import { I18nService } from '../../../core/i18n/I18nService';
-import { SelectInputComponent } from '../../../shared/components/forms/select-input/select-input.component';
-import { SelectInputOption } from '../../../shared/components/forms/select-input/select-input.interface';
-import { ACTION_PROGRESS } from '../../../store/app/app.actions';
-import { SELECT_LANGUAGE } from '../../../store/app/app.selectors';
-import { User } from '../../users/users.interface';
-import { UsersService } from '../../users/users.service';
+import { I18nService } from '../../../../core/i18n/I18nService';
+import { SelectInputComponent } from '../../../../shared/components/forms/select-input/select-input.component';
+import { SelectInputOption } from '../../../../shared/components/forms/select-input/select-input.interface';
+import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
+import { SELECT_LANGUAGE } from '../../../../store/app/app.selectors';
+import { User } from '../../../users/users.interface';
+import { UsersService } from '../../../users/users.service';
 
 @Component({
   selector: 'sec-settings-language',

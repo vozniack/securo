@@ -1,0 +1,11 @@
+<div class="segmented-button row-container">
+  <ng-container *ngFor="let segment of segments; let i = index">
+    <div class="segment row-container gap-small"
+         [class.border]="i != 0"
+         [class.active]="active == segment"
+         (click)="setActive(segment)">
+      <sec-icon *ngIf="active == segment" [name]="'check'" [size]="22" @fadeInAnimation></sec-icon>
+      <span *ngIf="segment.text">{{ segment.text | translate}}</span>
+    </div>
+  </ng-container>
+</div>

@@ -12,13 +12,13 @@ export const navigationLinks: NavigationLink[] = [
     'link': 'users'
   },
   {
+    'title': 'teams.title',
+    'icon': 'group',
+    'link': 'teams'
+  },
+  {
     'title': 'systems.title',
     'icon': 'host',
     'link': 'systems'
-  },
-  {
-    'title': 'environments.title',
-    'icon': 'dns',
-    'link': 'environments'
   }
 ];
