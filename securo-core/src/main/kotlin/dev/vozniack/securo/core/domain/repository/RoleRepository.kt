@@ -1,7 +1,7 @@
 package dev.vozniack.securo.core.domain.repository
 
 import dev.vozniack.securo.core.domain.entity.Role
-import dev.vozniack.securo.core.domain.entity.System
+import dev.vozniack.securo.core.domain.entity.Team
 import java.util.UUID
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.repository.CrudRepository
@@ -13,5 +13,5 @@ interface RoleRepository : CrudRepository<Role, UUID>,
     PagingAndSortingRepository<Role, UUID>,
     JpaSpecificationExecutor<Role> {
 
-    fun findByCodeAndSystem(code: String, system: System?): Role?
+    fun findByCodeAndTeam(code: String, team: Team?): Role?
 }

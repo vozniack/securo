@@ -3,8 +3,8 @@ package dev.vozniack.securo.core.api.controller
 import dev.vozniack.securo.core.api.dto.CreateSystemRequestDto
 import dev.vozniack.securo.core.api.dto.SystemDto
 import dev.vozniack.securo.core.api.dto.UpdateSystemRequestDto
-import dev.vozniack.securo.core.api.extension.toDto
-import dev.vozniack.securo.core.api.extension.validate
+import dev.vozniack.securo.core.api.extension.mapper.toDto
+import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.repository.specification.SystemQuery
 import dev.vozniack.securo.core.internal.logging.KLogging

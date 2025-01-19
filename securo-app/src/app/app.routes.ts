@@ -13,13 +13,13 @@ export const routes: Routes = [
     canActivate: [TokenGuard]
   },
   {
-    path: 'systems',
-    loadChildren: () => import('./modules/systems/systems.routes').then(m => m.SystemsRoutes),
+    path: 'teams',
+    loadChildren: () => import('./modules/teams/teams.route').then(m => m.TeamsRoute),
     canActivate: [TokenGuard]
   },
   {
-    path: 'environments',
-    loadChildren: () => import('./modules/environments/environments.routes').then(m => m.EnvironmentsRoutes),
+    path: 'systems',
+    loadChildren: () => import('./modules/systems/systems.routes').then(m => m.SystemsRoutes),
     canActivate: [TokenGuard]
   },
   {

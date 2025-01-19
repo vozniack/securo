@@ -1,4 +1,4 @@
 <button class="navigation-link" [class.mobile]="isMobile" [routerLink]="navigationLink.link" [routerLinkActive]="'active'">
-  <sec-icon [name]="navigationLink.icon" [size]="24" ></sec-icon>
+  <sec-icon [name]="navigationLink.icon" [size]="isMobile ? 22 : 24" ></sec-icon>
   <span>{{ navigationLink.title | translate}}</span>
 </button>

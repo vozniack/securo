@@ -7,12 +7,12 @@ import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
 import dev.vozniack.securo.core.api.dto.RoleDto
 import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
 import dev.vozniack.securo.core.domain.entity.Role
-import dev.vozniack.securo.core.domain.entity.System
+import dev.vozniack.securo.core.domain.entity.Team
 import dev.vozniack.securo.core.domain.repository.RoleRepository
-import dev.vozniack.securo.core.domain.repository.SystemRepository
+import dev.vozniack.securo.core.domain.repository.TeamRepository
 import dev.vozniack.securo.core.mock.mockCreateRoleRequestDto
 import dev.vozniack.securo.core.mock.mockRole
-import dev.vozniack.securo.core.mock.mockSystem
+import dev.vozniack.securo.core.mock.mockTeam
 import dev.vozniack.securo.core.mock.mockUpdateRoleRequestDto
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -29,42 +29,42 @@ import org.springframework.web.context.WebApplicationContext
 
 class RoleControllerTest @Autowired constructor(
     private val roleRepository: RoleRepository,
-    private val systemRepository: SystemRepository,
+    private val teamRepository: TeamRepository,
     context: WebApplicationContext
 ) : AbstractWebMvcTest(context) {
 
     @AfterEach
     fun `clean up`() {
         roleRepository.deleteAll()
-        systemRepository.deleteAll()
+        teamRepository.deleteAll()
     }
 
     @Test
     fun `find all in page`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
+        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
 
         // we just want to check if endpoint is fine
         // catching result is hard due to Page serialization problem in kotlin-jackson
 
         mockMvc.perform(
-            get("/api/v1/roles/page?systemId=${system.id}")
+            get("/api/v1/roles/page?team=${team.id}")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk)
     }
 
     @Test
     fun `find all in list`() {
-        val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", system = system))
-        roleRepository.save(mockRole(name = "User", code = "USER", system = system))
+        roleRepository.save(mockRole(name = "Admin", code = "ADMIN", team = team))
+        roleRepository.save(mockRole(name = "User", code = "USER", team = team))
 
         val roles: List<RoleDto> = jacksonObjectMapper().readValue(
             mockMvc.perform(
-                get("/api/v1/roles/list?systemId=${system.id}")
+                get("/api/v1/roles/list?teamId=${team.id}")
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(status().isOk).andReturn().response.contentAsString
         )
@@ -74,8 +74,8 @@ class RoleControllerTest @Autowired constructor(
 
     @Test
     fun `get by id`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
 
         val roleDto: RoleDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
@@ -89,8 +89,8 @@ class RoleControllerTest @Autowired constructor(
 
     @Test
     fun `create role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(systemId = system.id)
+        val team: Team = teamRepository.save(mockTeam())
+        val request: CreateRoleRequestDto = mockCreateRoleRequestDto(teamId = team.id)
 
         val roleDto: RoleDto = jacksonObjectMapper().readValue(
             mockMvc.perform(
@@ -106,8 +106,8 @@ class RoleControllerTest @Autowired constructor(
 
     @Test
     fun `update role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
         val request: UpdateRoleRequestDto = mockUpdateRoleRequestDto()
 
         val roleDto: RoleDto = jacksonObjectMapper().readValue(
@@ -123,8 +123,8 @@ class RoleControllerTest @Autowired constructor(
 
     @Test
     fun `delete role`() {
-        val system: System = systemRepository.save(mockSystem())
-        val role: Role = roleRepository.save(mockRole(system = system))
+        val team: Team = teamRepository.save(mockTeam())
+        val role: Role = roleRepository.save(mockRole(team = team))
 
         assertEquals(1, roleRepository.count())
 

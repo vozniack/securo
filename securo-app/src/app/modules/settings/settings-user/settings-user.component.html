@@ -1,0 +1,9 @@
+<div class="column-container gap" *ngIf="user" [style.flex-direction]="isMobile ? 'column' : 'row'">
+  <sec-settings-profile [style.flex]="100" [user]="user"></sec-settings-profile>
+
+  <div class="column-container gap">
+    <sec-settings-password [user]="user"></sec-settings-password>
+    <sec-settings-language [user]="user"></sec-settings-language>
+    <sec-settings-theme></sec-settings-theme>
+  </div>
+</div>

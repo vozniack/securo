@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { fadeInOutAnimation } from '../../../animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../../animations/fade-in-animation';
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { SelectInputComponent } from '../../forms/select-input/select-input.component';
 import { SelectInputOption } from '../../forms/select-input/select-input.interface';
@@ -15,7 +15,7 @@ import { SelectInputOption } from '../../forms/select-input/select-input.interfa
   imports: [ButtonComponent, NgIf, SelectInputComponent, TranslatePipe],
   templateUrl: './table-pagination.component.html',
   styleUrl: './table-pagination.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class TablePaginationComponent implements OnInit {
 

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { tap } from 'rxjs/operators';
-import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
 import { TextInputComponent } from '../../shared/components/forms/text-input/text-input.component';
@@ -22,7 +22,7 @@ import { AnimatedBackgroundComponent } from './animated-background/animated-back
   imports: [AnimatedBackgroundComponent, TextInputComponent, ButtonComponent, NgIf, TranslatePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class LoginComponent extends ResponsiveComponent {
 

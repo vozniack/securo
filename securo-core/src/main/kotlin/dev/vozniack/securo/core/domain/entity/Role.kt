@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.domain.entity
 
 import dev.vozniack.securo.core.domain.ScopeType
+import dev.vozniack.securo.core.domain.entity.common.Auditable
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -33,8 +34,8 @@ data class Role(
     @Column(nullable = false) var active: Boolean = true,
 
     @ManyToOne
-    @JoinColumn(name = "system_id", nullable = false) val system: System,
+    @JoinColumn(name = "team_id", nullable = false) val team: Team,
 
     @OneToMany(mappedBy = "role", cascade = [CascadeType.ALL], fetch = FetchType.EAGER) // #todo lazy fetch
     var privileges: MutableList<RolePrivilege> = mutableListOf()
-)
+) : Auditable()

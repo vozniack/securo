@@ -15,6 +15,9 @@ data class RoleDto(
     val description: String? = null,
 
     val active: Boolean,
+
+    val createdAt: String,
+    val updatedAt: String? = null
 )
 
 data class CreateRoleRequestDto(
@@ -23,7 +26,7 @@ data class CreateRoleRequestDto(
 
     val description: String? = null,
 
-    val systemId: UUID
+    val teamId: UUID
 )
 
 data class UpdateRoleRequestDto(

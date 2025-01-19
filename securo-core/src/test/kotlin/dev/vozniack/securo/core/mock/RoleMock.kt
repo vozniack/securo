@@ -4,7 +4,7 @@ import dev.vozniack.securo.core.api.dto.CreateRoleRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateRoleRequestDto
 import dev.vozniack.securo.core.domain.ScopeType
 import dev.vozniack.securo.core.domain.entity.Role
-import dev.vozniack.securo.core.domain.entity.System
+import dev.vozniack.securo.core.domain.entity.Team
 import java.util.UUID
 
 fun mockRole(
@@ -12,25 +12,25 @@ fun mockRole(
     name: String = "Admin",
     code: String = "ADMIN",
     description: String = "Admin role description",
-    system: System
+    team: Team
 ): Role = Role(
     scope = scope,
     name = name,
     code = code,
     description = description,
-    system = system
+    team = team
 )
 
 fun mockCreateRoleRequestDto(
     name: String = "Admin",
     code: String = "ADMIN",
     description: String = "Admin role description",
-    systemId: UUID
+    teamId: UUID
 ): CreateRoleRequestDto = CreateRoleRequestDto(
     name = name,
     code = code,
     description = description,
-    systemId = systemId
+    teamId = teamId
 )
 
 fun mockUpdateRoleRequestDto(

@@ -1,6 +1,7 @@
 package dev.vozniack.securo.core.domain.entity
 
 import dev.vozniack.securo.core.domain.ScopeType
+import dev.vozniack.securo.core.domain.entity.common.Auditable
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -40,4 +41,4 @@ data class Privilege(
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.REMOVE], fetch = FetchType.EAGER) // #todo lazy fetch
     var privileges: MutableList<Privilege> = mutableListOf()
-)
+) : Auditable()

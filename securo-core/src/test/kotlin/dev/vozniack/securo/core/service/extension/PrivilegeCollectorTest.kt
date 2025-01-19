@@ -4,15 +4,18 @@ import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.domain.entity.Privilege
 import dev.vozniack.securo.core.domain.entity.RolePrivilege
 import dev.vozniack.securo.core.domain.entity.System
+import dev.vozniack.securo.core.domain.entity.Team
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.domain.entity.UserPrivilege
 import dev.vozniack.securo.core.domain.repository.PrivilegeRepository
 import dev.vozniack.securo.core.domain.repository.RoleRepository
 import dev.vozniack.securo.core.domain.repository.SystemRepository
+import dev.vozniack.securo.core.domain.repository.TeamRepository
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.mock.mockPrivilege
 import dev.vozniack.securo.core.mock.mockRole
 import dev.vozniack.securo.core.mock.mockSystem
+import dev.vozniack.securo.core.mock.mockTeam
 import dev.vozniack.securo.core.mock.mockUser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -22,8 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired
 
 class PrivilegeCollectorTest @Autowired constructor(
     private val systemRepository: SystemRepository,
-    private val roleRepository: RoleRepository,
     private val privilegeRepository: PrivilegeRepository,
+    private val teamRepository: TeamRepository,
+    private val roleRepository: RoleRepository,
     private val userRepository: UserRepository
 ) : AbstractUnitTest() {
 
@@ -46,24 +50,25 @@ class PrivilegeCollectorTest @Autowired constructor(
     @Test
     fun `collect privileges`() {
         val system: System = systemRepository.save(mockSystem())
+        val team: Team = teamRepository.save(mockTeam())
 
         mockPrivileges(system)
-        mockRoles(system)
+        mockRoles(system, team)
 
         val loginPrivilege: Privilege = privilegeRepository.findByCodeAndSystem("LOGIN", system)!!
 
         val admin: User = userRepository.save(mockUser(email = "admin@securo.com").apply {
-            roles = mutableListOf(roleRepository.findByCodeAndSystem("ADM", system)!!)
+            roles = mutableListOf(roleRepository.findByCodeAndTeam("ADM", team)!!)
             privileges = mutableListOf(UserPrivilege(user = this, privilege = loginPrivilege, excluded = false))
         })
 
         val supervisor: User = userRepository.save(mockUser(email = "supervisor@securo.com").apply {
-            roles = mutableListOf(roleRepository.findByCodeAndSystem("SPR", system)!!)
+            roles = mutableListOf(roleRepository.findByCodeAndTeam("SPR", team)!!)
             privileges = mutableListOf(UserPrivilege(user = this, privilege = loginPrivilege, excluded = false))
         })
 
         val user: User = userRepository.save(mockUser(email = "user@securo.com").apply {
-            roles = mutableListOf(roleRepository.findByCodeAndSystem("USR", system)!!)
+            roles = mutableListOf(roleRepository.findByCodeAndTeam("USR", team)!!)
             privileges = mutableListOf(UserPrivilege(user = this, privilege = loginPrivilege, excluded = false))
         })
 
@@ -123,24 +128,24 @@ class PrivilegeCollectorTest @Autowired constructor(
         )
     }
 
-    private fun mockRoles(system: System) {
+    private fun mockRoles(system: System, team: Team) {
         val managePrivilege: Privilege = privilegeRepository.findByCodeAndSystem("MANAGE", system)!!
         val readPrivilege: Privilege = privilegeRepository.findByCodeAndSystem("READ", system)!!
         val createPrivilege: Privilege = privilegeRepository.findByCodeAndSystem("CREATE", system)!!
         val deletePrivilege: Privilege = privilegeRepository.findByCodeAndSystem("DELETE", system)!!
 
-        roleRepository.save(mockRole(name = "Admin", code = "ADM", system = system).apply {
+        roleRepository.save(mockRole(name = "Admin", code = "ADM", team = team).apply {
             privileges = mutableListOf(RolePrivilege(role = this, privilege = managePrivilege, excluded = false))
         })
 
-        roleRepository.save(mockRole(name = "Supervisor", code = "SPR", system = system).apply {
+        roleRepository.save(mockRole(name = "Supervisor", code = "SPR", team = team).apply {
             privileges = mutableListOf(
                 RolePrivilege(role = this, privilege = managePrivilege, excluded = false),
                 RolePrivilege(role = this, privilege = deletePrivilege, excluded = true)
             )
         })
 
-        roleRepository.save(mockRole(name = "User", code = "USR", system = system).apply {
+        roleRepository.save(mockRole(name = "User", code = "USR", team = team).apply {
             privileges = mutableListOf(
                 RolePrivilege(role = this, privilege = readPrivilege, excluded = false),
                 RolePrivilege(role = this, privilege = createPrivilege, excluded = false)

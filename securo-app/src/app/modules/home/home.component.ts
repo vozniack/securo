@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 
 @Component({
   selector: 'sec-home',
@@ -8,7 +8,7 @@ import { fadeInOutAnimation } from '../../shared/animations/fade-in-out-animatio
   imports: [TranslatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class HomeComponent {
 }

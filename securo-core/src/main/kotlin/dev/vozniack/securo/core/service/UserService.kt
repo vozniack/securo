@@ -4,7 +4,7 @@ import dev.vozniack.securo.core.api.dto.CreateUserRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserLanguageRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserPasswordRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateUserRequestDto
-import dev.vozniack.securo.core.api.extension.toUser
+import dev.vozniack.securo.core.api.extension.mapper.toUser
 import dev.vozniack.securo.core.domain.entity.User
 import dev.vozniack.securo.core.domain.repository.UserRepository
 import dev.vozniack.securo.core.domain.repository.specification.Specificable
@@ -62,11 +62,18 @@ class UserService(private val userRepository: UserRepository, private val passwo
     )
 
     fun updatePassword(id: UUID, request: UpdateUserPasswordRequestDto): User = userRepository.save(
-        getById(id).apply { password = passwordEncoder.encode(request.password) }
+        getById(id).apply {
+            password = passwordEncoder.encode(request.password)
+            updatedAt = LocalDateTime.now()
+
+        }
     )
 
     fun updateLanguage(id: UUID, request: UpdateUserLanguageRequestDto): User = userRepository.save(
-        getById(id).apply { language = request.language }
+        getById(id).apply {
+            language = request.language
+            updatedAt = LocalDateTime.now()
+        }
     )
 
     fun delete(id: UUID) = userRepository.delete(getById(id))

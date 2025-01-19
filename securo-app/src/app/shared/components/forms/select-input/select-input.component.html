@@ -12,12 +12,12 @@
     </div>
   </div>
 
-  <div class="select-options {{size}}" [style.width]="width" *ngIf="active" @fadeInOutAnimation>
-    <div class="option empty" *ngIf="allowEmpty" (click)="setValue(null)" @fadeInOutAnimation>
+  <div class="select-options {{size}}" [style.width]="width" *ngIf="active" @fadeInAnimation>
+    <div class="option empty" *ngIf="allowEmpty" (click)="setValue(null)" @fadeInAnimation>
       <span>. . .</span>
     </div>
 
-    <div class="option" *ngFor="let option of options" (click)="setValue(option.value)" @fadeInOutAnimation>
+    <div class="option" *ngFor="let option of options" (click)="setValue(option.value)" @fadeInAnimation>
       <span>{{ option.name }}</span>
       <sec-icon *ngIf="option.value == control.value" [name]="'check'" [size]="size == 'normal' ? 20 : 16"></sec-icon>
     </div>

@@ -1,7 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { fadeInOutAnimation } from '../../../animations/fade-in-out-animation';
+import { fadeInAnimation } from '../../../animations/fade-in-animation';
 import { IconComponent } from '../../common/icon/icon.component';
 import { SelectInputOption } from './select-input.interface';
 
@@ -11,7 +11,7 @@ import { SelectInputOption } from './select-input.interface';
   imports: [FormsModule, IconComponent, NgIf, ReactiveFormsModule, NgForOf],
   templateUrl: './select-input.component.html',
   styleUrl: './select-input.component.scss',
-  animations: [fadeInOutAnimation]
+  animations: [fadeInAnimation]
 })
 export class SelectInputComponent {
 

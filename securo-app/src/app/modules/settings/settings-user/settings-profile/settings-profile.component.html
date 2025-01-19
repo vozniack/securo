@@ -1,0 +1,140 @@
+<div class="column-container surface-container gap">
+  <h3>{{ "settings.profile.title" | translate }}</h3>
+
+  <div class="column-container gap" *ngIf="user" @fadeInAnimation>
+    <h4>{{ "settings.profile.personal.title" | translate }}</h4>
+
+    <div class="column-container gap-small">
+      <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
+        <sec-text-input [style.flex]="40"
+                        [control]="getControl('firstName')"
+                        [id]="'firstName'"
+                        [name]="'firstName'"
+                        [placeholder]="'settings.profile.personal.firstName' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-text-input [style.flex]="40"
+                        [control]="getControl('lastName')"
+                        [id]="'lastName'"
+                        [name]="'lastName'"
+                        [placeholder]="'settings.profile.personal.lastName' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-date-input [style.flex]="20"
+                        [control]="getControl('dateOfBirth')"
+                        [id]="'dateOfBirth'"
+                        [name]="'dateOfBirth'"
+                        [label]="'settings.profile.personal.dateOfBirth' | translate"
+                        [style]="'tonal'">
+        </sec-date-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-container gap" *ngIf="user">
+    <h4>{{ "settings.profile.contact.title" | translate }}</h4>
+
+    <div class="column-container gap-small">
+      <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
+        <sec-text-input [style.flex]="50"
+                        [control]="getControl('email')"
+                        [id]="'email'"
+                        [name]="'email'"
+                        [placeholder]="'settings.profile.contact.email' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-text-input [style.flex]="20"
+                        [control]="getControl('phonePrefix')"
+                        [id]="'phonePrefix'"
+                        [name]="'phonePrefix'"
+                        [placeholder]="'settings.profile.contact.phonePrefix' | translate"
+                        [maxLength]="4"
+                        [icon]="'add'"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-text-input [style.flex]="30"
+                        [control]="getControl('phoneNumber')"
+                        [id]="'phoneNumber'"
+                        [name]="'phoneNumber'"
+                        [placeholder]="'settings.profile.contact.phoneNumber' | translate"
+                        [maxLength]="14"
+                        [style]="'tonal'">
+        </sec-text-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="column-container gap" *ngIf="user">
+    <h4>{{ "settings.profile.address.title" | translate }}</h4>
+
+    <div class="column-container gap-small">
+      <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
+        <sec-text-input [style.flex]="50"
+                        [control]="getControl('country')"
+                        [id]="'country'"
+                        [name]="'country'"
+                        [placeholder]="'settings.profile.address.country' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+        <sec-text-input [style.flex]="50"
+                        [control]="getControl('city')"
+                        [id]="'city'"
+                        [name]="'city'"
+                        [placeholder]="'settings.profile.address.city' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+      </div>
+    </div>
+
+    <div class="column-container gap-small" *ngIf="user">
+      <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
+        <sec-text-input [style.flex]="20"
+                        [control]="getControl('zip')"
+                        [id]="'zip'"
+                        [name]="'zip'"
+                        [placeholder]="'settings.profile.address.zip' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-text-input [style.flex]="45"
+                        [control]="getControl('street')"
+                        [id]="'street'"
+                        [name]="'street'"
+                        [placeholder]="'settings.profile.address.street' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+
+        <sec-text-input [style.flex]="45"
+                        [control]="getControl('house')"
+                        [id]="'house'"
+                        [name]="'house'"
+                        [placeholder]="'settings.profile.address.house' | translate"
+                        [style]="'tonal'">
+        </sec-text-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-container gap end" *ngIf="user">
+    <sec-button [class.flex]="isMobile"
+                [text]="'common.reset' | translate"
+                [size]="'small'"
+                [style]="'outlined'"
+                [width]="isMobile ? '100%' : '128px'"
+                (click)="buildForm(this.user)">
+    </sec-button>
+
+    <sec-button [class.flex]="isMobile"
+                [text]="'common.save' | translate"
+                [size]="'small'"
+                [style]="'filled'"
+                [width]="isMobile ? '100%' : '128px'"
+                [disabled]="userForm ? userForm.invalid : true"
+                (click)="updateProfile()">
+    </sec-button>
+  </div>
+</div>

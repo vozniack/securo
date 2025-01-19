@@ -1,16 +1,10 @@
-<div class="column-container gap" @fadeInOutAnimation>
-  <div class="row-container gap">
-    <sec-icon-button [icon]="'arrow_back'" [style]="'tonal'" (click)="routeBack()"></sec-icon-button>
+<div class="column-container gap" @fadeInAnimation>
+  <div class="{{isMobile ? 'column-container' : 'row-container space-between'}}">
     <h2 class="title">{{ "settings.title" | translate }}</h2>
+    <sec-segmented-button [segments]="settingsSegments" (segmentChange)="onSettingsChange($event)">
+    </sec-segmented-button>
   </div>
 
-  <div class="column-container gap" *ngIf="user" [style.flex-direction]="isMobile ? 'column' : 'row'">
-    <sec-settings-profile [style.flex]="100" [user]="user"></sec-settings-profile>
-
-    <div class="column-container gap">
-      <sec-settings-password [user]="user"></sec-settings-password>
-      <sec-settings-language [user]="user"></sec-settings-language>
-      <sec-settings-theme></sec-settings-theme>
-    </div>
-  </div>
+  <sec-settings-user *ngIf="activeSegment.value == 'USER'" [user]="user" @fadeInAnimation></sec-settings-user>
+  <sec-settings-admin *ngIf="activeSegment.value == 'ADMIN'" @fadeInAnimation></sec-settings-admin>
 </div>
