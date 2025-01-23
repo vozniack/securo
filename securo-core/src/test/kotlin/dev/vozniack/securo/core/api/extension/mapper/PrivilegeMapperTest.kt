@@ -10,6 +10,7 @@ import dev.vozniack.securo.core.mock.mockCreatePrivilegeRequestDto
 import dev.vozniack.securo.core.mock.mockPrivilege
 import dev.vozniack.securo.core.mock.mockSystem
 import dev.vozniack.securo.core.utils.toStringLocalDateTime
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
@@ -19,6 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired
 class PrivilegeMapperTest @Autowired constructor(
     private val systemRepository: SystemRepository
 ) : AbstractUnitTest() {
+
+    @AfterEach
+    fun `clean up`() {
+        systemRepository.deleteAll()
+    }
 
     @Test
     fun `map create privilege request to privilege`() {

@@ -46,6 +46,29 @@ CREATE TABLE teams
     updated_at  TIMESTAMP
 );
 
+CREATE TABLE roles
+(
+    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
+
+    name        VARCHAR(255) NOT NULL,
+    code        VARCHAR(16)  NOT NULL,
+
+    description VARCHAR(1024),
+
+    team_id     UUID         NOT NULL,
+
+    active      BOOLEAN      NOT NULL             DEFAULT TRUE,
+
+    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP,
+
+    CONSTRAINT role_name_team_unique UNIQUE (name, team_id),
+    CONSTRAINT role_code_team_unique UNIQUE (code, team_id),
+    CONSTRAINT role_team_fk FOREIGN KEY (team_id) REFERENCES teams (id)
+);
+
 CREATE TABLE systems
 (
     id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -68,28 +91,6 @@ CREATE TABLE systems
     CONSTRAINT system_parent_fk FOREIGN KEY (parent_id) REFERENCES systems (id)
 );
 
-CREATE TABLE roles
-(
-    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
-
-    scope       VARCHAR(255) NOT NULL             DEFAULT 'EXTERNAL',
-
-    name        VARCHAR(255) NOT NULL,
-    code        VARCHAR(16)  NOT NULL,
-    description VARCHAR(1024),
-
-    team_id     UUID         NOT NULL,
-
-    active      BOOLEAN      NOT NULL             DEFAULT TRUE,
-
-    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
-    updated_at  TIMESTAMP,
-
-    CONSTRAINT role_name_team_unique UNIQUE (name, team_id),
-    CONSTRAINT role_code_team_unique UNIQUE (code, team_id),
-    CONSTRAINT role_team_fk FOREIGN KEY (team_id) REFERENCES teams (id)
-);
-
 CREATE TABLE privileges
 (
     id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -98,6 +99,7 @@ CREATE TABLE privileges
 
     name        VARCHAR(255) NOT NULL,
     code        VARCHAR(255) NOT NULL,
+
     description VARCHAR(1024),
 
     index       INT          NOT NULL,
@@ -113,6 +115,25 @@ CREATE TABLE privileges
     CONSTRAINT privilege_index_parent_system_unique UNIQUE (index, parent_id, system_id),
     CONSTRAINT privilege_system_fk FOREIGN KEY (system_id) REFERENCES systems (id),
     CONSTRAINT privilege_parent_fk FOREIGN KEY (parent_id) REFERENCES privileges (id)
+);
+
+CREATE TABLE environments
+(
+    id          UUID         NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    name        VARCHAR(255) NOT NULL,
+    code        VARCHAR(255) NOT NULL,
+
+    type        VARCHAR(255) NOT NULL,
+
+    description VARCHAR(1024),
+
+    index       INT          NOT NULL,
+
+    created_at  TIMESTAMP    NOT NULL             DEFAULT now(),
+    updated_at  TIMESTAMP,
+
+    CONSTRAINT environment_code_type_unique UNIQUE (code, type)
 );
 
 CREATE TABLE user_systems

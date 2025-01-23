@@ -97,7 +97,7 @@ class TeamControllerTest @Autowired constructor(
     }
 
     @Test
-    fun `update system`() {
+    fun `update team`() {
         val team: Team = teamRepository.save(mockTeam())
         val request: UpdateTeamRequestDto = mockUpdateTeamRequestDto()
 

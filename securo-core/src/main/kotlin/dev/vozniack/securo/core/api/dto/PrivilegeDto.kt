@@ -4,7 +4,6 @@ import dev.vozniack.securo.core.domain.ScopeType
 import java.util.UUID
 
 data class PrivilegeDto(
-
     val id: UUID,
 
     val scope: ScopeType,

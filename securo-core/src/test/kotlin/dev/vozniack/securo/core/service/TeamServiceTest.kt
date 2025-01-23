@@ -39,7 +39,6 @@ class TeamServiceTest @Autowired constructor(
         teamRepository.save(mockTeam(name = "Securo Internal", code = "SEC"))
         teamRepository.save(mockTeam(name = "Securo External", code = "SEC_EXT"))
 
-
         val teams: Page<Team> = teamService.findAll(TeamQuery(), PageRequest.of(0, 24))
 
         assertEquals(2, teams.content.size)
@@ -124,16 +123,16 @@ class TeamServiceTest @Autowired constructor(
     }
 
     @Test
-    fun `update system with already existing code`() {
+    fun `update team with already existing code`() {
         val team: Team = teamRepository.save(mockTeam())
         val teamExternal: Team = teamRepository.save(mockTeam(code = "EXT"))
 
         val request: UpdateTeamRequestDto = mockUpdateTeamRequestDto(code = "SEC")
 
-        // allowed because of changing the same system
+        // allowed because of changing the same team
         teamService.update(team.id, request)
 
-        // not allowed because of already used system code
+        // not allowed because of already used team code
         assertThrows<ConflictException> {
             teamService.update(teamExternal.id, request)
         }
@@ -152,10 +151,10 @@ class TeamServiceTest @Autowired constructor(
 
     @Test
     fun `delete internal team`() {
-        val system: Team = teamRepository.save(mockTeam(scope = ScopeType.INTERNAL))
+        val team: Team = teamRepository.save(mockTeam(scope = ScopeType.INTERNAL))
 
         assertThrows<ForbiddenException> {
-            teamService.delete(system.id)
+            teamService.delete(team.id)
         }
     }
 }
