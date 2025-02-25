@@ -1,0 +1,63 @@
+<div class="column-container surface-container gap-small">
+  <div class="row-container space-between">
+    <h3>{{ "settings.admin.environments.title" | translate }}</h3>
+    <sec-button [iconLeft]="'add'" [text]="'Add'" [style]="'filled'" [size]="'small'"></sec-button>
+  </div>
+
+  <div class="column-container gap-small" *ngIf="environments">
+    <div class="environments column-container gap-small" *ngFor="let type of types">
+      <div class="section row-container gap">
+        <span class="type">{{ type }}</span>
+
+        <span class="empty" *ngIf="getEnvironments(type).length < 1">
+          {{ "settings.admin.environments.noEnvironments" | translate }}
+        </span>
+      </div>
+
+      <div class="column-container gap-small" cdkDropList
+           [cdkDropListData]="getEnvironments(type)"
+           (cdkDropListDropped)="updateEnvironmentsOrder($event, type)">
+        <div class="environment row-container space-between" cdkDrag *ngFor="let env of getEnvironments(type)">
+          <div class="column-container gap-small">
+            <span class="name">{{ env.name }}</span>
+            <span class="description">{{ env.description }}</span>
+          </div>
+
+          <div class="row-container gap">
+            <span class="badge primary">{{ env.code }}</span>
+            <div class="row-container">
+              <sec-icon-button [icon]="'edit'"
+                               [size]="'tiny'"
+                               [style]="'tonal'"
+                               (click)="updateEnvironment(env)">
+              </sec-icon-button>
+
+              <sec-icon-button [icon]="'delete'"
+                               [size]="'tiny'"
+                               [style]="'tonal'"
+                               (click)="removeEnvironment(env)">
+              </sec-icon-button>
+            </div>
+          </div>
+
+          <div *cdkDragPreview> <!-- empty on purpose --> </div>
+
+          <div class="placeholder row-container space-between" *cdkDragPlaceholder>
+            <div class="column-container gap-small">
+              <span class="name">{{ env.name }}</span>
+              <span class="description">{{ env.description }}</span>
+            </div>
+
+            <div class="row-container gap">
+              <span class="badge primary">{{ env.code }}</span>
+              <div class="row-container">
+                <sec-icon-button [icon]="'edit'" [size]="'tiny'" [style]="'tonal'"></sec-icon-button>
+                <sec-icon-button [icon]="'delete'" [size]="'tiny'" [style]="'tonal'"></sec-icon-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

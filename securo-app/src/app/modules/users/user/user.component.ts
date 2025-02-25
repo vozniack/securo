@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { fadeInAnimation } from '../../../shared/animations/fade-in-animation';
 import { IconButtonComponent } from '../../../shared/components/buttons/icon-button/icon-button.component';
-import { User } from '../users.interface';
+import { User } from '../../../domain/entity/user.interface';
 
 @Component({
   selector: 'sec-user',

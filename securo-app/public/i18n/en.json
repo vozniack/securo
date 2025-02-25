@@ -46,39 +46,47 @@
   },
   "settings": {
     "title": "Settings",
-    "profile": {
-      "title": "Profile",
-      "personal": {
-        "title": "Personal data",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "dateOfBirth": "Date of birth"
+    "user": {
+      "profile": {
+        "title": "Profile",
+        "personal": {
+          "title": "Personal data",
+          "firstName": "First name",
+          "lastName": "Last name",
+          "dateOfBirth": "Date of birth"
+        },
+        "contact": {
+          "title": "Contact data",
+          "email": "Email",
+          "phonePrefix": "Phone prefix",
+          "phoneNumber": "Phone number"
+        },
+        "address": {
+          "title": "Address data",
+          "country": "Country",
+          "city": "City",
+          "zip": "Postal code / zip",
+          "street": "Street",
+          "house": "House / apartment"
+        }
       },
-      "contact": {
-        "title": "Contact data",
-        "email": "Email",
-        "phonePrefix": "Phone prefix",
-        "phoneNumber": "Phone number"
+      "password": {
+        "title": "Password",
+        "newPassword": "New password",
+        "repeatPassword": "Repeat password"
       },
-      "address": {
-        "title": "Address data",
-        "country": "Country",
-        "city": "City",
-        "zip": "Postal code / zip",
-        "street": "Street",
-        "house": "House / apartment"
+      "language": {
+        "title": "Language"
+      },
+      "theme": {
+        "title": "Theme"
       }
     },
-    "password": {
-      "title": "Password",
-      "newPassword": "New password",
-      "repeatPassword": "Repeat password"
-    },
-    "language": {
-      "title": "Language"
-    },
-    "theme": {
-      "title": "Theme"
+    "admin": {
+      "environments": {
+        "title": "Environments",
+        "noEnvironments": "No environments..."
+      }
     }
   }
 }

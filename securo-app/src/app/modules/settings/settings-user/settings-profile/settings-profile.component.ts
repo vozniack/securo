@@ -5,17 +5,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { TranslatePipe } from '@ngx-translate/core';
-import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ResponsiveComponent } from '../../../../shared/common/responsive.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { DateInputComponent } from '../../../../shared/components/forms/date-input/date-input.component';
 import { TextInputComponent } from '../../../../shared/components/forms/text-input/text-input.component';
 import { fadeInAnimation } from '../../../../shared/animations/fade-in-animation';
+import { handleError } from '../../../../shared/utils/request.utils';
 import { PhoneNumberValidator, PhonePrefixValidator } from '../../../../shared/utils/validator.utils';
 import { ACTION_PROGRESS } from '../../../../store/app/app.actions';
-import { User } from '../../../users/users.interface';
-import { UsersService } from '../../../users/users.service';
+import { User } from '../../../../domain/entity/user.interface';
+import { UserService } from '../../../../domain/services/user.service';
 
 @Component({
   selector: 'sec-settings-profile',
@@ -31,7 +31,7 @@ export class SettingsProfileComponent extends ResponsiveComponent implements OnI
 
   userForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UsersService, private store: Store, override breakpointObserver: BreakpointObserver) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private store: Store, override breakpointObserver: BreakpointObserver) {
     super(breakpointObserver);
   }
 
@@ -61,16 +61,11 @@ export class SettingsProfileComponent extends ResponsiveComponent implements OnI
     this.userService.updateUser(this.user.id, this.userForm.value).pipe(
       tap((response: User) => this.buildForm(this.user = response)),
       tap(() => this.store.dispatch(ACTION_PROGRESS({progress: 'success'}))),
-      catchError((error: HttpErrorResponse) => this.handleError(error))
+      catchError((response: HttpErrorResponse) => handleError(this.store, response))
     ).subscribe();
   }
 
   getControl(name: string): FormControl {
     return this.userForm?.get(name) as FormControl;
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    this.store.dispatch(ACTION_PROGRESS({progress: 'failure'}));
-    return throwError(() => new Error(error.message));
   }
 }

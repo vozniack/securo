@@ -4,6 +4,7 @@ import dev.vozniack.securo.core.api.controller.SystemController.Companion.logger
 import dev.vozniack.securo.core.api.dto.CreateEnvironmentRequestDto
 import dev.vozniack.securo.core.api.dto.EnvironmentDto
 import dev.vozniack.securo.core.api.dto.UpdateEnvironmentRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateEnvironmentsOrderRequestDto
 import dev.vozniack.securo.core.api.extension.mapper.toDto
 import dev.vozniack.securo.core.api.extension.validator.validate
 import dev.vozniack.securo.core.domain.entity.EnvironmentType
@@ -51,6 +52,15 @@ class EnvironmentController(private val environmentService: EnvironmentService) 
         }
 
         return environmentService.update(id, request).toDto()
+    }
+
+    @PutMapping("/order")
+    fun updateEnvironmentsOrder(@RequestBody request: UpdateEnvironmentsOrderRequestDto): List<EnvironmentDto> {
+        request.validate().also {
+            logger.debug { "Updating ${request.type} environments order with request $request" }
+        }
+
+        return environmentService.updateOrder(request).map { it.toDto() }
     }
 
     @DeleteMapping("/{id}")

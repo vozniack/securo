@@ -13,5 +13,7 @@ interface EnvironmentRepository : CrudRepository<Environment, UUID>,
     PagingAndSortingRepository<Environment, UUID>,
     JpaSpecificationExecutor<Environment> {
 
+    fun findByType(type: EnvironmentType): List<Environment>
+
     fun findByCodeAndType(code: String, type: EnvironmentType): Environment?
 }

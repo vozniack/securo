@@ -46,39 +46,47 @@
   },
   "settings": {
     "title": "Ustawienia",
-    "profile": {
-      "title": "Profil",
-      "personal": {
-        "title": "Dane osobowe",
-        "firstName": "Imię",
-        "lastName": "Nazwisko",
-        "dateOfBirth": "Data urodzenia"
+    "user": {
+      "profile": {
+        "title": "Profil",
+        "personal": {
+          "title": "Dane osobowe",
+          "firstName": "Imię",
+          "lastName": "Nazwisko",
+          "dateOfBirth": "Data urodzenia"
+        },
+        "contact": {
+          "title": "Dane kontaktowe",
+          "email": "Email",
+          "phonePrefix": "Prefix nr telefonu",
+          "phoneNumber": "Numer telefonu"
+        },
+        "address": {
+          "title": "Dane adresowe",
+          "country": "Kraj",
+          "city": "Miasto",
+          "zip": "Kod pocztowy",
+          "street": "Ulica",
+          "house": "Dom"
+        }
       },
-      "contact": {
-        "title": "Dane kontaktowe",
-        "email": "Email",
-        "phonePrefix": "Prefix nr telefonu",
-        "phoneNumber": "Numer telefonu"
+      "password": {
+        "title": "Hasło",
+        "newPassword": "Nowe hasło",
+        "repeatPassword": "Powtórz hasło"
       },
-      "address": {
-        "title": "Dane adresowe",
-        "country": "Kraj",
-        "city": "Miasto",
-        "zip": "Kod pocztowy",
-        "street": "Ulica",
-        "house": "Dom"
+      "language": {
+        "title": "Język"
+      },
+      "theme": {
+        "title": "Motyw"
       }
     },
-    "password": {
-      "title": "Hasło",
-      "newPassword": "Nowe hasło",
-      "repeatPassword": "Powtórz hasło"
-    },
-    "language": {
-      "title": "Język"
-    },
-    "theme": {
-      "title": "Motyw"
+    "admin": {
+      "environments": {
+        "title": "Środowiska",
+        "noEnvironments": "Brak środowisk..."
+      }
     }
   }
 }

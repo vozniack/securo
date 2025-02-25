@@ -8,8 +8,8 @@ import { fadeInAnimation } from '../../shared/animations/fade-in-animation';
 import { ResponsiveComponent } from '../../shared/common/responsive.component';
 import { SegmentedButtonComponent } from '../../shared/components/buttons/segmented-button/segmented-button.component';
 import { SegmentedButton } from '../../shared/components/buttons/segmented-button/segmented-button.interface';
-import { User } from '../users/users.interface';
-import { UsersService } from '../users/users.service';
+import { User } from '../../domain/entity/user.interface';
+import { UserService } from '../../domain/services/user.service';
 import { SettingsAdminComponent } from './settings-admin/settings-admin.component';
 import { SettingsUserComponent } from './settings-user/settings-user.component';
 import { settingsSegments } from './settings.const';
@@ -27,9 +27,9 @@ export class SettingsComponent extends ResponsiveComponent {
   user!: User;
 
   settingsSegments = settingsSegments;
-  activeSegment = settingsSegments[0];
+  activeSegment = settingsSegments[1];
 
-  constructor(private userService: UsersService, override breakpointObserver: BreakpointObserver) {
+  constructor(private userService: UserService, override breakpointObserver: BreakpointObserver) {
     super(breakpointObserver);
 
     this.userService.getLoggedUser().pipe(

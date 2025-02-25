@@ -36,3 +36,8 @@ data class UpdateEnvironmentRequestDto(
 
     val description: String? = null,
 )
+
+data class UpdateEnvironmentsOrderRequestDto(
+    val type: EnvironmentType,
+    val environments: List<EnvironmentDto>
+)

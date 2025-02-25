@@ -1,4 +1,7 @@
-import { HttpParams } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { throwError } from 'rxjs';
+import { ACTION_PROGRESS } from '../../store/app/app.actions';
 import { RequestParam, SortRequest } from '../model/request.interface';
 
 export function buildHttpParams(requestParam?: RequestParam): HttpParams {
@@ -20,4 +23,9 @@ function appendSortIfNotNull(httpParams: HttpParams, param: string, data?: SortR
 
 function appendIfNotNull(httpParams: HttpParams, param: string, data: any): HttpParams {
   return data != null ? httpParams.append(param, data) : httpParams;
+}
+
+export function handleError(store: Store, error: HttpErrorResponse) {
+  store.dispatch(ACTION_PROGRESS({progress: 'failure'}));
+  return throwError(() => new Error(error.message));
 }

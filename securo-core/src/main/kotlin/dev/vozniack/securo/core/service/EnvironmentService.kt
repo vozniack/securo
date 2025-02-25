@@ -2,6 +2,7 @@ package dev.vozniack.securo.core.service
 
 import dev.vozniack.securo.core.api.dto.CreateEnvironmentRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateEnvironmentRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateEnvironmentsOrderRequestDto
 import dev.vozniack.securo.core.api.extension.mapper.toEnvironment
 import dev.vozniack.securo.core.domain.entity.Environment
 import dev.vozniack.securo.core.domain.entity.EnvironmentType
@@ -45,6 +46,16 @@ class EnvironmentService(private val environmentRepository: EnvironmentRepositor
                 updatedAt = LocalDateTime.now()
             }
         )
+    }
+
+    fun updateOrder(request: UpdateEnvironmentsOrderRequestDto): List<Environment> {
+        val environments: List<Environment> = environmentRepository.findByType(request.type)
+
+        environments.forEach { environment ->
+            environment.index = request.environments.find { environment.id == it.id }!!.index
+        }
+
+        return environmentRepository.saveAll(environments).sortedBy { it.index }.toList()
     }
 
     fun delete(id: UUID) = environmentRepository.delete(getById(id))

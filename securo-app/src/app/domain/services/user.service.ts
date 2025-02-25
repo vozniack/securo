@@ -10,12 +10,12 @@ import {
   UpdateUserPasswordRequestDto,
   UpdateUserRequestDto,
   User
-} from './users.interface';
+} from '../entity/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UserService {
 
   baseUrl = `${environment.backendUrl}/v1/users`;
 

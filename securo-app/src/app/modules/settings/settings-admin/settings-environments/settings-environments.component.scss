@@ -1,0 +1,64 @@
+@import 'theme.scss';
+
+.environments {
+  .section {
+    .type {
+      margin: 12px 0;
+      color: $secondary;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .empty {
+      font-size: 12px;
+      color: $neutral;
+    }
+  }
+
+  [cdkDropList] {
+    &.cdk-drop-list-dragging .environment:not(.cdk-drag-preview) {
+      opacity: 0.5;
+    }
+  }
+
+  .environment, .placeholder {
+    cursor: pointer;
+
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, $primary 5%, transparent);
+    transition: border-color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+
+    &:hover {
+      border: 1px solid color-mix(in srgb, $primary-container 25%, transparent);
+
+      .badge {
+        opacity: 1;
+      }
+    }
+
+    .badge {
+      transition: opacity 0.1s ease-in-out;
+      opacity: 0;
+    }
+
+    .name {
+      font-size: 14px;
+    }
+
+    .description {
+      font-size: 10px;
+    }
+  }
+
+  .placeholder {
+    border: 1px dashed color-mix(in srgb, $primary 50%, transparent);
+    border-radius: 8px;
+
+    background: color-mix(in srgb, $primary-container 5%, transparent);
+
+    .badge {
+      opacity: 1;
+    }
+  }
+}

@@ -1,8 +1,8 @@
 <div class="column-container surface-container gap">
-  <h3>{{ "settings.profile.title" | translate }}</h3>
+  <h3>{{ "settings.user.profile.title" | translate }}</h3>
 
   <div class="column-container gap" *ngIf="user" @fadeInAnimation>
-    <h4>{{ "settings.profile.personal.title" | translate }}</h4>
+    <h4>{{ "settings.user.profile.personal.title" | translate }}</h4>
 
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
@@ -10,7 +10,7 @@
                         [control]="getControl('firstName')"
                         [id]="'firstName'"
                         [name]="'firstName'"
-                        [placeholder]="'settings.profile.personal.firstName' | translate"
+                        [placeholder]="'settings.user.profile.personal.firstName' | translate"
                         [style]="'tonal'">
         </sec-text-input>
 
@@ -18,7 +18,7 @@
                         [control]="getControl('lastName')"
                         [id]="'lastName'"
                         [name]="'lastName'"
-                        [placeholder]="'settings.profile.personal.lastName' | translate"
+                        [placeholder]="'settings.user.profile.personal.lastName' | translate"
                         [style]="'tonal'">
         </sec-text-input>
 
@@ -26,7 +26,7 @@
                         [control]="getControl('dateOfBirth')"
                         [id]="'dateOfBirth'"
                         [name]="'dateOfBirth'"
-                        [label]="'settings.profile.personal.dateOfBirth' | translate"
+                        [label]="'settings.user.profile.personal.dateOfBirth' | translate"
                         [style]="'tonal'">
         </sec-date-input>
       </div>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="column-container gap" *ngIf="user">
-    <h4>{{ "settings.profile.contact.title" | translate }}</h4>
+    <h4>{{ "settings.user.profile.contact.title" | translate }}</h4>
 
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
@@ -42,7 +42,7 @@
                         [control]="getControl('email')"
                         [id]="'email'"
                         [name]="'email'"
-                        [placeholder]="'settings.profile.contact.email' | translate"
+                        [placeholder]="'settings.user.profile.contact.email' | translate"
                         [style]="'tonal'">
         </sec-text-input>
 
@@ -50,7 +50,7 @@
                         [control]="getControl('phonePrefix')"
                         [id]="'phonePrefix'"
                         [name]="'phonePrefix'"
-                        [placeholder]="'settings.profile.contact.phonePrefix' | translate"
+                        [placeholder]="'settings.user.profile.contact.phonePrefix' | translate"
                         [maxLength]="4"
                         [icon]="'add'"
                         [style]="'tonal'">
@@ -60,7 +60,7 @@
                         [control]="getControl('phoneNumber')"
                         [id]="'phoneNumber'"
                         [name]="'phoneNumber'"
-                        [placeholder]="'settings.profile.contact.phoneNumber' | translate"
+                        [placeholder]="'settings.user.profile.contact.phoneNumber' | translate"
                         [maxLength]="14"
                         [style]="'tonal'">
         </sec-text-input>
@@ -69,7 +69,7 @@
   </div>
 
   <div class="column-container gap" *ngIf="user">
-    <h4>{{ "settings.profile.address.title" | translate }}</h4>
+    <h4>{{ "settings.user.profile.address.title" | translate }}</h4>
 
     <div class="column-container gap-small">
       <div class="{{isMobile ? 'column-container' : 'row-container'}} gap">
@@ -77,14 +77,14 @@
                         [control]="getControl('country')"
                         [id]="'country'"
                         [name]="'country'"
-                        [placeholder]="'settings.profile.address.country' | translate"
+                        [placeholder]="'settings.user.profile.address.country' | translate"
                         [style]="'tonal'">
         </sec-text-input>
         <sec-text-input [style.flex]="50"
                         [control]="getControl('city')"
                         [id]="'city'"
                         [name]="'city'"
-                        [placeholder]="'settings.profile.address.city' | translate"
+                        [placeholder]="'settings.user.profile.address.city' | translate"
                         [style]="'tonal'">
         </sec-text-input>
       </div>
@@ -96,7 +96,7 @@
                         [control]="getControl('zip')"
                         [id]="'zip'"
                         [name]="'zip'"
-                        [placeholder]="'settings.profile.address.zip' | translate"
+                        [placeholder]="'settings.user.profile.address.zip' | translate"
                         [style]="'tonal'">
         </sec-text-input>
 
@@ -104,7 +104,7 @@
                         [control]="getControl('street')"
                         [id]="'street'"
                         [name]="'street'"
-                        [placeholder]="'settings.profile.address.street' | translate"
+                        [placeholder]="'settings.user.profile.address.street' | translate"
                         [style]="'tonal'">
         </sec-text-input>
 
@@ -112,7 +112,7 @@
                         [control]="getControl('house')"
                         [id]="'house'"
                         [name]="'house'"
-                        [placeholder]="'settings.profile.address.house' | translate"
+                        [placeholder]="'settings.user.profile.address.house' | translate"
                         [style]="'tonal'">
         </sec-text-input>
       </div>

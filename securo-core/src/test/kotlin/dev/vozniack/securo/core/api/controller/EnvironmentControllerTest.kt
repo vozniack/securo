@@ -6,6 +6,8 @@ import dev.vozniack.securo.core.AbstractWebMvcTest
 import dev.vozniack.securo.core.api.dto.CreateEnvironmentRequestDto
 import dev.vozniack.securo.core.api.dto.EnvironmentDto
 import dev.vozniack.securo.core.api.dto.UpdateEnvironmentRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateEnvironmentsOrderRequestDto
+import dev.vozniack.securo.core.api.extension.mapper.toDto
 import dev.vozniack.securo.core.domain.entity.Environment
 import dev.vozniack.securo.core.domain.entity.EnvironmentType
 import dev.vozniack.securo.core.domain.repository.EnvironmentRepository
@@ -110,6 +112,43 @@ class EnvironmentControllerTest @Autowired constructor(
         )
 
         assertEquals(environment.id, environmentDto.id)
+    }
+
+    @Test
+    fun `update environments order`() {
+        val dev1 = environmentRepository.save(
+            mockEnvironment(name = "Dev 1", code = "DEV1", type = EnvironmentType.DEV, index = 0)
+        ).apply { index = 2 }
+
+        val dev2 = environmentRepository.save(
+            mockEnvironment(name = "Dev 2", code = "DEV2", type = EnvironmentType.DEV, index = 1)
+        ).apply { index = 0 }
+
+        val dev3 = environmentRepository.save(
+            mockEnvironment(name = "Dev 3", code = "DEV3", type = EnvironmentType.DEV, index = 2)
+        ).apply { index = 1 }
+
+        val request = UpdateEnvironmentsOrderRequestDto(
+            type = EnvironmentType.DEV,
+            environments = listOf(dev2.toDto(), dev3.toDto(), dev1.toDto())
+        )
+
+        val environments: List<EnvironmentDto> = jacksonObjectMapper().readValue(
+            mockMvc.perform(
+                put("/api/v1/environments/order")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(jacksonObjectMapper().writeValueAsString(request))
+            ).andExpect(status().isOk).andReturn().response.contentAsString
+        )
+
+        assertEquals(0, environments[0].index)
+        assertEquals("DEV2", environments[0].code)
+
+        assertEquals(1, environments[1].index)
+        assertEquals("DEV3", environments[1].code)
+
+        assertEquals(2, environments[2].index)
+        assertEquals("DEV1", environments[2].code)
     }
 
     @Test

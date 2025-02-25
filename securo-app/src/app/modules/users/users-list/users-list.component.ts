@@ -6,8 +6,8 @@ import { tap } from 'rxjs/operators';
 import { ListComponent } from '../../../shared/components/list/list.component';
 import { Pageable } from '../../../shared/model/pageable.interface';
 import { RequestParam } from '../../../shared/model/request.interface';
-import { User } from '../users.interface';
-import { UsersService } from '../users.service';
+import { User } from '../../../domain/entity/user.interface';
+import { UserService } from '../../../domain/services/user.service';
 import { userListEntry } from './users-list.const';
 
 @Component({
@@ -28,7 +28,7 @@ export class UsersListComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef);
 
-  constructor(private router: Router, private usersService: UsersService) {
+  constructor(private router: Router, private usersService: UserService) {
     this.getUsers(true);
   }
 

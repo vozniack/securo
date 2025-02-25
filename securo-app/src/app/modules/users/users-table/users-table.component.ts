@@ -7,8 +7,8 @@ import { TableComponent } from '../../../shared/components/table/table.component
 import { TableAction } from '../../../shared/components/table/table.interface';
 import { Pageable } from '../../../shared/model/pageable.interface';
 import { RequestParam } from '../../../shared/model/request.interface';
-import { User } from '../users.interface';
-import { UsersService } from '../users.service';
+import { User } from '../../../domain/entity/user.interface';
+import { UserService } from '../../../domain/services/user.service';
 import { userActions, userColumns } from './users-table.const';
 
 @Component({
@@ -30,7 +30,7 @@ export class UsersTableComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef);
 
-  constructor(private router: Router, private usersService: UsersService) {
+  constructor(private router: Router, private usersService: UserService) {
     this.getUsers();
   }
 

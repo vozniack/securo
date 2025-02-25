@@ -5,7 +5,7 @@
          [class.active]="active == segment"
          (click)="setActive(segment)">
       <sec-icon *ngIf="active == segment" [name]="'check'" [size]="22" @fadeInAnimation></sec-icon>
-      <span *ngIf="segment.text">{{ segment.text | translate}}</span>
+      <span *ngIf="segment.text">{{ segment.text | translate }}</span>
     </div>
   </ng-container>
 </div>

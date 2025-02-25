@@ -3,6 +3,8 @@ package dev.vozniack.securo.core.service
 import dev.vozniack.securo.core.AbstractUnitTest
 import dev.vozniack.securo.core.api.dto.CreateEnvironmentRequestDto
 import dev.vozniack.securo.core.api.dto.UpdateEnvironmentRequestDto
+import dev.vozniack.securo.core.api.dto.UpdateEnvironmentsOrderRequestDto
+import dev.vozniack.securo.core.api.extension.mapper.toDto
 import dev.vozniack.securo.core.domain.entity.Environment
 import dev.vozniack.securo.core.domain.entity.EnvironmentType
 import dev.vozniack.securo.core.domain.repository.EnvironmentRepository
@@ -135,6 +137,32 @@ class EnvironmentServiceTest @Autowired constructor(
         assertThrows<ConflictException> {
             environmentService.update(prodEnvironment.id, request)
         }
+    }
+
+    @Test
+    fun `update environments order`() {
+        val dev1 = environmentRepository.save(
+            mockEnvironment(name = "Dev 1", code = "DEV1", type = EnvironmentType.DEV, index = 0)
+        ).apply { index = 2 }
+
+        val dev2 = environmentRepository.save(
+            mockEnvironment(name = "Dev 2", code = "DEV2", type = EnvironmentType.DEV, index = 1)
+        ).apply { index = 0 }
+
+        val dev3 = environmentRepository.save(
+            mockEnvironment(name = "Dev 3", code = "DEV3", type = EnvironmentType.DEV, index = 2)
+        ).apply { index = 1 }
+
+        val request = UpdateEnvironmentsOrderRequestDto(
+            type = EnvironmentType.DEV,
+            environments = listOf(dev2.toDto(), dev3.toDto(), dev1.toDto())
+        )
+
+        environmentService.updateOrder(request)
+
+        assertEquals(0, environmentRepository.findById(dev2.id).get().index)
+        assertEquals(1, environmentRepository.findById(dev3.id).get().index)
+        assertEquals(2, environmentRepository.findById(dev1.id).get().index)
     }
 
     @Test
